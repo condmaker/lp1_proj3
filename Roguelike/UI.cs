@@ -20,6 +20,7 @@ namespace Roguelike
             Console.WriteLine("| c - Credits             |");
             Console.WriteLine("| q - Quit                |");
             Console.WriteLine("---------------------------");
+            Console.WriteLine("---------------------------");
         }
     }
 }
