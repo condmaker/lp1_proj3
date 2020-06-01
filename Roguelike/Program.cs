@@ -7,7 +7,6 @@ namespace Roguelike
         static void Main(string[] args)
         {
             
-            
         }
     }
 }
