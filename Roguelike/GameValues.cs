@@ -1,11 +1,6 @@
-using System;
-
 namespace Roguelike
 {
-
-
-    
-    public class Game
+    public class GameValues
     {
         
     }
