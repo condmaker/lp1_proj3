@@ -11,7 +11,7 @@ namespace Roguelike
         /// Variável de instância privada que contém referência ao array 
         /// bi-dimensional que representa o nível de jogo.
         /// </summary>
-        private IEntity[,] board;
+        private Entity[,] board;
 
         /// <summary>
         /// Cria uma nova instância do nível de jogo.
@@ -20,7 +20,7 @@ namespace Roguelike
         /// <param name="width">Dimensão vertical do nível.</param>
         public Board(int height, int width)
         {
-            board = new IEntity[height,width];     
+            board = new Entity[height,width];     
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Roguelike
         /// <param name="pos">.
         /// </returns>
         // TODO : IEntity?
-        public IEntity GetEntityAt(Coord pos)
+        public Entity GetEntityAt(Coord pos)
         {       
             pos = Normalize(pos);
             return board[pos.x, pos.y];
@@ -103,6 +103,19 @@ namespace Roguelike
             }
             neighbor = Normalize(neighbor);
             return neighbor;
+        }
+
+        /// <summary>
+        /// Move entidade <param name="entity"> para a posição 
+        /// <param name="coord">
+        /// </summary>
+        /// <param name="entity">Entidade a ser movida</param>
+        /// <param name="coord">Coordenada de destido da Entidade</param>
+        public void MoveEntity(Entity entity, Coord coord)
+        {
+            coord = Normalize(coord);
+            board[coord.x, coord.y] = entity;
+            board[entity.pos.x, entity.pos.y] = null;
         }
 
         /// <summary>
