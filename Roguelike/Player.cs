@@ -1,10 +1,7 @@
-using System;
-
 namespace Roguelike
 {
-    class Enemy : Agent
+    public class Player: Agent
     {
         
-
     }
 }

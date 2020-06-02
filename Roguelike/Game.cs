@@ -18,7 +18,7 @@ namespace Roguelike
         {
             Coord a = new Coord(0,0);
 
-            Console.WriteLine(board.GetTile(a));
+            //Console.WriteLine(board.GetTile(a));
         }
 
     }
