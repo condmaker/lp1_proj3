@@ -46,37 +46,9 @@ namespace Roguelike
         // TODO : IEntity?
         public IEntity GetEntityAt(Coord pos)
         {       
-            if (!IsOnBoard(pos))
-                throw new IndexOutOfRangeException("A coordenada não existe" +
-                                                    " no nível.");
+            pos = Normalize(pos);
             return board[pos.x, pos.y];
         } 
-
-
-        /// <summary>
-        /// Verifica se uma posição indicada no parâmetro <param name="pos"> 
-        /// existe no espaço do Board.
-        /// </summary>
-        /// <param name="pos">A posição</param>
-        /// <returns><c>true</c> se a posição dada existir no Board, 
-        /// <c>false</c> caso contrário.
-        /// </returns>
-        public bool IsOnBoard(Coord pos)
-        {
-            bool isInside = true;
-
-            if (pos.x < 0)
-                isInside = false;
-            if (pos.x >= Width)
-                isInside = false;
-            if (pos.y < 0)
-                isInside = false;
-            if (pos.y >= Height)
-                isInside = false;
-
-            return isInside;
-            
-        }
 
         /// <summary>
         /// Método que indica se existe uma entidade na posição indicada no 
@@ -88,10 +60,7 @@ namespace Roguelike
         /// </returns>
         public bool IsOccupied(Coord c)
         {
-            if (!IsOnBoard(c))
-                throw new IndexOutOfRangeException("A coordenada não existe" +
-                                                    " no nível.");
-
+            c = Normalize(c);
             // devolver false se não tiver nada na coordenada
             // devolver true caso contrário.
             return board[c.x, c.y] != null;
@@ -132,10 +101,31 @@ namespace Roguelike
                     throw new System.ComponentModel.InvalidEnumArgumentException
                     ("Direção não reconhecida.");
             }
-            if (!IsOnBoard(neighbor))
-                    throw new IndexOutOfRangeException("A coordenada não" + 
-                    " existe dentro do nível.")
+            neighbor = Normalize(neighbor);
             return neighbor;
+        }
+
+        /// <summary>
+        /// normaliza coordenada, garantindo que esta está dentro dos limites 
+        /// do nível
+        /// </summary>
+        /// <param name="c">Coordenada a normalizar.</param>
+        /// <returns>Coordenada normalizada.</returns>
+        public Coord Normalize(Coord c)
+        {
+            // inicialmente os valores originais
+            int x = c.x;
+            int y = c.y;
+            
+            // trata da dimensão horizontal
+            while (x>= Width) x -= Width;
+            while (x < 0) x += Width;
+
+            // trata da dimensão vertical
+            while (y>= Height) y -= Height;
+            while (y < 0) y += Height;
+
+            return new Coord(x, y);
         }
 
     }
