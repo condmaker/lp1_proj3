@@ -12,7 +12,7 @@ namespace Roguelike
         /// bi-dimensional array that represents the game's 'board' (made by 
         /// 'tiles' of Entities).
         /// </summary>
-        private Entity[,] board;
+        private int/*Entity*/[,] board;
 
         /// <summary>
         /// Creates a new instance of a level (or board).
@@ -21,7 +21,7 @@ namespace Roguelike
         /// <param name="width">Vertical dimensions of the level.</param>
         public Board(int height, int width)
         {
-            board = new Entity[height,width];     
+            board = new int/*Entity*/[height,width];     
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Roguelike
         /// <returns>Entity in the position indicated in the paramenter
         /// <param name="pos">.</returns>
         // TODO : IEntity?
-        public Entity GetEntityAt(Coord pos)
+        public int /*Entity*/ GetEntityAt(Coord pos)
         {       
             pos = Normalize(pos);
             return board[pos.x, pos.y];
@@ -111,7 +111,7 @@ namespace Roguelike
         /// </summary>
         /// <param name="entity">Entity to be moved</param>
         /// <param name="coord">Destination coordinate of the entity</param>
-        public void MoveEntity(Entity entity, Coord coord)
+        public void MoveEntity(int/*Entity*/ entity, Coord coord)
         {
             coord = Normalize(coord);
             board[coord.x, coord.y] = entity;
