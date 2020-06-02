@@ -18,7 +18,7 @@ namespace Roguelike
         /// </summary>
         /// <param name="height">Dimensão horizontal do nível.</param>
         /// <param name="width">Dimensão vertical do nível.</param>
-        public Board(int height, int width)
+        public Board(uint height, uint width)
         {
             board = new Entity[height,width];     
         }

@@ -46,7 +46,7 @@ namespace Roguelike
 
                 //Documentation used to Find Replace Method
                 string currentArg = args[i].Replace("-","");
-                string nextArg =  args[i+1].Replace("-","");
+                string nextArg =  args[i+1];
 
                 if(currentArg == "r")
                 {

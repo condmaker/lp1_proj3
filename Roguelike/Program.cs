@@ -17,6 +17,7 @@ namespace Roguelike
             //GameValue object with the same arguments
             GameValues gameValues = GameValues.ConvertArgs(args);
             Game lele = new Game(gameValues);
+            lele.Initiate();
            
         }
     }
