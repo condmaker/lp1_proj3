@@ -6,9 +6,14 @@ namespace Roguelike
     {
         // The single string that manages all inputs on the game.
         public string Input { get; private set; } = "";
+        
         // A splitted array of strings used to read commands.
         public string[] SplitInput { get; private set;} 
 
+        /// <summary>
+        /// A simple method that shows to the player a graphic depiction of 
+        /// the Main Menu's commands.
+        /// </summary>
         private void MainMenu()
         {
             Console.WriteLine("---------------------------");
@@ -20,9 +25,14 @@ namespace Roguelike
             Console.WriteLine("| c - Credits             |");
             Console.WriteLine("| q - Quit                |");
             Console.WriteLine("---------------------------");
-            Console.WriteLine("---------------------------");
         }
 
+
+
+        /// <summary>
+        /// Function that renders the game board in the console
+        /// </summary>
+        /// <param name="board">"Current game board"</param>
         public void ShowBoard(Board board)
         {
             //Cycle through every line 
@@ -34,17 +44,22 @@ namespace Roguelike
                     //Get current coordinate
                     Coord coord = new Coord(x,y);
 
+                        
+                    //Checks if there is some entity occupeing the position
                     if(board.IsOccupied(coord))
                     {
+                        //Prints its image
                         Console.Write
-                        (GetEntityString(board.GetEntityAt(coord).Kind));
+                        (GetEntityString(board.GetEntityAt(coord).kind));
                     }
                     else
                     {
+                        //Prints empty tile image
                         Console.Write("  .  ");
                     }
                 }
 
+                //Space between lines 
                 Console.WriteLine("\n");
             }
         }
@@ -64,25 +79,25 @@ namespace Roguelike
             switch(entity)
             {
                 case EntityKind.Player:
-                    entityStr = "P";
+                    entityStr = " P ";
                     break;
-                case EntityKind.Enemy:
-                    entityStr = "E";
+                case EntityKind.Minion:
+                    entityStr = " m ";
+                    break;
+                case EntityKind.Boss:
+                    entityStr = " B ";
                     break;
                 case EntityKind.Obstacle:
-                    entityStr = "O";
+                    entityStr = " O ";
                     break;
                 case EntityKind.PowerUpL:
-                    entityStr = "X";
+                    entityStr = " X ";
                     break;
                 case EntityKind.PowerUpM:
-                    entityStr = "*";
+                    entityStr = " * ";
                     break;
                 case EntityKind.PowerUpS:
-                    entityStr = "+";
-                    break;
-                default:
-                    entityStr = ".";
+                    entityStr = " + ";
                     break;
             }
 

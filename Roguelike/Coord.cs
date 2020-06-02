@@ -1,27 +1,28 @@
 namespace Roguelike
 {
     /// <summary>
-    /// Define uma posição no mundo de jogo.
+    /// The class that defines what is a 'position'/'coordinate' on the game's
+    /// 'board'.
     /// </summary>
     public class Coord
     {
         /// <summary>
-        /// Propriedade que define uma posição horizontal no mundo de jogo.
+        /// Property that defines a horizontal position on the 'board'.
         /// </summary>
-        /// <value>Posição horizontal no mundo de jogo.</value>
+        /// <value>Aforementioned horizontal position.</value>
         public int x { get; }
 
         /// <summary>
-        /// Propriedade que define uma posição vertical no mundo de jogo.
+        /// Property that defines a vertical position on the 'board'.
         /// </summary>
-        /// <value>Posição vertical no mundo de jogo.</value>
+        /// <value>Aforementioned vertical position.</value>
         public int y { get; }
 
         /// <summary>
-        /// Cria uma posição no mundo de jogo.
+        /// Creates a position (Coord instance) to be used on the board.
         /// </summary>
-        /// <param name="x">Posição horizontal no mundo de jogo.</param>
-        /// <param name="y">Posição vertical no mundo de jogo.</param>
+        /// <param name="x">Horizontal position</param>
+        /// <param name="y">Vertical position</param>
         public Coord(int x=0, int y=0)
         {
             this.x = x;
@@ -29,44 +30,44 @@ namespace Roguelike
         }
 
         /// <summary>
-        /// Devolve a posição devidamente formatada.
+        /// Returns the instance's position properly formatted in string format.
         /// </summary>
-        /// <returns>A posição devidamente formatada.</returns>
+        /// <returns>A string representing the instance's position.</returns>
         public  override string ToString() => $"({x}, {y})";
 
         /// <summary>
-        /// Devolve a soma de duas posições.
+        /// Retuns the sum of two positions.
         /// </summary>
-        /// <param name="a">Uma posição</param>
-        /// <param name="b">Uma posição</param>
-        /// <returns>A soma de duas posições.</returns>
+        /// <param name="a">A position</param>
+        /// <param name="b">A position</param>
+        /// <returns>The sum of the positions.</returns>
         public static Coord operator +(Coord a, Coord b) 
         => new Coord(a.x + b.x, a.y + b.y);
 
         /// <summary>
-        /// Devolve a subtração de duas posições.
+        /// Retuns the subtraction of two positions.
         /// </summary>
-        /// <param name="a">Uma posição</param>
-        /// <param name="b">Uma posição</param>
-        /// <returns>A subtração de duas posições.</returns>
+        /// <param name="a">A position</param>
+        /// <param name="b">A position</param>
+        /// <returns>The subtraction of the positions.</returns>
         public static Coord operator -(Coord a, Coord b) 
         => new Coord(a.x - b.x, a.y - b.y);
 
         /// <summary>
-        /// Devolve a multiplicação de uma posição por um escalar.
+        /// Retuns the mutiplication of two positions.
         /// </summary>
-        /// <param name="a">Uma posição</param>
-        /// <param name="b">Um escalar</param>
-        /// <returns>A multiplicação de uma posição por um escalar.</returns>
+        /// <param name="a">A position</param>
+        /// <param name="b">A position</param>
+        /// <returns>The multiplication of the positions.</returns>
         public static Coord operator *(Coord a, int b) 
         => new Coord(a.x * b, a.y * b);
 
         /// <summary>
-        /// Devolve a divisão de uma posição por um escalar.
+        /// Retuns the division of two positions.
         /// </summary>
-        /// <param name="a">Uma posição</param>
-        /// <param name="b">Um escalar</param>
-        /// <returns>A divisão de uma posição por um escalar.</returns>
+        /// <param name="a">A position</param>
+        /// <param name="b">A position</param>
+        /// <returns>The division of the positions.</returns>
         public static Coord operator /(Coord a, int b)
         {
             if (b == 0)
@@ -75,10 +76,11 @@ namespace Roguelike
         }
 
         /// <summary>
-        /// Devolve a distância von Neumann até outra posição.
+        /// Returns the von Neumann distance of the instance's position to
+        /// another given position.
         /// </summary>
-        /// <param name="other">Uma posição</param>
-        /// <returns>A distância von Neumann até outra posição.</returns>
+        /// <param name="other">Position to base off the distance.</param>
+        /// <returns>The von Neumann distance to the other position.</returns>
         public int DistanceTo(Coord other)
         {
             return ((System.Math.Abs(this.x - other.x)) 

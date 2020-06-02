@@ -20,6 +20,9 @@ namespace Roguelike
         /// Game board reference
         /// </summary>
         public Board board;
+        /// <summary>
+        /// Game UI reference
+        /// </summary>
         public UI ui;
 
         public Game(GameValues gameValues)
@@ -32,10 +35,7 @@ namespace Roguelike
 
         public void Initiate()
         {
-            Coord a = new Coord(0,0);
 
-            ui.ShowBoard(board);
-            //Console.WriteLine(board.GetTile(a));
         }
 
     }
