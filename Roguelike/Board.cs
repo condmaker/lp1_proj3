@@ -3,46 +3,46 @@ using System;
 namespace Roguelike
 {
     /// <summary>
-    /// Representação de um nível de jogo.
+    /// The class that represents a level in the game.
     /// </summary>
     public class Board
     {
         /// <summary>
-        /// Variável de instância privada que contém referência ao array 
-        /// bi-dimensional que representa o nível de jogo.
+        /// Private instance variable that contains a reference to the 
+        /// bi-dimensional array that represents the game's 'board' (made by 
+        /// 'tiles' of Entities).
         /// </summary>
         private Entity[,] board;
 
         /// <summary>
-        /// Cria uma nova instância do nível de jogo.
+        /// Creates a new instance of a level (or board).
         /// </summary>
-        /// <param name="height">Dimensão horizontal do nível.</param>
-        /// <param name="width">Dimensão vertical do nível.</param>
+        /// <param name="height">Horizontal dimensions of the level.</param>
+        /// <param name="width">Vertical dimensions of the level.</param>
         public Board(int height, int width)
         {
             board = new Entity[height,width];     
         }
 
         /// <summary>
-        /// Propriedade que representa a dimensão horizontal do nível.
+        /// Property that represents the horizontal dimension of the level.
         /// </summary>
-        /// <value>Dimensão horizontal do nível.</value>
+        /// <value>Horizontal dimension of the level.</value>
         public int Width => board.GetLength(0);
 
         /// <summary>
-        /// Propriedade que representa a dimensão vertical do nível.
+        /// Property that represents the vertical dimension of the level.
         /// </summary>
-        /// <value>Dimensão vertical do nível.</value>
+        /// <value>Vertical dimension of the level.</value>
         public int Height => board.GetLength(1);
 
         /// <summary>
-        /// Método que retorna a entidade de uma posição indicada no 
-        /// parâmetro <param name="pos">.
+        /// Method that returns the Entity of a position indicated at the 
+        /// parameter <param name="pos">.
         /// </summary>
-        /// <param name="pos">Posição no mundo de jogo.</param>
-        /// <returns>Entidade na posição indicada no parâmetro 
-        /// <param name="pos">.
-        /// </returns>
+        /// <param name="pos">Position in the current game 'board'.</param>
+        /// <returns>Entity in the position indicated in the paramenter
+        /// <param name="pos">.</returns>
         // TODO : IEntity?
         public Entity GetEntityAt(Coord pos)
         {       
@@ -51,38 +51,38 @@ namespace Roguelike
         } 
 
         /// <summary>
-        /// Método que indica se existe uma entidade na posição indicada no 
-        /// parâmetro <param name="c">
+        /// Method that indicates if an entity in the indicated position on the
+        /// parameter <param name="c"> exists.
         /// </summary>
-        /// <param name="c">Posição no nível.</param>
-        /// <returns><c>true</c> se existir uma entidade na posição dada em
-        /// <param name="c">, <c>false</c> caso contrário.
+        /// <param name="c">Position on the 'board'.</param>
+        /// <returns><c>true</c> if an entity in the given position exists in
+        /// <param name="c">, <c>false</c> otherwise
         /// </returns>
         public bool IsOccupied(Coord c)
         {
             c = Normalize(c);
-            // devolver false se não tiver nada na coordenada
-            // devolver true caso contrário.
+            // TODO: Return false if the Coord is empty
+            // and return true otherwise
             return board[c.x, c.y] != null;
         }  
 
         /// <summary>
-        /// Método que devolve a posição vizinha da posição dada no parâmetro
-        /// <param name="coord"> na direção do parâmetro 
-        /// <param name="direction">.
+        /// Method that returns the Neighbour position of the given position in
+        /// the parameter <param name="coord">, in the direction of the 
+        /// parameter <param name="direction">.
         /// </summary>
-        /// <param name="coord">Posição do nível.</param>
-        /// <param name="direction">Direção.</param>
-        /// <returns>Posição vizinha da posição dada no parâmetro
-        /// <param name="coord"> na direção do parâmetro 
+        /// <param name="coord">Position in the 'board'</param>
+        /// <param name="direction">Direction to check the Neighbour</param>
+        /// <returns>Neighbour position of the given position in the paramenter
+        /// <param name="coord"> in the direction of the paramenter
         /// <param name="direction">.
         /// </returns>
         public Coord GetNeighbor(Coord coord, Direction direction)
         {
-            // declaração da coordenada de vizinhança.
+            // Declaration of the neighbour coordinate to be written to.
             Coord neighbor;
 
-            // Verificar a direção e adquirir a coord correspondente.
+            // Verifies the direction and obtains the Neighbour Coord.
             switch(direction)
             {
                 case Direction.Up:
@@ -106,11 +106,11 @@ namespace Roguelike
         }
 
         /// <summary>
-        /// Move entidade <param name="entity"> para a posição 
+        /// Moves entity <param name="entity"> to the position 
         /// <param name="coord">
         /// </summary>
-        /// <param name="entity">Entidade a ser movida</param>
-        /// <param name="coord">Coordenada de destido da Entidade</param>
+        /// <param name="entity">Entity to be moved</param>
+        /// <param name="coord">Destination coordinate of the entity</param>
         public void MoveEntity(Entity entity, Coord coord)
         {
             coord = Normalize(coord);
@@ -119,22 +119,22 @@ namespace Roguelike
         }
 
         /// <summary>
-        /// normaliza coordenada, garantindo que esta está dentro dos limites 
-        /// do nível
+        /// Normalizes a coordinate, assuring that its still inside the level's
+        /// bounds.
         /// </summary>
-        /// <param name="c">Coordenada a normalizar.</param>
-        /// <returns>Coordenada normalizada.</returns>
+        /// <param name="c">Coord to be normalized.</param>
+        /// <returns>Normalized Coord.</returns>
         public Coord Normalize(Coord c)
         {
-            // inicialmente os valores originais
+            // Initially, the original values
             int x = c.x;
             int y = c.y;
             
-            // trata da dimensão horizontal
+            // Observes if the horizontal value is inside the bounds
             while (x>= Width) x -= Width;
             while (x < 0) x += Width;
 
-            // trata da dimensão vertical
+            // Observes if the vertical value is inside the bounds
             while (y>= Height) y -= Height;
             while (y < 0) y += Height;
 

@@ -6,9 +6,14 @@ namespace Roguelike
     {
         // The single string that manages all inputs on the game.
         public string Input { get; private set; } = "";
+        
         // A splitted array of strings used to read commands.
         public string[] SplitInput { get; private set;} 
 
+        /// <summary>
+        /// A simple method that shows to the player a graphic depiction of 
+        /// the Main Menu's commands.
+        /// </summary>
         private void MainMenu()
         {
             Console.WriteLine("---------------------------");
@@ -19,7 +24,6 @@ namespace Roguelike
             Console.WriteLine("| i - Instructions        |");
             Console.WriteLine("| c - Credits             |");
             Console.WriteLine("| q - Quit                |");
-            Console.WriteLine("---------------------------");
             Console.WriteLine("---------------------------");
         }
     }

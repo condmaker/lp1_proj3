@@ -1,25 +1,28 @@
 namespace Roguelike
 {
+    /// <summary>
+    /// A enumerate defining direction movement in the game 'board'.
+    /// </summary>
     public enum Direction
     {
         /// <summary>
-        /// Não se move.
+        /// Does not move.
         /// </summary>
         None,
         /// <summary>
-        /// Se move para cima.
+        /// Moves upwards.
         /// </summary>
         Up,
         /// <summary>
-        /// Se move para direita.
+        /// Moves rightwards.
         /// </summary>
         Right,
         /// <summary>
-        /// Se move para baixo.
+        /// Moves downwards.
         /// </summary>
         Down,
         /// <summary>
-        /// Se move para esquerda.
+        /// Moves leftwards.
         /// </summary>
         Left
     }
