@@ -20,20 +20,21 @@ namespace Roguelike
         /// direction of movement.</returns>
         public override Coord WhereToMove(Board board)
         {
+            /*
             // Asks the player to input a direction.
             Direction direction = UI.InputDirection();
 
             // Gets the destination Coord and asks again if it's occupied.
             Coord dest = board.GetNeighbor(Pos, direction);
-
+            
             while (board.IsObstructed(dest))
             {
                 UI.WriteMessage("You can't move there. Try another direction.");
                 direction = UI.InputDirection();
                 dest = board.GetNeighbor(Pos, direction);
             }
-
-            return dest;
+            */
+            return null;
         }
     }
 }

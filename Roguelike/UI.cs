@@ -33,7 +33,7 @@ namespace Roguelike
         /// Function that renders the game board in the console
         /// </summary>
         /// <param name="board">"Current game board"</param>
-        public void ShowBoard(Board board)
+        public void ShowBoard(Board board, bool empty = false)
         {
             //Cycle through every line 
             for(int y = 0; y < board.Height; y++)
@@ -45,8 +45,10 @@ namespace Roguelike
                     Coord coord = new Coord(x,y);
 
                         
-                    //Checks if there is some entity occupeing the position
-                    if(board.IsOccupied(coord))
+                    //Checks if there is some entity occupying the position
+                    //and if the board was setuped to be printed in an empty
+                    //state
+                    if(board.IsOccupied(coord) && !empty)
                     {
                         //Prints its image
                         Console.Write
@@ -55,7 +57,7 @@ namespace Roguelike
                     else
                     {
                         //Prints empty tile image
-                        Console.Write("  .  ");
+                        Console.Write(" ... ");
                     }
                 }
 
@@ -79,25 +81,25 @@ namespace Roguelike
             switch(entity)
             {
                 case EntityKind.Player:
-                    entityStr = " P ";
+                    entityStr = " PPP ";
                     break;
                 case EntityKind.Minion:
-                    entityStr = " m ";
+                    entityStr = " mmm ";
                     break;
                 case EntityKind.Boss:
-                    entityStr = " B ";
+                    entityStr = " BBB ";
                     break;
                 case EntityKind.Obstacle:
-                    entityStr = " O ";
+                    entityStr = " OOO ";
                     break;
                 case EntityKind.PowerUpL:
-                    entityStr = " X ";
+                    entityStr = " -X- ";
                     break;
                 case EntityKind.PowerUpM:
-                    entityStr = " * ";
+                    entityStr = " -*- ";
                     break;
                 case EntityKind.PowerUpS:
-                    entityStr = " + ";
+                    entityStr = " -+- ";
                     break;
             }
 

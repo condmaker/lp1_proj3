@@ -27,9 +27,9 @@ namespace Roguelike
         /// </summary>
         /// <param name="height">Horizontal dimensions of the level.</param>
         /// <param name="width">Vertical dimensions of the level.</param>
-        public Board(int height, int width)
+        public Board(int width, int height)
         {
-            board = new Entity[height,width];   
+            board = new Entity[width,height];   
         }
 
         /// <summary>
@@ -157,7 +157,6 @@ namespace Roguelike
         {
             coord = Normalize(coord);
             board[coord.x, coord.y] = entity;
-            entity.Pos = coord;
         }
 
         /// <summary>

@@ -24,17 +24,15 @@ namespace Roguelike
 
         public int MinionNumb => Level + 1; 
         //TODO: Substituir por uma função a sério
-
-
         public int BossNumb => Level + 1; 
         //TODO: Substituir por uma função a sério
         public int ObstclNumb => Level + 1; 
         //TODO: Substituir por uma função a sério
-        public int PowUPSmallNumb => (int)MathF.Min(1f, 10 - Level);  
+        public int PowUPSmallNumb => (int)MathF.Max(1f, 10 - Level);  
         //TODO: Substituir por uma função a sério
-        public int PowUPSMediumNumb => (int)MathF.Min(1f, 10 - Level); 
+        public int PowUPSMediumNumb => (int)MathF.Max(1f, 10 - Level); 
         //TODO: Substituir por uma função a sério
-        public int PowUPLargeNumb => (int)MathF.Min(1f, 10 - Level); 
+        public int PowUPLargeNumb => (int)MathF.Max(1f, 10 - Level); 
         //TODO: Substituir por uma função a sério
 
 
@@ -53,8 +51,9 @@ namespace Roguelike
             //the program ends with an error message
             if(args.Length != 4)
             {
+                //TODO: Exeption
                 //Temp for testing
-                return null;
+                return new GameValues(10, 10);
             }
 
             // A not very efficient way to parse the arguments
@@ -95,7 +94,7 @@ namespace Roguelike
         /// </summary>
         /// <param name="height"></param>
         /// <param name="width"></param>
-        private GameValues(int height, int width)
+        private GameValues(int width, int height)
         {
             Height = height;
             Width = width;

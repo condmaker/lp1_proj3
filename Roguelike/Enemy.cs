@@ -7,7 +7,7 @@ namespace Roguelike
         public Enemy (Coord pos, EntityKind kind, int health)
             : base(pos, kind) {}
 
-        public override Coord WhereToMove()
+        public override Coord WhereToMove(Board board)
         {
             return null;
             //TODO
