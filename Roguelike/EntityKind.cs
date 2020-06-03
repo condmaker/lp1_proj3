@@ -11,6 +11,7 @@ namespace Roguelike
         Obstacle,
         PowerUpS,
         PowerUpM,
-        PowerUpL
+        PowerUpL,
+        Exit
     }
 }

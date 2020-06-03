@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace Roguelike
 {
@@ -35,9 +36,17 @@ namespace Roguelike
         /// <param name="board">"Current game board"</param>
         public void ShowBoard(Board board, bool empty = false)
         {
+            // Allows the console to print other Unicode characters 
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            for (int i = 0; i < board.Width; i++)
+                Console.Write("-----");
+            Console.WriteLine("--");
+
             //Cycle through every line 
             for(int y = 0; y < board.Height; y++)
             {
+                Console.Write("|");
                 //Cycle through every column in the current line 
                 for(int x = 0; x < board.Width; x++)
                 {
@@ -52,7 +61,7 @@ namespace Roguelike
                     {
                         //Prints its image
                         Console.Write
-                        (GetEntityString(board.GetEntityAt(coord).kind));
+                        (board.GetEntityAt(coord).ToString());
                     }
                     else
                     {
@@ -61,13 +70,19 @@ namespace Roguelike
                     }
                 }
 
+                Console.Write("|");
+
                 //Space between lines 
                 Console.WriteLine("\n");
             }
+
+            for (int i = 0; i < board.Width; i++)
+                Console.Write("-----");
+            Console.WriteLine("--");
         }
         
 
-
+        /*
         /// <summary>
         ///  
         /// </summary>
@@ -105,6 +120,7 @@ namespace Roguelike
 
             return entityStr; 
         }
+        */
 
     }
 }
