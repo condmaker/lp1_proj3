@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 
 namespace Roguelike
 {
@@ -13,6 +13,14 @@ namespace Roguelike
         /// 'tiles' of Entities).
         /// </summary>
         private Entity[,] board;
+
+
+        /// <summary>
+        /// Private instance variable that contains reference to the Entities
+        /// that are hidden under an enemy. This is used to store the Power-Ups
+        /// when enemies are in the same tiles as them.
+        /// </summary>
+        private List<Entity> hiddenPowerUps;
 
         /// <summary>
         /// Creates a new instance of a level (or board).
@@ -61,10 +69,32 @@ namespace Roguelike
         public bool IsOccupied(Coord c)
         {
             c = Normalize(c);
-            // TODO: Return false if the Coord is empty
+            // Return false if the Coord is empty
             // and return true otherwise
             return board[c.x, c.y] != null;
-        }  
+        }
+
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public bool IsObstructed(Coord c){
+            c = Normalize(c);
+
+            // if the tile is not occupied, it is not obstructed.
+            if (IsOccupied(c) == false)
+                return false;
+
+            // if the tile is occupied but not by a Power Up, it is obstructed.
+            if (GetEntityAt(c).kind != EntityKind.PowerUpS &&
+                GetEntityAt(c).kind != EntityKind.PowerUpM &&
+                GetEntityAt(c).kind != EntityKind.PowerUpL)
+                return true;
+            // otherwise, it is not obstructed.
+            return false;
+        }
 
         /// <summary>
         /// Method that returns the Neighbour position of the given position in
@@ -113,9 +143,21 @@ namespace Roguelike
         /// <param name="coord">Destination coordinate of the entity</param>
         public void MoveEntity(Entity entity, Coord coord)
         {
+            PlaceEntity(entity, coord);
+            board[entity.Pos.x, entity.Pos.y] = null;
+        }
+
+
+        /// <summary>
+        /// Places entity <param name="entity"> in the position 
+        /// </summary>
+        /// <param name="entity">Entity to be placed</param>
+        /// <param name="coord">Destination coordinate of the entity</param>
+        public void PlaceEntity(Entity entity, Coord coord)
+        {
             coord = Normalize(coord);
             board[coord.x, coord.y] = entity;
-            board[entity.Pos.x, entity.Pos.y] = null;
+            entity.Pos = coord;
         }
 
         /// <summary>
@@ -139,6 +181,35 @@ namespace Roguelike
             while (y < 0) y += Height;
 
             return new Coord(x, y);
+        }
+
+        /// <summary>
+        /// Stores the Entity from a given position <param name="c"> in the 
+        /// hiddenPowerUps List.
+        /// </summary>
+        /// <param name="c">The position on the board of the entity to be 
+        /// stored.</param>
+        public void StorePowerUp(Coord c)
+        {
+            hiddenPowerUps.Add(GetEntityAt(c));
+        }
+
+        /// <summary>
+        /// Restores a Entity in hiddenPowerUps List to a given position
+        /// <param name="c"> on the board.
+        /// </summary>
+        /// <param name="c">The position of the entity to be restored.</param>
+        public void RestorePowerUp(Coord c)
+        {
+            foreach (Entity e in hiddenPowerUps)
+            {
+                if (e.Pos == c)
+                {
+                    board[c.x, c.y] = e;
+                    hiddenPowerUps.Remove(e);
+                    continue;
+                }
+            }
         }
 
     }
