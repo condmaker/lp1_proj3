@@ -74,10 +74,32 @@ namespace Roguelike
         public bool IsOccupied(Coord c)
         {
             c = Normalize(c);
-            // TODO: Return false if the Coord is empty
+            // Return false if the Coord is empty
             // and return true otherwise
             return board[c.x, c.y] != null;
-        }  
+        }
+
+
+        /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public bool IsObstructed(Coord c){
+            c = Normalize(c);
+
+            // if the tile is not occupied, it is not obstructed.
+            if (IsOccupied(c) == false)
+                return false;
+
+            // if the tile is occupied but not by a Power Up, it is obstructed.
+            if (GetEntityAt(c).kind != EntityKind.PowerUpS &&
+                GetEntityAt(c).kind != EntityKind.PowerUpM &&
+                GetEntityAt(c).kind != EntityKind.PowerUpL)
+                return true;
+            // otherwise, it is not obstructed.
+            return false;
+        }
 
         /// <summary>
         /// Method that returns the Neighbour position of the given position in
