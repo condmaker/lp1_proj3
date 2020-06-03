@@ -1,4 +1,4 @@
-using System;
+using System.Collections.Generic;
 
 namespace Roguelike
 {
@@ -13,6 +13,14 @@ namespace Roguelike
         /// 'tiles' of Entities).
         /// </summary>
         private Entity[,] board;
+
+
+        /// <summary>
+        /// Private instance variable that contains reference to the Entities
+        /// that are hidden under an enemy. This is used to store the Power-Ups
+        /// when enemies are in the same tiles as them.
+        /// </summary>
+        private List<Entity> hiddenPowerUps;
 
         /// <summary>
         /// Creates a new instance of a level (or board).
@@ -144,6 +152,35 @@ namespace Roguelike
             while (y < 0) y += Height;
 
             return new Coord(x, y);
+        }
+
+        /// <summary>
+        /// Stores the Entity from a given position <param name="c"> in the 
+        /// hiddenPowerUps List.
+        /// </summary>
+        /// <param name="c">The position on the board of the entity to be 
+        /// stored.</param>
+        public void StorePowerUp(Coord c)
+        {
+            hiddenPowerUps.Add(GetEntityAt(c));
+        }
+
+        /// <summary>
+        /// Restores a Entity in hiddenPowerUps List to a given position
+        /// <param name="c"> on the board.
+        /// </summary>
+        /// <param name="c">The position of the entity to be restored.</param>
+        public void RestorePowerUp(Coord c)
+        {
+            foreach (Entity e in hiddenPowerUps)
+            {
+                if (e.Pos == c)
+                {
+                    board[c.x, c.y] = e;
+                    hiddenPowerUps.Remove(e);
+                    continue;
+                }
+            }
         }
 
     }
