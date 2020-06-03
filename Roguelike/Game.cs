@@ -44,8 +44,7 @@ namespace Roguelike
         /// </summary>
         public void Initiate()
         {           
-            UI u = new UI();
-            u.ShowBoard(board);
+            UI.ShowBoard(board);
         }
 
         
@@ -119,7 +118,8 @@ namespace Roguelike
             Entity newEntity = null;
             
 
-            //Find a coordinate unocupied to instatiate the entity
+            //Find a coordinate unocupied to instatiate the entity]
+            //Made by the teacher
             do{
                 pos = new Coord(
                     rand.Next(gameValues.Width),

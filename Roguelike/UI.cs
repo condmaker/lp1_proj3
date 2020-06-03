@@ -3,19 +3,19 @@ using System.Text;
 
 namespace Roguelike
 {
-    public class UI
+    public static class UI
     {
         // The single string that manages all inputs on the game.
-        public string Input { get; private set; } = "";
+        public static string Input { get; private set; } = "";
         
         // A splitted array of strings used to read commands.
-        public string[] SplitInput { get; private set;} 
+        public static string[] SplitInput { get; private set;} 
 
         /// <summary>
         /// A simple method that shows to the player a graphic depiction of 
         /// the Main Menu's commands.
         /// </summary>
-        private void MainMenu()
+        private static void MainMenu()
         {
             Console.WriteLine("---------------------------");
             Console.WriteLine("|        Roguelike        |");
@@ -34,7 +34,7 @@ namespace Roguelike
         /// Function that renders the game board in the console
         /// </summary>
         /// <param name="board">"Current game board"</param>
-        public void ShowBoard(Board board, bool empty = false)
+        public static void ShowBoard(Board board, bool empty = false)
         {
             // Allows the console to print other Unicode characters 
             Console.OutputEncoding = System.Text.Encoding.UTF8;
