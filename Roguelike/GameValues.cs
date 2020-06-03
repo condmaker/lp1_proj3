@@ -1,3 +1,5 @@
+using  System;
+
 namespace Roguelike
 {
     public class GameValues
@@ -17,6 +19,24 @@ namespace Roguelike
         /// </summary>
         /// <value> Number of tiles in the x axis. </value>
         public int Width{ get; }
+
+        public int Level{get; set;}
+
+        public int MinionNumb => Level + 1; 
+        //TODO: Substituir por uma função a sério
+
+
+        public int BossNumb => Level + 1; 
+        //TODO: Substituir por uma função a sério
+        public int ObstclNumb => Level + 1; 
+        //TODO: Substituir por uma função a sério
+        public int PowUPSmallNumb => (int)MathF.Min(1f, 10 - Level);  
+        //TODO: Substituir por uma função a sério
+        public int PowUPSMediumNumb => (int)MathF.Min(1f, 10 - Level); 
+        //TODO: Substituir por uma função a sério
+        public int PowUPLargeNumb => (int)MathF.Min(1f, 10 - Level); 
+        //TODO: Substituir por uma função a sério
+
 
         /// <summary>
         /// 

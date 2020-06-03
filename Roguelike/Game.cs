@@ -28,6 +28,8 @@ namespace Roguelike
         public Game(GameValues gameValues)
         {
             this.gameValues = gameValues;
+            
+            
 
             board = new Board(gameValues.Height, gameValues.Width);
             ui = new UI();

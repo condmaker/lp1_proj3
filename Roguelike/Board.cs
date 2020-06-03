@@ -22,11 +22,6 @@ namespace Roguelike
         public Board(int height, int width)
         {
             board = new Entity[height,width];   
-
-
-            board[3,3] = new Enemy(new Coord(3,3), EntityKind.Minion ,30);  
-            board[2,5] = new Enemy(new Coord(2,5), EntityKind.Boss ,30);  
-            board[5,5] = new Player(new Coord(5,5), 10);  
         }
 
         /// <summary>

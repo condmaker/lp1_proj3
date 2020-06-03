@@ -16,8 +16,8 @@ namespace Roguelike
             //Gets the arguments from the command line and creates a new 
             //GameValue object with the same arguments
             GameValues gameValues = GameValues.ConvertArgs(args);
-            Game lele = new Game(gameValues);
-            lele.Initiate();
+            Game game = new Game(gameValues);
+            game.Initiate();
            
         }
     }
