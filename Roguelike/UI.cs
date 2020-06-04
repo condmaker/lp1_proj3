@@ -236,6 +236,7 @@ namespace Roguelike
         /// <param name="highscore">"Highscore table"</param>
         public static void ShowHighscoreTable(HighscoreTable highscore)
         {
+            Console.WriteLine("Ψѧ-----|");
 
             //Checks every possible spot of the table.
             for(int i  = 0; i < 10; i++)
@@ -245,10 +246,15 @@ namespace Roguelike
                 Score score = highscore.GetScore(i);
 
                 //If theres a score in the expecifict spot, print it.
-                if(score != null)
-                     Console.WriteLine ($"Name: {score.Name} " +
-                            $"-- Score: {score.NewScore}");
+                if(score != null) 
+                {
+                    Console.WriteLine ($"| Name: {score.Name} " +
+                            $"+Ѡ+ Score: {score.NewScore}");
+                }
+
             }
+
+            Console.WriteLine("Ψѧ-----|");
         }
 
         /// <summary>

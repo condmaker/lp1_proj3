@@ -50,7 +50,7 @@ namespace Roguelike
         {           
             UI.MainMenu();
 
-            while (UI.Input != "q")
+            while (UI.Input.ToLower() != "q")
             {
                 UI.WriteOnString();
 
