@@ -33,6 +33,8 @@ namespace Roguelike
         /// Function that renders the game board in the console
         /// </summary>
         /// <param name="board">"Current game board"</param>
+        /// <param name="empty">"Usefull command to print the board 
+        /// compeletly empty"</param>
         public void ShowBoard(Board board, bool empty = false)
         {
             //Cycle through every line 
