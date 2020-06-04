@@ -14,7 +14,7 @@ namespace Roguelike
         /// <summary>
         /// Random number generator
         /// </summary>
-        private Random rand;
+        public static Random rand;
 
         /// <summary>
         /// Game board reference
