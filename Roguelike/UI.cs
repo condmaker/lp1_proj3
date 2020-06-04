@@ -1,20 +1,21 @@
 using System;
+using System.Text;
 
 namespace Roguelike
 {
-    public class UI
+    public static class UI
     {
         // The single string that manages all inputs on the game.
-        public string Input { get; private set; } = "";
+        public static string Input { get; private set; } = "";
         
         // A splitted array of strings used to read commands.
-        public string[] SplitInput { get; private set;} 
+        public static string[] SplitInput { get; private set;} 
 
         /// <summary>
         /// A simple method that shows to the player a graphic depiction of 
         /// the Main Menu's commands.
         /// </summary>
-        private void MainMenu()
+        private static void MainMenu()
         {
             Console.WriteLine("---------------------------");
             Console.WriteLine("|        Roguelike        |");
@@ -27,19 +28,41 @@ namespace Roguelike
             Console.WriteLine("---------------------------");
         }
 
+        /// <summary>
+        /// Function that renders the highscore table in the console
+        /// </summary>
+        /// <param name="highscore">"Highscore table"</param>
 
+        public static void ShowHighscoreTable(HighscoreTable highscore)
+        {
+
+            for(int i  = 0; i < 10; i++)
+            {
+                Score score = highscore.GetScore(i);
+                if(score != null)
+                     Console.WriteLine ($"Name: {score.Name} " +
+                            $"-- Score: {score.NewScore}");
+            }
+
+        }
 
         /// <summary>
         /// Function that renders the game board in the console
         /// </summary>
         /// <param name="board">"Current game board"</param>
-        /// <param name="empty">"Usefull command to print the board 
-        /// compeletly empty"</param>
-        public void ShowBoard(Board board, bool empty = false)
+        public static void ShowBoard(Board board, bool empty = false)
         {
+            // Allows the console to print other Unicode characters 
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+
+            for (int i = 0; i < board.Width; i++)
+                Console.Write("-----");
+            Console.WriteLine("--");
+
             //Cycle through every line 
             for(int y = 0; y < board.Height; y++)
             {
+                Console.Write("|");
                 //Cycle through every column in the current line 
                 for(int x = 0; x < board.Width; x++)
                 {
@@ -54,7 +77,7 @@ namespace Roguelike
                     {
                         //Prints its image
                         Console.Write
-                        (GetEntityString(board.GetEntityAt(coord).kind));
+                        (board.GetEntityAt(coord).ToString());
                     }
                     else
                     {
@@ -63,50 +86,16 @@ namespace Roguelike
                     }
                 }
 
+                Console.Write("|");
+
                 //Space between lines 
                 Console.WriteLine("\n");
             }
-        }
-        
 
-
-        /// <summary>
-        ///  
-        /// </summary>
-        /// <param name="type">Entity to print</param>
-        /// <returns>String that represent the entity</returns>
-        private string GetEntityString(EntityKind entity)
-        {
-            string entityStr = "";
-
-            //Converts entity type to corresponding string
-            switch(entity)
-            {
-                case EntityKind.Player:
-                    entityStr = " PPP ";
-                    break;
-                case EntityKind.Minion:
-                    entityStr = " mmm ";
-                    break;
-                case EntityKind.Boss:
-                    entityStr = " BBB ";
-                    break;
-                case EntityKind.Obstacle:
-                    entityStr = " OOO ";
-                    break;
-                case EntityKind.PowerUpL:
-                    entityStr = " -X- ";
-                    break;
-                case EntityKind.PowerUpM:
-                    entityStr = " -*- ";
-                    break;
-                case EntityKind.PowerUpS:
-                    entityStr = " -+- ";
-                    break;
-            }
-
-            return entityStr; 
-        }
+            for (int i = 0; i < board.Width; i++)
+                Console.Write("-----");
+            Console.WriteLine("--");
+        }      
 
     }
 }

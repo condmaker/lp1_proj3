@@ -14,15 +14,15 @@ namespace Roguelike
         /// <summary>
         /// Random number generator
         /// </summary>
-        private Random rand;
+        public static Random rand;
 
         /// <summary>
         /// Game board reference
         /// </summary>
-        public Board board;
+        private Board board;
 
-
-
+        private HighscoreTable highscoreTable;
+         
         /// <summary>
         /// 
         /// </summary>
@@ -30,13 +30,18 @@ namespace Roguelike
         public Game(GameValues gameValues)
         {
             this.gameValues = gameValues;
-            
+
+            highscoreTable = new HighscoreTable();
+
             //Ceate board instance
             board = new Board(gameValues.Width, gameValues.Height);
 
             rand = new Random();
-
+            gameValues.Level = 2;
             GenerateLevel();
+
+
+
         }
 
         /// <summary>
@@ -44,8 +49,9 @@ namespace Roguelike
         /// </summary>
         public void Initiate()
         {           
-            UI u = new UI();
-            u.ShowBoard(board);
+            UI.ShowBoard(board);
+            UI.ShowHighscoreTable(highscoreTable);
+
         }
 
         
@@ -110,7 +116,6 @@ namespace Roguelike
         }
 
 
-
         /// <summary>
         /// 
         /// </summary>
@@ -122,7 +127,8 @@ namespace Roguelike
             Entity newEntity = null;
             
 
-            // Find a coordinate unocupied to instatiate the entity
+            //Find a coordinate unocupied to instatiate the entity]
+            //Made by the teacher
             do{
                 pos = new Coord(
                     rand.Next(gameValues.Width),
@@ -136,10 +142,10 @@ namespace Roguelike
             switch(kind)
             {
                 case EntityKind.Minion:
-                    newEntity = new Enemy(pos, kind, 0);
+                    newEntity = new Enemy(pos, kind);
                     break;
                 case EntityKind.Boss:
-                    newEntity = new Enemy(pos, kind, 0);
+                    newEntity = new Enemy(pos, kind);
                     break;
                 default:
                     newEntity = new Entity(pos, kind);

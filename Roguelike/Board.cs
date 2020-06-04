@@ -14,6 +14,13 @@ namespace Roguelike
         /// </summary>
         private Entity[,] board;
 
+        /// <summary>
+        /// Returns the bi-dimensional array that represents the game's 'board'
+        /// </summary>
+        /// <returns>The bi-dimensional array that represents the game's 'board'
+        /// </returns>
+        public Entity[,] GetBoard() => board;
+
 
         /// <summary>
         /// Private instance variable that contains reference to the Entities
