@@ -135,10 +135,10 @@ namespace Roguelike
             switch(kind)
             {
                 case EntityKind.Minion:
-                    newEntity = new Enemy(pos, kind, 0);
+                    newEntity = new Enemy(pos, kind);
                     break;
                 case EntityKind.Boss:
-                    newEntity = new Enemy(pos, kind, 0);
+                    newEntity = new Enemy(pos, kind);
                     break;
                 default:
                     newEntity = new Entity(pos, kind);
