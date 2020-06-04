@@ -2,6 +2,9 @@ using System.Collections.Generic;
 
 namespace Roguelike
 {
+    /// <summary>
+    /// Defines a implementation of the game's enemies.
+    /// </summary>
     class Enemy : Agent
     {
         /// <summary>
@@ -17,7 +20,7 @@ namespace Roguelike
         /// Method that implements the AI movement of the minion and boss 
         /// entities.
         /// </summary>
-        /// <param name="board">Board in which the entities are.</param>
+        /// <param name="board">Reference to the level's board.</param>
         /// <returns>A coord which represents where the enemy should move.
         /// </returns>
         public override Coord WhereToMove(Board board)

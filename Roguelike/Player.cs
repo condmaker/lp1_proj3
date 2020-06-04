@@ -2,6 +2,11 @@ namespace Roguelike
 {
     public class Player: Agent
     {
+        /// <summary>
+        /// Auto implemented property which indicates the player's health 
+        /// points.
+        /// </summary>
+        /// <value>The player's health points.</value>
         public int Health {get; set;}
         
         /// <summary>
