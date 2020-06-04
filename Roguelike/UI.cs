@@ -65,7 +65,7 @@ namespace Roguelike
             Console.WriteLine("|                                 |");
             Console.WriteLine("| various types of health         |");
             Console.WriteLine("| power-ups, varying from small   |");
-            Console.WriteLine("| to large:           s♥s m♥m l♥l |");
+            Console.WriteLine("| to large:            ♥  ɾ♥ɿ ѧ♥ѧ |");
             Console.WriteLine("|                                 |");
             Console.WriteLine("| ...And the door that will lead  |");
             Console.WriteLine("| you further beyond this         |");
@@ -79,7 +79,18 @@ namespace Roguelike
 
             if (ContinueTutorial() == false) return;
 
-            
+            Console.WriteLine("Ψѧ-------------------------------ѧΨ");
+            Console.WriteLine("| The Dungeon (Map or Game Board) |");
+            Console.WriteLine("Ψѧ-------------------------------ѧΨ");
+            Console.WriteLine("| The Dungeon is divided in       |");
+            Console.WriteLine("| floors, and when you, the       |");
+            Console.WriteLine("| player (.☻.) leaves the current |");
+            Console.WriteLine("| floor through an door (_∩_)     |");
+            Console.WriteLine("| you will descend to the next    |");
+            Console.WriteLine("| floor. But beware- it only gets |");
+            Console.WriteLine("| more and more deadly as you go  |");
+            Console.WriteLine("| down...                         |");
+
         }
 
         /// <summary>
@@ -107,8 +118,8 @@ namespace Roguelike
         {
             
             for (int i = 0; i < board.Width; i++)
-                Console.Write("-----");
-            Console.WriteLine("--");
+                Console.Write("——————");
+            Console.WriteLine("————————————");
 
             //Cycle through every line 
             for(int y = 0; y < board.Height; y++)
@@ -124,6 +135,9 @@ namespace Roguelike
                     //Checks if there is some entity occupying the position
                     //and if the board was setuped to be printed in an empty
                     //state
+
+                    Console.Write("「");
+
                     if(board.IsOccupied(coord) && !empty)
                     {
                         //Prints its image
@@ -133,8 +147,10 @@ namespace Roguelike
                     else
                     {
                         //Prints empty tile image
-                        Console.Write(" ___ ");
+                        Console.Write("   ");
                     }
+
+                    Console.Write("」");
                 }
 
                 Console.Write("|");
@@ -144,8 +160,8 @@ namespace Roguelike
             }
 
             for (int i = 0; i < board.Width; i++)
-                Console.Write("-----");
-            Console.WriteLine("--");
+                Console.Write("‾‾‾‾‾‾");
+            Console.WriteLine("‾‾‾‾‾‾‾‾‾‾‾‾");
         }
 
         /// <summary>
