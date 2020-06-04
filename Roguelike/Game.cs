@@ -45,6 +45,8 @@ namespace Roguelike
         public void Initiate()
         {           
             UI.ShowBoard(board);
+
+            UI.ShowTutorial();
         }
 
         

@@ -19,28 +19,28 @@ namespace Roguelike
             switch (this.kind)
             {
                 case EntityKind.Player:
-                    return ".☻.";
+                    return " .☻. ";
 
                 case EntityKind.Minion:
-                    return ".¤.";
+                    return " .¤. ";
 
                 case EntityKind.Boss:
-                    return "◄☼►";
+                    return " ◄☼► ";
 
                 case EntityKind.Obstacle:
-                    return "|||";    
+                    return " ||| ";    
                 
                 case EntityKind.PowerUpS:
-                    return " ♥ ";
+                    return "  ♥  ";
 
                 case EntityKind.PowerUpM:
-                    return "ɾ♥ɿ";
+                    return " ɾ♥ɿ ";
                 
                 case EntityKind.PowerUpL:
-                    return "ѧ♥ѧ";
+                    return " ѧ♥ѧ ";
 
                 case EntityKind.Exit:
-                    return "_∩_";
+                    return " _∩_ ";
                 
                 default:
                     return "";
