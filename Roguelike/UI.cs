@@ -12,23 +12,98 @@ namespace Roguelike
         public static string[] SplitInput { get; private set;} 
 
         /// <summary>
+        /// Static constructor of the class. Will make the output encode
+        /// support Unicode characters.
+        /// </summary>
+        static UI()
+        {
+            // Allows the console to print other Unicode characters 
+            Console.OutputEncoding = System.Text.Encoding.UTF8;
+        }
+
+        /// <summary>
         /// A simple method that shows to the player a graphic depiction of 
         /// the Main Menu's commands.
         /// </summary>
         private static void MainMenu()
         {
-            Console.WriteLine("---------------------------");
-            Console.WriteLine("|        Roguelike        |");
-            Console.WriteLine("---------------------------");
-            Console.WriteLine("| n - New Game            |");
-            Console.WriteLine("| h - High Scores         |");
-            Console.WriteLine("| i - Instructions        |");
-            Console.WriteLine("| c - Credits             |");
-            Console.WriteLine("| q - Quit                |");
-            Console.WriteLine("---------------------------");
+            Console.WriteLine("Ψѧ--------------+Ѡ+--------------ѧΨ");
+            Console.WriteLine("|           -Roguelike-           |");
+            Console.WriteLine("Ψѧ--------------+Ѡ+--------------ѧΨ");
+            Console.WriteLine("| n - New Game                    |");
+            Console.WriteLine("| h - High Scores                 |");
+            Console.WriteLine("| i - Instructions                |");
+            Console.WriteLine("| c - Credits                     |");
+            Console.WriteLine("| q - Quit                        |");
+            Console.WriteLine("Ψѧ-------------------------------ѧΨ");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private static void ShowTutorial()
+        {
+            Console.WriteLine("Ψѧ-------------------------------ѧΨ");
+            Console.WriteLine("|           Introduction          |");
+            Console.WriteLine("Ψѧ-------------------------------ѧΨ");
+            Console.WriteLine("| Welcome. In this introduction,  |");
+            Console.WriteLine("| you will understand how to play |");
+            Console.WriteLine("| this Roguelike game. Let's      |");
+            Console.WriteLine("| begin by the very basics: You   |");
+            Console.WriteLine("| control a little adventurer,    |");
+            Console.WriteLine("| that is exploring an unknown    |");
+            Console.WriteLine("| dungeon.                        |");
+            Console.WriteLine("|                                 |");
+            Console.WriteLine("| You look like this:         .☻. |");
+            Console.WriteLine("|                                 |");
+            Console.WriteLine("| When at the dungeon, you will   |");
+            Console.WriteLine("| be faced with obstacles,:   ||| |");
+            Console.WriteLine("|                                 |");
+            Console.WriteLine("| small but scary enemies,:   .¤. |");
+            Console.WriteLine("|                                 |");
+            Console.WriteLine("| big, dangerous bosses,:     ◄☼► |");
+            Console.WriteLine("|                                 |");
+            Console.WriteLine("| various types of health         |");
+            Console.WriteLine("| power-ups, varying from small   |");
+            Console.WriteLine("| to large:           s♥s m♥m l♥l |");
+            Console.WriteLine("|                                 |");
+            Console.WriteLine("| ...And the door that will lead  |");
+            Console.WriteLine("| you further beyond this         |");
+            Console.WriteLine("| mysterious dungeon:         _∩_ |");
+            Console.WriteLine("|                                 |");
+            Console.WriteLine("| Now that you understand the     |");
+            Console.WriteLine("| basics and knows every entity   |");
+            Console.WriteLine("| in the game, let us continue    |");
+            Console.WriteLine("| to explain the dungeon itself.  |");
+            Console.WriteLine("Ψѧ-------------------------------ѧΨ");
 
+            if (ContinueTutorial() == false) return;
+
+            Console.WriteLine("Ψѧ-------------------------------ѧΨ");
+            Console.WriteLine("| The Dungeon (Map or Game Board) |");
+            Console.WriteLine("Ψѧ-------------------------------ѧΨ");
+            Console.WriteLine("| The Dungeon is divided in       |");
+            Console.WriteLine("| floors, and when you, the       |");
+            Console.WriteLine("| player (.☻.) leaves the current |");
+            Console.WriteLine("| floor through an door (_∩_)     |");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        private static bool ContinueTutorial()
+        {
+            Console.WriteLine("Ψѧ-------------------------------ѧΨ");
+            Console.WriteLine("|       Press c to continue,      |");
+            Console.WriteLine("| or, anything else to go back... |");
+            Console.WriteLine("Ψѧ-------------------------------ѧΨ");
+
+            WriteOnString();
+
+            if (Input == "c") return true;
+            return false;
+        }
 
         /// <summary>
         /// Function that renders the game board in the console
@@ -36,9 +111,7 @@ namespace Roguelike
         /// <param name="board">"Current game board"</param>
         public static void ShowBoard(Board board, bool empty = false)
         {
-            // Allows the console to print other Unicode characters 
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
-
+            
             for (int i = 0; i < board.Width; i++)
                 Console.Write("-----");
             Console.WriteLine("--");
@@ -66,7 +139,7 @@ namespace Roguelike
                     else
                     {
                         //Prints empty tile image
-                        Console.Write(" ... ");
+                        Console.Write(" ___ ");
                     }
                 }
 
@@ -80,47 +153,15 @@ namespace Roguelike
                 Console.Write("-----");
             Console.WriteLine("--");
         }
-        
 
-        /*
         /// <summary>
-        ///  
+        /// Changes the instance Input.
         /// </summary>
-        /// <param name="type">Entity to print</param>
-        /// <returns>String that represent the entity</returns>
-        private string GetEntityString(EntityKind entity)
+        public static void WriteOnString()
         {
-            string entityStr = "";
-
-            //Converts entity type to corresponding string
-            switch(entity)
-            {
-                case EntityKind.Player:
-                    entityStr = " PPP ";
-                    break;
-                case EntityKind.Minion:
-                    entityStr = " mmm ";
-                    break;
-                case EntityKind.Boss:
-                    entityStr = " BBB ";
-                    break;
-                case EntityKind.Obstacle:
-                    entityStr = " OOO ";
-                    break;
-                case EntityKind.PowerUpL:
-                    entityStr = " -X- ";
-                    break;
-                case EntityKind.PowerUpM:
-                    entityStr = " -*- ";
-                    break;
-                case EntityKind.PowerUpS:
-                    entityStr = " -+- ";
-                    break;
-            }
-
-            return entityStr; 
+            Console.Write(">");
+            Input = Console.ReadLine();
         }
-        */
 
     }
 }
