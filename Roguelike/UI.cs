@@ -79,13 +79,7 @@ namespace Roguelike
 
             if (ContinueTutorial() == false) return;
 
-            Console.WriteLine("Ψѧ-------------------------------ѧΨ");
-            Console.WriteLine("| The Dungeon (Map or Game Board) |");
-            Console.WriteLine("Ψѧ-------------------------------ѧΨ");
-            Console.WriteLine("| The Dungeon is divided in       |");
-            Console.WriteLine("| floors, and when you, the       |");
-            Console.WriteLine("| player (.☻.) leaves the current |");
-            Console.WriteLine("| floor through an door (_∩_)     |");
+            
         }
 
         /// <summary>
