@@ -50,7 +50,8 @@ namespace Roguelike
             // target shorter
             for (int i = pathsToTarget.Count - 1; i >= 0; i--)
             {
-                int newDistanceToTarget = pathsToTarget[i].DistanceTo(target.Pos);
+                int newDistanceToTarget = 
+                    pathsToTarget[i].DistanceTo(target.Pos);
                 if (newDistanceToTarget >= distanceToTarget)
                     pathsToTarget.RemoveAt(i);
             }
@@ -59,16 +60,18 @@ namespace Roguelike
             // exists
             if (pathsToTarget.Count > 0)
             {
-                // TODO: make it random
-                return pathsToTarget[0];
+                int random = Game.rand.Next(pathsToTarget.Count);
+
+                return pathsToTarget[random];
             }
 
             // If no path shortens the distance to target, returns a random
             // possible destiny
             if (possibleDestiny.Count > 0)
             {
-                // TODO: make it random
-                return pathsToTarget[0];
+                int random = Game.rand.Next(possibleDestiny.Count);
+
+                return possibleDestiny[random];
             }
                 
 
