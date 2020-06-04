@@ -31,7 +31,8 @@ namespace Roguelike
         {
             this.gameValues = gameValues;
 
-            highscoreTable = new HighscoreTable();
+            highscoreTable = SaveManager.Load();
+            
 
             //Ceate board instance
             board = new Board(gameValues.Width, gameValues.Height);
@@ -39,8 +40,6 @@ namespace Roguelike
             rand = new Random();
             gameValues.Level = 2;
             GenerateLevel();
-
-
 
         }
 
@@ -51,7 +50,10 @@ namespace Roguelike
         {           
             UI.ShowBoard(board);
             UI.ShowHighscoreTable(highscoreTable);
+            
 
+            //SaveManager.Save(highscoreTable);
+            
         }
 
         

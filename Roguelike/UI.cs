@@ -36,9 +36,14 @@ namespace Roguelike
         public static void ShowHighscoreTable(HighscoreTable highscore)
         {
 
+            //Checks every possible spot of the table.
             for(int i  = 0; i < 10; i++)
             {
+
+                //Gets the score correspondent to the spot.
                 Score score = highscore.GetScore(i);
+
+                //If theres a score in the expecifict spot, print it.
                 if(score != null)
                      Console.WriteLine ($"Name: {score.Name} " +
                             $"-- Score: {score.NewScore}");

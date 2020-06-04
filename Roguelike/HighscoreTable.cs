@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System;
 
 namespace Roguelike
 {
@@ -39,6 +40,7 @@ namespace Roguelike
         /// <returns> </returns>
         public Score GetScore(int id)
         {
+            if(id > highscoreTable.Count - 1) return null;
             return highscoreTable[id];
         }
 
