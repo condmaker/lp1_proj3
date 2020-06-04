@@ -19,10 +19,10 @@ namespace Roguelike
         /// <summary>
         /// Game board reference
         /// </summary>
-        public Board board;
+        private Board board;
 
-
-
+        private HighscoreTable highscoreTable;
+         
         /// <summary>
         /// 
         /// </summary>
@@ -30,13 +30,17 @@ namespace Roguelike
         public Game(GameValues gameValues)
         {
             this.gameValues = gameValues;
+
+            highscoreTable = SaveManager.Load();
             
+
             //Ceate board instance
             board = new Board(gameValues.Width, gameValues.Height);
 
             rand = new Random();
-
+            gameValues.Level = 2;
             GenerateLevel();
+
         }
 
         /// <summary>
@@ -44,9 +48,40 @@ namespace Roguelike
         /// </summary>
         public void Initiate()
         {           
-            UI.ShowBoard(board);
+            UI.MainMenu();
 
-            UI.ShowTutorial();
+            while (UI.Input != "q")
+            {
+                UI.WriteOnString();
+
+                switch(UI.Input.ToLower())
+                {
+                    case "n":
+                        break;
+
+                    case "m":
+                        UI.MainMenu();
+                        break;
+
+                    case "h":
+                        UI.ShowHighscoreTable(highscoreTable);
+                        break;
+
+                    case "i":
+                        UI.ShowTutorial();
+                        break;
+
+                    case "c":
+                        UI.ShowCredits();
+                        break;
+                        
+                    default:
+                        break;
+                }
+            }
+
+            UI.ShowEndMessage();
+            //SaveManager.Save(highscoreTable);
         }
 
         
@@ -66,6 +101,7 @@ namespace Roguelike
             //Instantiate the Player
             Coord pCoord = new Coord(0, rand.Next(0, gameValues.Height)); 
             board.PlaceEntity(new Player(pCoord, 10) ,pCoord);
+            
             //Instantiate Exit
 
             //Instatiate minions
@@ -81,6 +117,8 @@ namespace Roguelike
             }
 
             //Instatiate Obstacle
+            gameValues.ObstclNumb 
+                = rand.Next( (int)MathF.Min(gameValues.Height,gameValues.Width) - 1);
             for(int i = 0; i < gameValues.ObstclNumb; i++)
             {
                 CreateEntity(EntityKind.Obstacle);
@@ -108,15 +146,14 @@ namespace Roguelike
         }
 
 
-
         /// <summary>
         /// 
         /// </summary>
         private void CreateEntity(EntityKind kind)
         {
-            //Inicial position
+            // Inicial position
             Coord pos;
-            //Entity reference 
+            // Entity reference 
             Entity newEntity = null;
             
 
@@ -130,8 +167,8 @@ namespace Roguelike
             }while(board.IsOccupied(pos));
 
 
-            //Creates Entity of the desired kind and assign it to the newEntity
-            //reference
+            // Creates Entity of the desired kind and assign it to the newEntity
+            // reference
             switch(kind)
             {
                 case EntityKind.Minion:
@@ -145,7 +182,7 @@ namespace Roguelike
                     break;
             }
 
-            //Place new Entity int the generated position
+            // Place new Entity int the generated position
             board.PlaceEntity(newEntity, pos);
         }
   

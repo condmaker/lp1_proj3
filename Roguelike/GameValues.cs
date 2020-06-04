@@ -22,12 +22,20 @@ namespace Roguelike
 
         public int Level{get; set;}
 
-        public int MinionNumb => Level + 1; 
+        public int MinionNumb => 
+            (int)MathF.Min(
+                (Height*Width) / 2,
+                (int)ProcGenFunctions.Log(Level, 4.5f, 7));
+        
+             
         //TODO: Substituir por uma função a sério
-        public int BossNumb => Level + 1; 
+        public int BossNumb => 
+            (int)MathF.Min(
+                    (Height*Width) / 2,
+                    (int)ProcGenFunctions.Log(Level, 1, 1.7f));
+        
         //TODO: Substituir por uma função a sério
-        public int ObstclNumb => Level + 1; 
-        //TODO: Substituir por uma função a sério
+        public int ObstclNumb{get; set;} 
         public int PowUPSmallNumb => (int)MathF.Max(1f, 10 - Level);  
         //TODO: Substituir por uma função a sério
         public int PowUPSMediumNumb => (int)MathF.Max(1f, 10 - Level); 

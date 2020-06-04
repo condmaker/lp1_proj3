@@ -25,17 +25,39 @@ namespace Roguelike
         /// A simple method that shows to the player a graphic depiction of 
         /// the Main Menu's commands.
         /// </summary>
-        private static void MainMenu()
+        public static void MainMenu()
         {
             Console.WriteLine("Ψѧ--------------+Ѡ+--------------ѧΨ");
             Console.WriteLine("|           -Roguelike-           |");
             Console.WriteLine("Ψѧ--------------+Ѡ+--------------ѧΨ");
             Console.WriteLine("| n - New Game                    |");
+            Console.WriteLine("| m - Print this again            |");
             Console.WriteLine("| h - High Scores                 |");
             Console.WriteLine("| i - Instructions                |");
             Console.WriteLine("| c - Credits                     |");
             Console.WriteLine("| q - Quit                        |");
             Console.WriteLine("Ψѧ-------------------------------ѧΨ");
+        }
+        
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void ShowCredits()
+        {
+            
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void ShowEndMessage()
+        {
+            Console.WriteLine(
+                "Ψѧ----------------------+Ѡ+-------------------ѧΨ");
+            Console.WriteLine(
+                "| Thank you for playing. Till the next time... |");
+            Console.WriteLine(
+                "Ψѧ----------------------+Ѡ+-------------------ѧΨ");
         }
 
         /// <summary>
@@ -135,13 +157,13 @@ namespace Roguelike
             new Player(new Coord(0, 2), 20), new Coord(0, 2));
 
             exampleBoard.PlaceEntity(
-            new Enemy(new Coord(2, 4), EntityKind.Minion, 20), new Coord(2, 4));
+            new Enemy(new Coord(2, 4), EntityKind.Minion), new Coord(2, 4));
 
             exampleBoard.PlaceEntity(
-            new Enemy(new Coord(1, 1), EntityKind.Minion, 20), new Coord(1, 1));
+            new Enemy(new Coord(1, 1), EntityKind.Minion), new Coord(1, 1));
 
             exampleBoard.PlaceEntity(
-            new Enemy(new Coord(0, 0), EntityKind.Boss, 20), new Coord(0, 0));
+            new Enemy(new Coord(0, 0), EntityKind.Boss), new Coord(0, 0));
 
             exampleBoard.PlaceEntity(
             new Entity(new Coord(4, 2), EntityKind.Obstacle), new Coord(4, 2));
@@ -205,6 +227,28 @@ namespace Roguelike
 
             if (Input == "c") return true;
             return false;
+
+        }
+
+        /// <summary>
+        /// Function that renders the highscore table in the console
+        /// </summary>
+        /// <param name="highscore">"Highscore table"</param>
+        public static void ShowHighscoreTable(HighscoreTable highscore)
+        {
+
+            //Checks every possible spot of the table.
+            for(int i  = 0; i < 10; i++)
+            {
+
+                //Gets the score correspondent to the spot.
+                Score score = highscore.GetScore(i);
+
+                //If theres a score in the expecifict spot, print it.
+                if(score != null)
+                     Console.WriteLine ($"Name: {score.Name} " +
+                            $"-- Score: {score.NewScore}");
+            }
         }
 
         /// <summary>
