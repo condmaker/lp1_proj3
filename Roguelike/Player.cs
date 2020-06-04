@@ -4,10 +4,40 @@ namespace Roguelike
     {
         public int Health {get; set;}
         
+        /// <summary>
+        /// Constructor
+        /// </summary>
+        /// <param name="pos">The position in which the entity is located on 
+        /// the level.</param>
+        /// <param name="health"></param>
         public Player (Coord pos, int health)
             : base(pos, EntityKind.Player)
         {
             Health = health;
+        }
+
+        /// <summary>
+        /// Methods that subtracts a given amount <param name="damage"> from 
+        /// the player's health.
+        /// </summary>
+        /// <param name="damage">The amount to subtract.</param>
+        /// <returns>The player's health after subtracting.</returns>
+        public int Damage(int damage)
+        {
+            Health -= damage;
+            return Health;
+        }
+
+        /// <summary>
+        /// Methods that adds a given amount <param name="heal"> to 
+        /// the player's health.
+        /// </summary>
+        /// <param name="heal">The amount to add.</param>
+        /// <returns>The player's health after adding.</returns>
+        public int Heal(int heal)
+        {
+            Health += damage;
+            return Health;
         }
 
         /// <summary>
@@ -33,6 +63,8 @@ namespace Roguelike
                 direction = UI.InputDirection();
                 dest = board.GetNeighbor(Pos, direction);
             }
+            health--;
+            return dest;
             */
             return null;
         }
