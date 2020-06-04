@@ -163,6 +163,31 @@ namespace Roguelike
             Console.WriteLine();
             
             if (ContinueTutorial() == false) return;
+
+            Console.WriteLine("\nΨѧ-------------------------------ѧΨ");
+            Console.WriteLine("|    How to play, How to Score    |");
+            Console.WriteLine("Ψѧ-------------------------------ѧΨ");
+            Console.WriteLine("| You can move your character     |");
+            Console.WriteLine("| with the keyboard arrows or     |");
+            Console.WriteLine("| with the WSAD binds, only at    |");
+            Console.WriteLine("| the player phase, obviously.    |");
+            Console.WriteLine("| The game also has a Highscore   |");
+            Console.WriteLine("| Board, which can be verified at |");
+            Console.WriteLine("| the Main Menu. The score is     |");
+            Console.WriteLine("| equivalent to the last floor    |");
+            Console.WriteLine("| the player reached on that      |");
+            Console.WriteLine("| session.                        |");
+            Console.WriteLine("| The game ends when you die or   |");
+            Console.WriteLine("| when you press the 'Escape'     |");
+            Console.WriteLine("| key. After ending, the game     |");
+            Console.WriteLine("| will ask you to input your name |");
+            Console.WriteLine("| to be recorded alongside your   |");
+            Console.WriteLine("| score.                          |");
+            Console.WriteLine("Ψѧ-------------------------------ѧΨ");
+            Console.WriteLine("| You have reached the end of the |");
+            Console.WriteLine("|  tutorial and returned to the   |");
+            Console.WriteLine("|            Main Menu.           |");
+            Console.WriteLine("Ψѧ-------------------------------ѧΨ");
         }
 
         /// <summary>
