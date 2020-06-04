@@ -15,7 +15,7 @@ namespace Roguelike
         /// obstructed, returns the coordinate to the tile adjacent to the 
         /// player in the given direction.
         /// </summary>
-        /// <param name="board">The game Board.</param>
+        /// <param name="board">Reference to the level's board.</param>
         /// <returns>The Coord of the tile adjacent to the player in the 
         /// direction of movement.</returns>
         public override Coord WhereToMove(Board board)

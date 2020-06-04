@@ -4,9 +4,22 @@ namespace Roguelike
 {
     class Enemy : Agent
     {
-        public Enemy (Coord pos, EntityKind kind, int health)
+        /// <summary>
+        /// Constructor method.
+        /// </summary>
+        /// <param name="pos">The position in which the entity is located on 
+        /// the level.</param>
+        /// <param name="kind">The kind of entity this is.</param>
+        public Enemy (Coord pos, EntityKind kind)
             : base(pos, kind) {}
 
+        /// <summary>
+        /// Method that implements the AI movement of the minion and boss 
+        /// entities.
+        /// </summary>
+        /// <param name="board">Board in which the entities are.</param>
+        /// <returns>A coord which represents where the enemy should move.
+        /// </returns>
         public override Coord WhereToMove(Board board)
         {
             Entity target = null;
@@ -44,7 +57,7 @@ namespace Roguelike
             }
 
             // Creates copy of the possibleDestiny list
-            List<Coord> pathsToTarget = possibleDestiny;
+            List<Coord> pathsToTarget = new List<Coord>(possibleDestiny);
 
             // Removes from new list destinies that don't make the distace to 
             // target shorter
