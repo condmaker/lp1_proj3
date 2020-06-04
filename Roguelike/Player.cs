@@ -36,7 +36,7 @@ namespace Roguelike
         /// <returns>The player's health after adding.</returns>
         public int Heal(int heal)
         {
-            Health += damage;
+            Health += heal;
             return Health;
         }
 
