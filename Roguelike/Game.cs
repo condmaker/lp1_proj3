@@ -21,6 +21,8 @@ namespace Roguelike
         /// </summary>
         private Board board;
 
+        private Player currentPlayer;
+
         private HighscoreTable highscoreTable;
          
         /// <summary>
@@ -39,6 +41,12 @@ namespace Roguelike
 
             rand = new Random();
             gameValues.Level = 2;
+
+            // Instantiates current player
+            Coord pCoord = new Coord(0, rand.Next(0, gameValues.Height)); 
+            currentPlayer = new Player(
+                pCoord, (gameValues.Width * gameValues.Height) / 4);
+
             GenerateLevel();
 
         }
@@ -50,11 +58,11 @@ namespace Roguelike
         {           
             UI.MainMenu();
 
-            while (UI.Input.ToLower() != "q")
+            while (UI.Input != "q")
             {
                 UI.WriteOnString();
 
-                switch(UI.Input.ToLower())
+                switch(UI.Input)
                 {
                     case "n":
                         GameLoop();
@@ -88,7 +96,17 @@ namespace Roguelike
         private void GameLoop()
         {
             UI.ShowStartingMessage();
-            UI.ShowBoard(board);
+
+            while (currentPlayer.Health > 0)
+            {
+                UI.ShowCurrentInformation(
+                    currentPlayer.Health, "Player", gameValues.Level);
+                UI.ShowBoard(board);
+                
+                board.MoveEntity(
+                    currentPlayer, currentPlayer.WhereToMove(board));
+
+            }
             
         }
 
@@ -106,11 +124,11 @@ namespace Roguelike
         /// </summary>
         private void GenerateLevel()
         {
-            //Instantiate the Player
-            Coord pCoord = new Coord(0, rand.Next(0, gameValues.Height)); 
-            board.PlaceEntity(new Player(pCoord, 10), pCoord);
+            // Instantiate the Player
+            board.PlaceEntity(
+                currentPlayer, new Coord(0, rand.Next(0, gameValues.Height)));
             
-            //Instantiate Exit
+            // Instantiate Exit
             Coord sCoord = new Coord (
                 gameValues.Width - 1, rand.Next(0, gameValues.Height));
             board.PlaceEntity(new Entity(sCoord, EntityKind.Exit), sCoord);

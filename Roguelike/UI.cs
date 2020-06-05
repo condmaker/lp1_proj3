@@ -5,11 +5,8 @@ namespace Roguelike
 {
     public static class UI
     {
-        // The single string that manages all inputs on the game.
+        // The single string that manages all inputs on the game
         public static string Input { get; private set; } = "";
-        
-        // A splitted array of strings used to read commands.
-        public static string[] SplitInput { get; private set;} 
 
         /// <summary>
         /// Static constructor of the class. Will make the output encode
@@ -37,6 +34,14 @@ namespace Roguelike
             Console.WriteLine("| c - Credits                     |");
             Console.WriteLine("| q - Quit                        |");
             Console.WriteLine("Ψѧ-------------------------------ѧΨ");
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public static void WriteMessage(String str)
+        {
+            Console.WriteLine(str);
         }
         
         /// <summary>
@@ -68,9 +73,41 @@ namespace Roguelike
             Console.WriteLine("Ψѧ----------------------------");
         }
 
-        public static void ShowCurrentInformation()
+        public static void ShowBoardInformation(Direction dir, EntityKind entity)
         {
-            
+            Console.WriteLine("Ψѧ----------------------------");
+            Console.WriteLine(
+                "| Use WASD or the Arrow Keys to move, or press 'q' to leave.");
+            Console.WriteLine("Ψѧ----------------------------");
+
+            if (entity == EntityKind.Player)
+            {
+                Console.WriteLine($"You moved {entity.ToString()}.");
+            }
+            else if (entity == EntityKind.Minion)
+            {
+                Console.WriteLine(
+                    $"An enemy minion moved {entity.ToString()}.");
+            }
+            else if (entity == EntityKind.Boss)
+            {
+                Console.WriteLine(
+                    $"An enemy boss moved {entity.ToString()}.");
+            }
+            else
+                return;
+        }
+
+        public static void ShowCurrentInformation(int playerHealth, 
+        String currentTurn, int currentFloor)
+        {
+            Console.WriteLine("Ψѧ--------");
+            Console.WriteLine($"| HP: {playerHealth}");
+            Console.WriteLine("Ψѧ");
+            Console.WriteLine($"| {currentTurn} Turn");
+            Console.WriteLine("Ψѧ");
+            Console.WriteLine($"| Floor: -{currentFloor}");
+            Console.WriteLine("Ψѧ--------");
         }
 
         /// <summary>
@@ -338,7 +375,24 @@ namespace Roguelike
         public static void WriteOnString()
         {
             Console.Write(">");
-            Input = Console.ReadLine();
+            Input = Console.ReadLine().ToLower();
+        }
+
+        public static Direction InputDirection()
+        {
+            Console.Write(">");
+            Input = Console.ReadKey().KeyChar.ToString().ToLower();
+
+            if (Input == "w")
+                return Direction.Up;
+            else if (Input == "a")
+                return Direction.Left;
+            else if (Input == "s")
+                return Direction.Down;
+            else if (Input == "d")
+                return Direction.Right;
+            else if (Input == "q")
+                return Direction.None;
         }
 
     }
