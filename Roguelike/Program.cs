@@ -19,7 +19,7 @@ namespace Roguelike
 
             // Starts the game.
             game.Initiate();
-           
+
         }
     }
 }

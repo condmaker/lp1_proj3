@@ -151,6 +151,7 @@ namespace Roguelike
         public void MoveEntity(Entity entity, Coord coord)
         {
             PlaceEntity(entity, coord);
+           
             board[entity.Pos.x, entity.Pos.y] = null;
         }
 

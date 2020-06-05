@@ -107,23 +107,24 @@ namespace Roguelike
                 UI.ShowBoard(board);
 
                 VerifyNeighbours();
-                
+
                 // TODO - See if the player wants to move again
                 board.MoveEntity(
-                    currentPlayer, new Coord(2,2));
+                    currentPlayer, new Coord(2,3));
+        
 
                 // To put in place of hardcoded Coord above:
                 // currentPlayer.WhereToMove(board)
 
                 // Debugging stuff
-                UI.ShowBoard(board);
+                //UI.ShowBoard(board);
                 Console.ReadLine();
 
                 VerifyNeighbours();
 
                 UI.ShowCurrentInformation(
                     currentPlayer.Health, "Enemy", gameValues.Level);
-                UI.ShowBoard(board);
+                //UI.ShowBoard(board);
                 // Here goes a for/foreach for all enemies on board to move
 
             }
@@ -193,7 +194,7 @@ namespace Roguelike
         {
             // Instantiate the Player
             board.PlaceEntity(
-                currentPlayer, new Coord(0, rand.Next(0, gameValues.Height)));
+                currentPlayer, currentPlayer.Pos);
             
             // Instantiate Exit
             Coord sCoord = new Coord (
