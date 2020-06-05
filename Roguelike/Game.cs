@@ -93,6 +93,9 @@ namespace Roguelike
             //SaveManager.Save(highscoreTable);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         private void GameLoop()
         {
             UI.ShowStartingMessage();
@@ -102,14 +105,78 @@ namespace Roguelike
                 UI.ShowCurrentInformation(
                     currentPlayer.Health, "Player", gameValues.Level);
                 UI.ShowBoard(board);
+
+                VerifyNeighbours();
                 
+                // TODO - See if the player wants to move again
                 board.MoveEntity(
-                    currentPlayer, currentPlayer.WhereToMove(board));
+                    currentPlayer, new Coord(2,2));
+
+                // To put in place of hardcoded Coord above:
+                // currentPlayer.WhereToMove(board)
+
+                // Debugging stuff
+                UI.ShowBoard(board);
+                Console.ReadLine();
+
+                VerifyNeighbours();
+
+                UI.ShowCurrentInformation(
+                    currentPlayer.Health, "Enemy", gameValues.Level);
+                UI.ShowBoard(board);
+                // Here goes a for/foreach for all enemies on board to move
 
             }
             
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        private void VerifyNeighbours()
+        {
+            Coord verUp = board.GetNeighbor(
+                currentPlayer.Pos, Direction.Up);
+            Coord verDown = board.GetNeighbor(
+                currentPlayer.Pos, Direction.Down);
+            Coord verLeft = board.GetNeighbor(
+                currentPlayer.Pos, Direction.Left);
+            Coord verRight = board.GetNeighbor(
+                currentPlayer.Pos, Direction.Right);
+
+            if (board.GetEntityAt(verUp) is Enemy )
+            {
+                // Verifies if enemy caught is a minion or a boss
+                if (board.GetEntityAt(verUp).kind == EntityKind.Minion)
+                    currentPlayer.Health -= 5;
+                if (board.GetEntityAt(verUp).kind == EntityKind.Boss)
+                    currentPlayer.Health -= 5;
+            }
+            if (board.GetEntityAt(verDown) is Enemy )
+            {
+                // Verifies if enemy caught is a minion or a boss
+                if (board.GetEntityAt(verDown).kind == EntityKind.Minion)
+                    currentPlayer.Health -= 5;
+                if (board.GetEntityAt(verDown).kind == EntityKind.Boss)
+                    currentPlayer.Health -= 5;
+            }
+            if (board.GetEntityAt(verLeft) is Enemy )
+            {
+                // Verifies if enemy caught is a minion or a boss
+                if (board.GetEntityAt(verLeft).kind == EntityKind.Minion)
+                    currentPlayer.Health -= 5;
+                if (board.GetEntityAt(verLeft).kind == EntityKind.Boss)
+                    currentPlayer.Health -= 5;
+            }
+            if (board.GetEntityAt(verRight) is Enemy )
+            {
+                // Verifies if enemy caught is a minion or a boss
+                if (board.GetEntityAt(verRight).kind == EntityKind.Minion)
+                    currentPlayer.Health -= 5;
+                if (board.GetEntityAt(verRight).kind == EntityKind.Boss)
+                    currentPlayer.Health -= 5;
+            }
+        }
         
         /// <summary>
         /// Resets board to its initial empty state

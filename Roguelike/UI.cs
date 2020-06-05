@@ -393,6 +393,8 @@ namespace Roguelike
                 return Direction.Right;
             else if (Input == "q")
                 return Direction.None;
+
+            return Direction.None;
         }
 
     }
