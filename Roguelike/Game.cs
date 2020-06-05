@@ -38,7 +38,9 @@ namespace Roguelike
             board = new Board(gameValues.Width, gameValues.Height);
 
             rand = new Random();
-            gameValues.Level = 2;
+
+            
+
             GenerateLevel();
 
         }
@@ -50,9 +52,7 @@ namespace Roguelike
         {           
             UI.ShowBoard(board);
             UI.ShowHighscoreTable(highscoreTable);
-            
-
-            //SaveManager.Save(highscoreTable);
+        
             
         }
 
@@ -114,7 +114,7 @@ namespace Roguelike
                 CreateEntity(EntityKind.PowerUpL);
             }
 
-
+            
         }
 
 

@@ -20,6 +20,8 @@ namespace Roguelike
         /// <value> Number of tiles in the x axis. </value>
         public int Width{ get; }
 
+        public int Hp{get; set;}
+
         public int Level{get; set;}
 
         public int MinionNumb => 
@@ -57,14 +59,22 @@ namespace Roguelike
 
             //If the user doesn't give all the arguments
             //the program ends with an error message
-            if(args.Length != 4)
+            if(args.Length != 4 && args.Length != 2)
             {
                 //TODO: Exeption
                 //Temp for testing
                 return new GameValues(10, 10);
             }
 
-            // A not very efficient way to parse the arguments
+            //Checks if the user is trying to load the game
+            if(args[0] == "-l")
+            {
+               int[] values = SaveManager.Load(args[1]);           
+               return 
+                    new GameValues(values[0], values[1], values[2], values[3]);
+            }
+
+            // Argument parsing
             for(int i = 0; i < 4; i++)
             {
                  if(i == 3)
@@ -98,7 +108,7 @@ namespace Roguelike
         }
 
         /// <summary>
-        /// 
+        /// Constructor used normaly
         /// </summary>
         /// <param name="height"></param>
         /// <param name="width"></param>
@@ -107,6 +117,24 @@ namespace Roguelike
             Height = height;
             Width = width;
         }
+
+
+        /// <summary>
+        /// Constructor of GameValues to be used when the user loads the game
+        /// </summary>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        /// <param name="level"></param>
+        /// <param name="hp"></param>
+        private GameValues(int width, int height, int level, int hp)
+        {
+            Height = height;
+            Width = width;
+            level = Level;
+            Hp = hp;
+        }
+
+
 
     }
 }
