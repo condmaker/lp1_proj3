@@ -57,6 +57,7 @@ namespace Roguelike
                 switch(UI.Input.ToLower())
                 {
                     case "n":
+                        GameLoop();
                         break;
 
                     case "m":
@@ -84,6 +85,13 @@ namespace Roguelike
             //SaveManager.Save(highscoreTable);
         }
 
+        private void GameLoop()
+        {
+            UI.ShowStartingMessage();
+            UI.ShowBoard(board);
+            
+        }
+
         
         /// <summary>
         /// Resets board to its initial empty state
@@ -100,9 +108,12 @@ namespace Roguelike
         {
             //Instantiate the Player
             Coord pCoord = new Coord(0, rand.Next(0, gameValues.Height)); 
-            board.PlaceEntity(new Player(pCoord, 10) ,pCoord);
+            board.PlaceEntity(new Player(pCoord, 10), pCoord);
             
             //Instantiate Exit
+            Coord sCoord = new Coord (
+                gameValues.Width - 1, rand.Next(0, gameValues.Height));
+            board.PlaceEntity(new Entity(sCoord, EntityKind.Exit), sCoord);
 
             //Instatiate minions
             for(int i = 0; i < gameValues.MinionNumb; i++)

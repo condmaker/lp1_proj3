@@ -44,6 +44,32 @@ namespace Roguelike
         /// </summary>
         public static void ShowCredits()
         {
+            Console.WriteLine("Ψѧ--------------+Ѡ+--------------ѧΨ");
+            Console.WriteLine("|           -Roguelike-           |");
+            Console.WriteLine("|                                 |");
+            Console.WriteLine("|             Made by:            |");
+            Console.WriteLine("|         Daniel Fernandes,       |");
+            Console.WriteLine("|          Pedro Bezerra,         |");
+            Console.WriteLine("|          Marco Domingos         |");
+            Console.WriteLine("|                                 |");
+            Console.WriteLine("|          -Made in 2020-         |");
+            Console.WriteLine("Ψѧ--------------+Ѡ+--------------ѧΨ");
+        }
+
+        /// <summary>
+        /// Prints a message when the player starts a game.
+        /// </summary>
+        public static void ShowStartingMessage()
+        {
+            Console.WriteLine("Ψѧ----------------------------");
+            Console.WriteLine(
+                "| As you were adventuring, you find yourself trapped in "+
+                "a strange dungeon... The only option is to proceed. ");
+            Console.WriteLine("Ψѧ----------------------------");
+        }
+
+        public static void ShowCurrentInformation()
+        {
             
         }
 
