@@ -381,7 +381,9 @@ namespace Roguelike
         public static Direction InputDirection()
         {
             Console.Write(">");
+            // This is buggy! Change.
             Input = Console.ReadKey().KeyChar.ToString().ToLower();
+            Console.WriteLine();
 
             if (Input == "w")
                 return Direction.Up;
