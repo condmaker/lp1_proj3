@@ -68,10 +68,12 @@ namespace Roguelike
             }
 
             // Gets the destination Coord and asks again if it's occupied.
+            Console.WriteLine("Debug: " + Pos);
             Coord dest = board.GetNeighbor(Pos, direction);
             
             while (board.IsObstructed(dest))
             {
+                Console.WriteLine("Debug: " + Pos);
                 UI.WriteMessage("You can't move there. Try another direction.");
                 direction = UI.InputDirection();
                 dest = board.GetNeighbor(Pos, direction);

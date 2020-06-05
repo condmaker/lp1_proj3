@@ -110,15 +110,7 @@ namespace Roguelike
 
                 // TODO - See if the player wants to move again
                 board.MoveEntity(
-                    currentPlayer, new Coord(2,3));
-        
-
-                // To put in place of hardcoded Coord above:
-                // currentPlayer.WhereToMove(board)
-
-                // Debugging stuff
-                //UI.ShowBoard(board);
-                Console.ReadLine();
+                    currentPlayer, currentPlayer.WhereToMove(board));
 
                 VerifyNeighbours();
 

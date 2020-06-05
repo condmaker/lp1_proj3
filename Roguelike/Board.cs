@@ -153,6 +153,8 @@ namespace Roguelike
             PlaceEntity(entity, coord);
            
             board[entity.Pos.x, entity.Pos.y] = null;
+
+            entity.Pos = coord;
         }
 
 
