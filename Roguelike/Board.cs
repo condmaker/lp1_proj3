@@ -123,16 +123,16 @@ namespace Roguelike
             switch(direction)
             {
                 case Direction.Up:
-                    neighbor = coord - new Coord(0, -1);
-                    break;
-                case Direction.Right:
-                    neighbor = coord - new Coord(1, 0);
-                    break;
-                case Direction.Down:
                     neighbor = coord - new Coord(0, 1);
                     break;
-                case Direction.Left:
+                case Direction.Right:
                     neighbor = coord - new Coord(-1, 0);
+                    break;
+                case Direction.Down:
+                    neighbor = coord - new Coord(0, -1);
+                    break;
+                case Direction.Left:
+                    neighbor = coord - new Coord(1, 0);
                     break;
                 default:
                     throw new System.ComponentModel.InvalidEnumArgumentException

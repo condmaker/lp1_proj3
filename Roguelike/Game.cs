@@ -105,9 +105,7 @@ namespace Roguelike
                 UI.ShowCurrentInformation(
                     currentPlayer.Health, "Player", gameValues.Level);
                 UI.ShowBoard(board);
-
-                VerifyNeighbours();
-
+                
                 // TODO - See if the player wants to move again
                 board.MoveEntity(
                     currentPlayer, currentPlayer.WhereToMove(board));
