@@ -369,13 +369,44 @@ namespace Roguelike
             Console.WriteLine("‾‾");
         }
 
+        public static bool MoveAgain()
+        {
+            bool willMove = false;
+
+            Console.WriteLine("Do you wish to move again? (y/n)");
+            WriteOnString(true);
+
+            do
+            {
+                if (Input == "y")
+                    willMove = true;
+                else if (Input == "n")
+                    willMove = false;
+                else 
+                {
+                    Console.WriteLine("Unknown Input. Please answer with y/n.");
+                    WriteOnString(true);
+                }
+            }
+            while (Input != "y" && Input != "n");
+
+            return willMove;
+        } 
+
         /// <summary>
         /// Changes the instance Input.
         /// </summary>
-        public static void WriteOnString()
+        public static void WriteOnString(bool keyBuffer = false)
         {
             Console.Write(">");
-            Input = Console.ReadLine().ToLower();
+
+            if (!keyBuffer)
+                Input = Console.ReadLine().ToLower();
+            else 
+            {
+                Input = Console.ReadKey().KeyChar.ToString().ToLower();
+                Console.WriteLine();
+            }
         }
 
         public static Direction InputDirection()
@@ -396,7 +427,7 @@ namespace Roguelike
             else if (Input == "q")
                 return Direction.None;
 
-            return Direction.None;
+            return Direction.Undefined;
         }
 
     }

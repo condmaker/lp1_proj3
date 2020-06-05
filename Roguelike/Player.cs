@@ -70,7 +70,7 @@ namespace Roguelike
             // Gets the destination Coord and asks again if it's occupied.
             Coord dest = board.GetNeighbor(Pos, direction);
             
-            while (board.IsObstructed(dest))
+            while (board.IsObstructed(dest) || direction == Direction.Undefined)
             {
                 UI.WriteMessage("You can't move there. Try another direction.");
                 direction = UI.InputDirection();
