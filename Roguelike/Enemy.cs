@@ -26,7 +26,7 @@ namespace Roguelike
         public override Coord WhereToMove(Board board)
         {
             Entity target = null;
-            Entity[,] level = board.GetBoard();
+            Entity[,] level = board.CurrentBoard;
             // Finds player location on board
             foreach (Entity e in level)
             {

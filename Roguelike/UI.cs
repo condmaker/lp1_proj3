@@ -79,23 +79,14 @@ namespace Roguelike
             Console.WriteLine(
                 "| Use WASD or the Arrow Keys to move, or press 'q' to leave.");
             Console.WriteLine("Ψѧ----------------------------");
-
-            if (entity == EntityKind.Player)
-            {
-                Console.WriteLine($"You moved {entity.ToString()}.");
-            }
-            else if (entity == EntityKind.Minion)
-            {
-                Console.WriteLine(
-                    $"An enemy minion moved {entity.ToString()}.");
-            }
-            else if (entity == EntityKind.Boss)
-            {
-                Console.WriteLine(
-                    $"An enemy boss moved {entity.ToString()}.");
-            }
-            else
-                return;
+            
+            Console.WriteLine($"You moved {dir.ToString()}.");
+        }
+        public static void ShowBoardInformation(Coord coord, EntityKind entity)
+        {
+            Console.WriteLine(
+                    $"An enemy {entity.ToString()} moved to " +
+                    $"{coord.ToString()}.");
         }
 
         public static void ShowCurrentInformation(int playerHealth, 

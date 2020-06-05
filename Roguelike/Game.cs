@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 
 namespace Roguelike
 {
@@ -124,10 +125,28 @@ namespace Roguelike
                     VerifyNeighbours();
                 }
 
-                UI.ShowCurrentInformation(
-                    currentPlayer.Health, "Enemy", gameValues.Level);
-                //UI.ShowBoard(board);
                 // Here goes a for/foreach for all enemies on board to move
+                foreach (Entity entity in board.CurrentBoard)
+                {
+                    if (entity is Enemy)
+                    {
+                        UI.ShowCurrentInformation(
+                            currentPlayer.Health, "Enemy", gameValues.Level);
+                        UI.ShowBoard(board);
+
+                        Enemy enemy = (Enemy) entity;
+
+                        board.MoveEntity(
+                        enemy, enemy.WhereToMove(board));
+
+                        UI.ShowBoardInformation(
+                            enemy.WhereToMove(board), enemy.kind);
+
+                        Thread.Sleep(1000);
+                    }
+                    
+                }
+                
 
             }
             

@@ -76,6 +76,11 @@ namespace Roguelike
                 direction = UI.InputDirection();
                 dest = board.GetNeighbor(Pos, direction);
             }
+
+            // Shows where the player moved on screen.
+            UI.ShowBoardInformation(direction, kind);
+
+            // Decrements health, by walking, and then returns the coordinate.
             Health--;
             return dest;
         }

@@ -12,15 +12,7 @@ namespace Roguelike
         /// bi-dimensional array that represents the game's 'board' (made by 
         /// 'tiles' of Entities).
         /// </summary>
-        private Entity[,] board;
-
-        /// <summary>
-        /// Returns the bi-dimensional array that represents the game's 'board'
-        /// </summary>
-        /// <returns>The bi-dimensional array that represents the game's 'board'
-        /// </returns>
-        public Entity[,] GetBoard() => board;
-
+        public Entity[,] CurrentBoard { get; private set;}
 
         /// <summary>
         /// Private instance variable that contains reference to the Entities
@@ -36,20 +28,20 @@ namespace Roguelike
         /// <param name="width">Vertical dimensions of the level.</param>
         public Board(int width, int height)
         {
-            board = new Entity[width,height];   
+            CurrentBoard = new Entity[width,height];   
         }
 
         /// <summary>
         /// Property that represents the horizontal dimension of the level.
         /// </summary>
         /// <value>Horizontal dimension of the level.</value>
-        public int Width => board.GetLength(0);
+        public int Width => CurrentBoard.GetLength(0);
 
         /// <summary>
         /// Property that represents the vertical dimension of the level.
         /// </summary>
         /// <value>Vertical dimension of the level.</value>
-        public int Height => board.GetLength(1);
+        public int Height => CurrentBoard.GetLength(1);
 
         /// <summary>
         /// Method that returns the Entity of a position indicated at the 
@@ -62,7 +54,7 @@ namespace Roguelike
         public Entity GetEntityAt(Coord pos)
         {       
             pos = Normalize(pos);
-            return board[pos.x, pos.y];
+            return CurrentBoard[pos.x, pos.y];
         } 
 
         /// <summary>
@@ -78,7 +70,7 @@ namespace Roguelike
             c = Normalize(c);
             // Return false if the Coord is empty
             // and return true otherwise
-            return board[c.x, c.y] != null;
+            return CurrentBoard[c.x, c.y] != null;
         }
 
 
@@ -152,7 +144,7 @@ namespace Roguelike
         {
             PlaceEntity(entity, coord);
            
-            board[entity.Pos.x, entity.Pos.y] = null;
+            CurrentBoard[entity.Pos.x, entity.Pos.y] = null;
 
             entity.Pos = coord;
         }
@@ -166,7 +158,7 @@ namespace Roguelike
         public void PlaceEntity(Entity entity, Coord coord)
         {
             coord = Normalize(coord);
-            board[coord.x, coord.y] = entity;
+            CurrentBoard[coord.x, coord.y] = entity;
         }
 
         /// <summary>
@@ -214,7 +206,7 @@ namespace Roguelike
             {
                 if (e.Pos == c)
                 {
-                    board[c.x, c.y] = e;
+                    CurrentBoard[c.x, c.y] = e;
                     hiddenPowerUps.Remove(e);
                     continue;
                 }
