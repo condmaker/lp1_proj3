@@ -22,6 +22,9 @@ namespace Roguelike
         /// </summary>
         private Board board;
 
+        /// <summary>
+        /// The current player reference
+        /// </summary>
         private Player currentPlayer;
 
         private HighscoreTable highscoreTable;
@@ -103,6 +106,7 @@ namespace Roguelike
 
             while (currentPlayer.Health > 0)
             {
+                // Prints game information
                 UI.ShowCurrentInformation(
                     currentPlayer.Health, "Player", gameValues.Level);
                 UI.ShowBoard(board);
@@ -111,21 +115,30 @@ namespace Roguelike
                 board.MoveEntity(
                     currentPlayer, currentPlayer.WhereToMove(board));
 
+                // Verifies if there is any enemy nearby, damaging the enemy
+                // if true
                 VerifyNeighbours();
+
+                // Leaves the game if the player's health is smaller than 0
+                if (currentPlayer.Health > 0) break;
 
                 UI.ShowCurrentInformation(
                     currentPlayer.Health, "Player", gameValues.Level);
                 UI.ShowBoard(board);
 
+                // Asks the player if he wants to move again this turn
                 if (UI.MoveAgain()) 
                 {
                     board.MoveEntity(
                         currentPlayer, currentPlayer.WhereToMove(board));
 
                     VerifyNeighbours();
+
+                    if (currentPlayer.Health > 0) break;
                 }
 
                 // Here goes a for/foreach for all enemies on board to move
+                // OBS: Apparently not working that well
                 foreach (Entity entity in board.CurrentBoard)
                 {
                     if (entity is Enemy)
@@ -141,6 +154,8 @@ namespace Roguelike
 
                         UI.ShowBoardInformation(
                             enemy.WhereToMove(board), enemy.kind);
+
+                        if (currentPlayer.Health > 0) break;
 
                         Thread.Sleep(1000);
                     }
