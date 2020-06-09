@@ -82,8 +82,7 @@ namespace Roguelike
             // Shows where the player moved on screen.
             UI.ShowBoardInformation(direction, kind);
 
-            // Decrements health, by walking, and then returns the coordinate.
-            Health--;
+            // returns coordinate
             return dest;
         }
     }
