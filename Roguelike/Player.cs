@@ -67,10 +67,12 @@ namespace Roguelike
                 Environment.Exit(0);
             }
 
-            // Gets the destination Coord and asks again if it's occupied.
+            // Gets the destination Coord and asks again if it's occupied or
+            // board limit.
             Coord dest = board.GetNeighbor(Pos, direction);
             
-            while (board.IsObstructed(dest) || direction == Direction.Undefined)
+            while (board.IsObstructed(dest) || direction == Direction.Undefined
+                    || !board.IsOnBoard(dest))
             {
                 UI.WriteMessage("You can't move there. Try another direction.");
                 direction = UI.InputDirection();
