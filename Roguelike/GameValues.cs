@@ -22,28 +22,45 @@ namespace Roguelike
 
         public int Hp{get; set;}
 
+        public int BoardSize => Width * Height; 
+
         public int Level{get; set;}
 
         public int MinionNumb => 
-            (int)MathF.Min(
-                (Height*Width) / 2,
-                (int)ProcGenFunctions.Log(Level, 4.5f, 7));
+        (int)MathF.Max(2,
+           (BoardSize * 
+                MathF.Min(
+                    BoardSize / 2, 
+                    (float)ProcGenFunctions.Logistic(Level, 0.2f, 17, 0.28f))));
         
              
-        //TODO: Substituir por uma função a sério
         public int BossNumb => 
-            (int)MathF.Min(
-                    (Height*Width) / 2,
-                    (int)ProcGenFunctions.Log(Level, 1, 1.7f));
-        
-        //TODO: Substituir por uma função a sério
+        (int)MathF.Max(1,
+           (BoardSize * 
+                MathF.Min(
+                BoardSize / 4, 
+                (float)ProcGenFunctions.Logistic(Level, 0.05f, 17, 0.28f))));
+            
+
         public int ObstclNumb{get; set;} 
-        public int PowUPSmallNumb => (int)MathF.Max(1f, 10 - Level);  
-        //TODO: Substituir por uma função a sério
-        public int PowUPSMediumNumb => (int)MathF.Max(1f, 10 - Level); 
-        //TODO: Substituir por uma função a sério
-        public int PowUPLargeNumb => (int)MathF.Max(1f, 10 - Level); 
-        //TODO: Substituir por uma função a sério
+        
+
+        private float PuPNumbPercent =>
+            MathF.Max(0.01f,
+            0.01f *  MathF.Min(15, 
+            (float)ProcGenFunctions.Logistic(Level, 25, 25, -0.08)));
+            
+        
+        public int PowUPSmallNumb => 
+            (int)(0.5f * (BoardSize * PuPNumbPercent));  
+
+        public int PowUPSMediumNumb =>
+            (int)(0.35f * (BoardSize * PuPNumbPercent)); 
+
+
+        public int PowUPLargeNumb => 
+            (int)(0.25f * (BoardSize * PuPNumbPercent)); 
+
 
 
         /// <summary>
