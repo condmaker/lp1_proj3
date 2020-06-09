@@ -125,7 +125,7 @@ namespace Roguelike
 
                 // moves player again
                 MovePlayer();
-                if (currentPlayer.Damage(1) <= 0)
+                if (currentPlayer.Damage(0) <= 0)
                     continue;
 
 
@@ -152,9 +152,24 @@ namespace Roguelike
                     // TODO POWERUP
                     else
                     {
-                        // moves enemy and shows movement on console
-                        board.MoveEntity(
-                        enemy, enemy.WhereToMove(board));
+                        // gets target move coordinate
+                        Coord dest = enemy.WhereToMove(board);
+
+                        // gets original coordinate
+                        Coord source = enemy.Pos;
+
+                        // checks if the is powerup on dest coordinate, and 
+                        // stores it
+                        if (board.IsPowerUp(dest) > 0)
+                        {
+                            board.StorePowerUp(dest);
+                        }
+
+                        // moves enemy
+                        board.MoveEntity(enemy, dest);
+
+                        // restores power ups if needed
+                        board.RestorePowerUp(source);
 
                         // show where the enemy moved
                         UI.ShowBoardInformation(
@@ -176,16 +191,7 @@ namespace Roguelike
 
             // checks if player is moving into power up and heals them
             int heal = 4;
-            Entity ent = board.GetEntityAt(dest);
-            if (ent != null)
-            {
-                if (ent.kind == EntityKind.PowerUpS)
-                    currentPlayer.Heal(heal);
-                if (ent.kind == EntityKind.PowerUpM)
-                    currentPlayer.Heal(heal*2);
-                if (ent.kind == EntityKind.PowerUpL)
-                    currentPlayer.Heal(heal*4);
-            }
+            currentPlayer.Heal(heal * board.IsPowerUp(dest));
 
             // moves player and updates board
             board.MoveEntity(currentPlayer, dest);

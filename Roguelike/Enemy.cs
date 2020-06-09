@@ -87,7 +87,8 @@ namespace Roguelike
                 Coord dest = board.GetNeighbor(Pos, d);
 
                 // verifies if it is on board and not obstructed
-                if (board.IsOnBoard(dest) && !board.IsObstructed(dest))
+                if (board.IsOnBoard(dest) && !board.IsObstructed(dest) &&
+                    !board.IsExit(dest))
                 {
                     // adds it to the legalMoves list
                     legalMoves.Add(d);
