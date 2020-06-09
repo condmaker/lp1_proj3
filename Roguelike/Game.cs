@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace Roguelike
@@ -21,7 +22,12 @@ namespace Roguelike
         /// Game board reference
         /// </summary>
         private Board board;
+        
+        private List<Enemy> enemyInBoard = new List<Enemy>();
 
+        /// <summary>
+        /// The current player reference
+        /// </summary>
         private Player currentPlayer;
 
         private HighscoreTable highscoreTable;
@@ -103,6 +109,7 @@ namespace Roguelike
 
             while (currentPlayer.Health > 0)
             {
+                // Prints game information
                 UI.ShowCurrentInformation(
                     currentPlayer.Health, "Player", gameValues.Level);
                 UI.ShowBoard(board);
@@ -111,40 +118,45 @@ namespace Roguelike
                 board.MoveEntity(
                     currentPlayer, currentPlayer.WhereToMove(board));
 
+                // Verifies if there is any enemy nearby, damaging the enemy
+                // if true
                 VerifyNeighbours();
+
+                // Leaves the game if the player's health is smaller than 0
+                if (currentPlayer.Health < 0) break;
 
                 UI.ShowCurrentInformation(
                     currentPlayer.Health, "Player", gameValues.Level);
                 UI.ShowBoard(board);
 
+                // Asks the player if he wants to move again this turn
                 if (UI.MoveAgain()) 
                 {
                     board.MoveEntity(
                         currentPlayer, currentPlayer.WhereToMove(board));
 
                     VerifyNeighbours();
+
+                    if (currentPlayer.Health < 0) break;
                 }
 
                 // Here goes a for/foreach for all enemies on board to move
-                foreach (Entity entity in board.CurrentBoard)
+                // OBS: Apparently not working that well
+                foreach (Enemy enemy in enemyInBoard)
                 {
-                    if (entity is Enemy)
-                    {
-                        UI.ShowCurrentInformation(
-                            currentPlayer.Health, "Enemy", gameValues.Level);
-                        UI.ShowBoard(board);
+                    UI.ShowCurrentInformation(
+                        currentPlayer.Health, "Enemy", gameValues.Level);
+                    UI.ShowBoard(board);
 
-                        Enemy enemy = (Enemy) entity;
+                    board.MoveEntity(
+                    enemy, enemy.WhereToMove(board));
 
-                        board.MoveEntity(
-                        enemy, enemy.WhereToMove(board));
+                    UI.ShowBoardInformation(
+                        enemy.WhereToMove(board), enemy.kind);
 
-                        UI.ShowBoardInformation(
-                            enemy.WhereToMove(board), enemy.kind);
+                    if (currentPlayer.Health < 0) break;
 
-                        Thread.Sleep(1000);
-                    }
-                    
+                    Thread.Sleep(1000);  
                 }
                 
 
@@ -260,7 +272,10 @@ namespace Roguelike
                 CreateEntity(EntityKind.PowerUpL);
             }
 
-            
+            // Gets a list with all enemy in the board
+            foreach (Entity entity in board.CurrentBoard)
+                if (entity is Enemy)
+                    enemyInBoard.Add((Enemy) entity);  
         }
 
 

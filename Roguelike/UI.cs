@@ -73,13 +73,9 @@ namespace Roguelike
             Console.WriteLine("Ψѧ----------------------------");
         }
 
-        public static void ShowBoardInformation(Direction dir, EntityKind entity)
-        {
-            Console.WriteLine("Ψѧ----------------------------");
-            Console.WriteLine(
-                "| Use WASD or the Arrow Keys to move, or press 'q' to leave.");
-            Console.WriteLine("Ψѧ----------------------------");
-            
+        public static void ShowBoardInformation(Direction dir, 
+        EntityKind entity)
+        {   
             Console.WriteLine($"You moved {dir.ToString()}.");
         }
         public static void ShowBoardInformation(Coord coord, EntityKind entity)
@@ -358,6 +354,13 @@ namespace Roguelike
             for (int i = 0; i < board.Width; i++)
                 Console.Write("‾‾‾‾‾");
             Console.WriteLine("‾‾");
+            
+            // Basic instructions
+            Console.WriteLine("Ψѧ----------------------------");
+            Console.WriteLine(
+                "| Use WASD or the Arrow Keys to move, or press 'q' to leave " +
+                "in your turn.");
+            Console.WriteLine("Ψѧ----------------------------");
         }
 
         public static bool MoveAgain()
