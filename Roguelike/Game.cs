@@ -50,9 +50,8 @@ namespace Roguelike
         /// </summary>
         public void Initiate()
         {           
-            UI.ShowBoard(board);
-            UI.ShowHighscoreTable(highscoreTable);
-        
+
+            
             
         }
 
@@ -62,7 +61,23 @@ namespace Roguelike
         /// </summary>
         private void EmptyBoard()
         {
-
+            //Cycle through every line 
+            for(int y = 0; y < gameValues.Height; y++)
+            {
+                //Cycle through every column in the current line 
+                for(int x = 0; x < gameValues.Width; x++)
+                {
+                    //Get current coordinate
+                    Coord coord = new Coord(x,y);                    
+                    //Checks if there is some entity occupying the position
+                    if(board.IsOccupied(coord))
+                    {
+                        //Deletes entity
+                        board.PlaceEntity(null,coord);
+                    }
+ 
+                }
+            }
         }
 
         /// <summary>
