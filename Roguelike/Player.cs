@@ -1,3 +1,5 @@
+using System;
+
 namespace Roguelike
 {
     public class Player: Agent
@@ -55,23 +57,34 @@ namespace Roguelike
         /// direction of movement.</returns>
         public override Coord WhereToMove(Board board)
         {
-            /*
+
             // Asks the player to input a direction.
             Direction direction = UI.InputDirection();
 
-            // Gets the destination Coord and asks again if it's occupied.
+            if (direction == Direction.None)
+            {
+                UI.ShowEndMessage();
+                Environment.Exit(0);
+            }
+
+            // Gets the destination Coord and asks again if it's occupied or
+            // board limit.
             Coord dest = board.GetNeighbor(Pos, direction);
             
-            while (board.IsObstructed(dest))
+            while (board.IsObstructed(dest) || direction == Direction.Undefined
+                    || !board.IsOnBoard(dest))
             {
                 UI.WriteMessage("You can't move there. Try another direction.");
                 direction = UI.InputDirection();
                 dest = board.GetNeighbor(Pos, direction);
             }
-            health--;
+
+            // Shows where the player moved on screen.
+            UI.ShowBoardInformation(direction, kind);
+
+            // Decrements health, by walking, and then returns the coordinate.
+            Health--;
             return dest;
-            */
-            return null;
         }
     }
 }

@@ -52,13 +52,13 @@ namespace Roguelike
                     return " ||| ";    
                 
                 case EntityKind.PowerUpS:
-                    return " s♥s ";
+                    return "  ♥  ";
 
                 case EntityKind.PowerUpM:
-                    return " m♥m ";
+                    return " ɾ♥ɿ ";
                 
                 case EntityKind.PowerUpL:
-                    return " l♥l ";
+                    return " ѧ♥ѧ ";
 
                 case EntityKind.Exit:
                     return " _∩_ ";

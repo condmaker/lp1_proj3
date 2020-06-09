@@ -26,7 +26,7 @@ namespace Roguelike
         public override Coord WhereToMove(Board board)
         {
             Entity target = null;
-            Entity[,] level = board.GetBoard();
+            Entity[,] level = board.CurrentBoard;
             // Finds player location on board
             foreach (Entity e in level)
             {
@@ -43,51 +43,53 @@ namespace Roguelike
             // Stores current distance to target
             int distanceToTarget = Pos.DistanceTo(target.Pos);
 
-            // Creates a list with every adjacent tile
-            List<Coord> possibleDestiny = new List<Coord>();
-            possibleDestiny.Add(board.GetNeighbor(Pos, Direction.Up));
-            possibleDestiny.Add(board.GetNeighbor(Pos, Direction.Right));
-            possibleDestiny.Add(board.GetNeighbor(Pos, Direction.Down));
-            possibleDestiny.Add(board.GetNeighbor(Pos, Direction.Left));
+            // Creates a list with every direction
+            List<Direction> PossibleDirections = new List<Direction>();
+            PossibleDirections.Add(Direction.Up);
+            PossibleDirections.Add(Direction.Right);
+            PossibleDirections.Add(Direction.Down);
+            PossibleDirections.Add(Direction.Left);
 
-            // Removes from list tiles that are obstructed
-            for (int i = possibleDestiny.Count - 1; i >= 0; i--)
+            // creates list of shorter paths, and all possible moves
+            List<Direction> legalMoves = new List<Direction>();
+            List<Direction> shorterPaths = new List<Direction>();
+
+
+            // for every direction, verifies if the move is legal
+            foreach (Direction d in PossibleDirections)
             {
-                if (board.IsObstructed(possibleDestiny[i]))
+                // gets the destination
+                Coord dest = board.GetNeighbor(Pos, d);
+
+                // verifies if it is on board and not obstructed
+                if (board.IsOnBoard(dest) && !board.IsObstructed(dest))
                 {
-                    possibleDestiny.RemoveAt(i);
+                    // adds it to the legalMoves list
+                    legalMoves.Add(d);
+
+                    // verifies if it shortens the path to player
+                    int newDistanceToTarget = dest.DistanceTo(target.Pos);
+                    if (newDistanceToTarget < distanceToTarget)
+                        shorterPaths.Add(d);
                 }
-            }
-
-            // Creates copy of the possibleDestiny list
-            List<Coord> pathsToTarget = new List<Coord>(possibleDestiny);
-
-            // Removes from new list destinies that don't make the distace to 
-            // target shorter
-            for (int i = pathsToTarget.Count - 1; i >= 0; i--)
-            {
-                int newDistanceToTarget = 
-                    pathsToTarget[i].DistanceTo(target.Pos);
-                if (newDistanceToTarget >= distanceToTarget)
-                    pathsToTarget.RemoveAt(i);
             }
 
             // Returns possible destiny in which the distance is shorter, if it
             // exists
-            if (pathsToTarget.Count > 0)
+            if (shorterPaths.Count > 0)
             {
-                int random = Game.rand.Next(pathsToTarget.Count);
+                int random = Game.rand.Next(shorterPaths.Count);
 
-                return pathsToTarget[random];
+                return board.GetNeighbor(Pos, shorterPaths[random]);
             }
 
             // If no path shortens the distance to target, returns a random
             // possible destiny
-            if (possibleDestiny.Count > 0)
+            if (legalMoves.Count > 0)
             {
-                int random = Game.rand.Next(possibleDestiny.Count);
+                int random = Game.rand.Next(legalMoves.Count);
 
-                return possibleDestiny[random];
+                return board.GetNeighbor(Pos, legalMoves[random]);
             }
                 
 
