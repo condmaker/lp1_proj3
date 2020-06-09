@@ -20,7 +20,7 @@ namespace Roguelike
 
         /// <summary>
         /// Game board reference
-        /// </summary>
+        /// </summary> 
         private Board board;
         
         private List<Enemy> enemyInBoard = new List<Enemy>();
@@ -47,7 +47,7 @@ namespace Roguelike
             board = new Board(gameValues.Width, gameValues.Height);
 
             rand = new Random();
-            gameValues.Level = 2;
+            gameValues.Level = 1;
 
             // Instantiates current player
             Coord pCoord = new Coord(0, rand.Next(0, gameValues.Height)); 
@@ -98,6 +98,9 @@ namespace Roguelike
 
             UI.ShowEndMessage();
             //SaveManager.Save(highscoreTable);
+
+            
+
         }
 
         /// <summary>
@@ -105,7 +108,8 @@ namespace Roguelike
         /// </summary>
         private void GameLoop()
         {
-            UI.ShowStartingMessage();
+            
+            UI.ShowStartingMessage(gameValues.Level);
 
             while (currentPlayer.Health > 0)
             {
@@ -114,9 +118,21 @@ namespace Roguelike
                     currentPlayer.Health, "Player", gameValues.Level);
                 UI.ShowBoard(board);
 
+                
+                //Gets the coordinate to where the player is going to move next
+                Coord destination = currentPlayer.WhereToMove(board);
+
+                //Checks if in that coordinate there's an exit
+                if(board.GetEntityAt(destination) != null){
+                    if(board.GetEntityAt(destination).kind == EntityKind.Exit)
+                    NextLevel();
+                }
+                
+
                 // TODO - See if the player wants to move again
                 board.MoveEntity(
-                    currentPlayer, currentPlayer.WhereToMove(board));
+                    currentPlayer, destination);
+ 
 
                 // Verifies if there is any enemy nearby, damaging the enemy
                 // if true
@@ -335,5 +351,17 @@ namespace Roguelike
             board.PlaceEntity(newEntity, pos);
         }
   
+
+        /// <summary>
+        /// Handles the the new level creation
+        /// </summary>
+        private void NextLevel()
+        {
+            gameValues.Level++;
+            EmptyBoard();
+            GenerateLevel();
+            GameLoop();
+        }
+
     }
 }

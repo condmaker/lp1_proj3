@@ -64,13 +64,24 @@ namespace Roguelike
         /// <summary>
         /// Prints a message when the player starts a game.
         /// </summary>
-        public static void ShowStartingMessage()
+        public static void ShowStartingMessage(int level)
         {
-            Console.WriteLine("Ψѧ----------------------------");
-            Console.WriteLine(
-                "| As you were adventuring, you find yourself trapped in "+
-                "a strange dungeon... The only option is to proceed. ");
-            Console.WriteLine("Ψѧ----------------------------");
+            if(level == 1){
+                Console.WriteLine("Ψѧ----------------------------");
+                Console.WriteLine(
+                    "| As you were adventuring, you find yourself trapped in "+
+                    "a strange dungeon... The only option is to proceed. ");
+                Console.WriteLine("Ψѧ----------------------------");
+            }
+            else
+            {
+                Console.WriteLine("Ψѧ----------------------------");
+                Console.WriteLine(
+                    "| You reached the end of this section and decided to "+
+                    "continue exploring... You are now in the level " +
+                    $"{level}. ");
+                Console.WriteLine("Ψѧ----------------------------");
+            }
         }
 
         public static void ShowBoardInformation(Direction dir, 

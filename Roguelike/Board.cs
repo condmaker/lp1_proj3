@@ -102,7 +102,8 @@ namespace Roguelike
             // if the tile is occupied but not by a Power Up, it is obstructed.
             if (GetEntityAt(c).kind != EntityKind.PowerUpS &&
                 GetEntityAt(c).kind != EntityKind.PowerUpM &&
-                GetEntityAt(c).kind != EntityKind.PowerUpL)
+                GetEntityAt(c).kind != EntityKind.PowerUpL &&
+                GetEntityAt(c).kind != EntityKind.Exit)
                 return true;
             // otherwise, it is not obstructed.
             return false;
@@ -160,7 +161,6 @@ namespace Roguelike
 
             entity.Pos = coord;
         }
-
 
         /// <summary>
         /// Places entity <param name="entity"> in the position 
