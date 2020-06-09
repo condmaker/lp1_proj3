@@ -19,7 +19,7 @@ namespace Roguelike
         /// that are hidden under an enemy. This is used to store the Power-Ups
         /// when enemies are in the same tiles as them.
         /// </summary>
-        private List<Entity> hiddenPowerUps;
+        private List<Entity> hiddenPowerUps = new List<Entity>();
 
         /// <summary>
         /// Creates a new instance of a level (or board).
@@ -56,6 +56,19 @@ namespace Roguelike
             pos = Normalize(pos);
             return CurrentBoard[pos.x, pos.y];
         } 
+
+        public bool IsOnBoard(Coord c)
+        {
+            if (c.x < 0)
+                return false;
+            if (c.y < 0)
+                return false;
+            if (c.x >= Width)
+                return false;
+            if (c.y >= Height)
+                return false;
+            return true;
+        }
 
         /// <summary>
         /// Method that indicates if an entity in the indicated position on the
@@ -130,7 +143,6 @@ namespace Roguelike
                     throw new System.ComponentModel.InvalidEnumArgumentException
                     ("Direção não reconhecida.");
             }
-            neighbor = Normalize(neighbor);
             return neighbor;
         }
 
@@ -160,6 +172,8 @@ namespace Roguelike
             coord = Normalize(coord);
             CurrentBoard[coord.x, coord.y] = entity;
         }
+
+        
 
         /// <summary>
         /// Normalizes a coordinate, assuring that its still inside the level's
