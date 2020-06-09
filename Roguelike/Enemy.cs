@@ -16,6 +16,31 @@ namespace Roguelike
         public Enemy (Coord pos, EntityKind kind)
             : base(pos, kind) {}
 
+
+        /// <summary>
+        /// Method that checks if the enemy is adjacent to the player.
+        /// </summary>
+        /// <param name="board">Reference to the level's board.</param>
+        /// <returns><c>true</c> if it is adjacent to player,
+        /// <c>false</c> otherwise.</returns>
+        public bool AdjacentToPlayer(Board board)
+        {
+            // Creates a list with every direction
+            List<Direction> Directions = new List<Direction>();
+            Directions.Add(Direction.Up);
+            Directions.Add(Direction.Right);
+            Directions.Add(Direction.Down);
+            Directions.Add(Direction.Left);
+
+            foreach (Direction d in Directions)
+            {
+                Entity neighbor = board.GetEntityAt(board.GetNeighbor(Pos, d));
+                if (neighbor is Player)
+                    return true;
+            }
+            return false;
+        }
+
         /// <summary>
         /// Method that implements the AI movement of the minion and boss 
         /// entities.
@@ -73,6 +98,14 @@ namespace Roguelike
                         shorterPaths.Add(d);
                 }
             }
+            // DELETE
+            System.Console.WriteLine("\nshorterPaths: ");
+            foreach (Direction d in shorterPaths)
+                System.Console.Write(d);
+            System.Console.WriteLine("\nlegalMoves: ");
+            foreach (Direction d in legalMoves)
+                System.Console.Write(d);
+
 
             // Returns possible destiny in which the distance is shorter, if it
             // exists

@@ -63,10 +63,9 @@ namespace Roguelike
         /// </summary>
         public void Initiate()
         {           
-            UI.MainMenu();
-
             while (UI.Input != "q")
             {
+                UI.MainMenu();
                 UI.WriteOnString();
 
                 switch(UI.Input)
@@ -98,9 +97,7 @@ namespace Roguelike
 
             UI.ShowEndMessage();
             //SaveManager.Save(highscoreTable);
-
-            
-
+    
         }
 
         /// <summary>
@@ -118,114 +115,83 @@ namespace Roguelike
                     currentPlayer.Health, "Player", gameValues.Level);
                 UI.ShowBoard(board);
 
-                
-                //Gets the coordinate to where the player is going to move next
-                Coord destination = currentPlayer.WhereToMove(board);
+                // moves player
+                MovePlayer();
+                if (currentPlayer.Damage(1) <= 0)
+                    continue;
 
-                //Checks if in that coordinate there's an exit
-                if(board.GetEntityAt(destination) != null){
-                    if(board.GetEntityAt(destination).kind == EntityKind.Exit)
-                    NextLevel();
-                }
-                
-
-                // TODO - See if the player wants to move again
-                board.MoveEntity(
-                    currentPlayer, destination);
- 
-
-                // Verifies if there is any enemy nearby, damaging the enemy
-                // if true
-                VerifyNeighbours();
-
-                // Leaves the game if the player's health is smaller than 0
-                if (currentPlayer.Health < 0) break;
-
+                // Prints game info
                 UI.ShowCurrentInformation(
                     currentPlayer.Health, "Player", gameValues.Level);
                 UI.ShowBoard(board);
 
-                // Asks the player if he wants to move again this turn
-                if (UI.MoveAgain()) 
-                {
-                    board.MoveEntity(
-                        currentPlayer, currentPlayer.WhereToMove(board));
+                // moves player again
+                MovePlayer();
+                if (currentPlayer.Damage(1) <= 0)
+                    continue;
 
-                    VerifyNeighbours();
 
-                    if (currentPlayer.Health < 0) break;
-                }
-
-                // Here goes a for/foreach for all enemies on board to move
-                // OBS: Apparently not working that well
+                // iterates though all enemies on board, moving them or damaging
+                // the player nearby
                 foreach (Enemy enemy in enemyInBoard)
                 {
+                    // prints current information on console
                     UI.ShowCurrentInformation(
                         currentPlayer.Health, "Enemy", gameValues.Level);
                     UI.ShowBoard(board);
 
-                    board.MoveEntity(
-                    enemy, enemy.WhereToMove(board));
+                    // checks if is adjacent to player
+                    if (enemy.AdjacentToPlayer(board))
+                    {
+                        int damage = 5;
+                        // bosses deal double the damage
+                        if (enemy.kind == EntityKind.Boss)
+                            damage *= 2;
+                        currentPlayer.Damage(damage);
+                    }
 
-                    UI.ShowBoardInformation(
-                        enemy.WhereToMove(board), enemy.kind);
+                    // if it's not adjacent to player
+                    // TODO POWERUP
+                    else
+                    {
+                        // moves enemy and shows movement on console
+                        board.MoveEntity(
+                        enemy, enemy.WhereToMove(board));
 
-                    if (currentPlayer.Health < 0) break;
+                        // show where the enemy moved
+                        UI.ShowBoardInformation(
+                        enemy.Pos, enemy.kind);
+                    }
+
+                    if (currentPlayer.Health < 0) continue;
 
                     Thread.Sleep(1000);  
-                }
-                
-
-            }
-            
+                } // end foreach (Enemy enemy in enemyInBoard)
+            } // end while (currentPlayer.Health > 0)
+            UI.WriteMessage("Your health reached 0. Game over.");
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        private void VerifyNeighbours()
+        private void MovePlayer()
         {
-            Coord verUp = board.GetNeighbor(
-                currentPlayer.Pos, Direction.Up);
-            Coord verDown = board.GetNeighbor(
-                currentPlayer.Pos, Direction.Down);
-            Coord verLeft = board.GetNeighbor(
-                currentPlayer.Pos, Direction.Left);
-            Coord verRight = board.GetNeighbor(
-                currentPlayer.Pos, Direction.Right);
+            // gets the coord where player will move
+            Coord dest = currentPlayer.WhereToMove(board);
 
-            if (board.GetEntityAt(verUp) is Enemy )
+            // checks if player is moving into power up and heals them
+            int heal = 4;
+            Entity ent = board.GetEntityAt(dest);
+            if (ent != null)
             {
-                // Verifies if enemy caught is a minion or a boss
-                if (board.GetEntityAt(verUp).kind == EntityKind.Minion)
-                    currentPlayer.Health -= 5;
-                if (board.GetEntityAt(verUp).kind == EntityKind.Boss)
-                    currentPlayer.Health -= 5;
+                if (ent.kind == EntityKind.PowerUpS)
+                    currentPlayer.Heal(heal);
+                if (ent.kind == EntityKind.PowerUpM)
+                    currentPlayer.Heal(heal*2);
+                if (ent.kind == EntityKind.PowerUpL)
+                    currentPlayer.Heal(heal*4);
             }
-            if (board.GetEntityAt(verDown) is Enemy )
-            {
-                // Verifies if enemy caught is a minion or a boss
-                if (board.GetEntityAt(verDown).kind == EntityKind.Minion)
-                    currentPlayer.Health -= 5;
-                if (board.GetEntityAt(verDown).kind == EntityKind.Boss)
-                    currentPlayer.Health -= 5;
-            }
-            if (board.GetEntityAt(verLeft) is Enemy )
-            {
-                // Verifies if enemy caught is a minion or a boss
-                if (board.GetEntityAt(verLeft).kind == EntityKind.Minion)
-                    currentPlayer.Health -= 5;
-                if (board.GetEntityAt(verLeft).kind == EntityKind.Boss)
-                    currentPlayer.Health -= 5;
-            }
-            if (board.GetEntityAt(verRight) is Enemy )
-            {
-                // Verifies if enemy caught is a minion or a boss
-                if (board.GetEntityAt(verRight).kind == EntityKind.Minion)
-                    currentPlayer.Health -= 5;
-                if (board.GetEntityAt(verRight).kind == EntityKind.Boss)
-                    currentPlayer.Health -= 5;
-            }
+
+            // moves player and updates board
+            board.MoveEntity(currentPlayer, dest);
+
         }
         
         /// <summary>
