@@ -63,7 +63,10 @@ namespace Roguelike
                 //Add score to new HighscoreTable
                 highscore.AddScore(splitData[0], score);      
 
-            }        
+            }   
+
+            //Close file
+            sr.Close();     
                    
             return highscore;
         }

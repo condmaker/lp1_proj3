@@ -71,7 +71,7 @@ namespace Roguelike
                 switch(UI.Input)
                 {
                     case "n":
-                        GameLoop();
+                        NewLevel();
                         break;
 
                     case "m":
@@ -108,27 +108,33 @@ namespace Roguelike
             
             UI.ShowStartingMessage(gameValues.Level);
 
+            bool playerWon = false;
             while (currentPlayer.Health > 0)
             {
+
                 // Prints game information
                 UI.ShowCurrentInformation(
                     currentPlayer.Health, "Player", gameValues.Level);
                 UI.ShowBoard(board);
 
-                // moves player
-                MovePlayer();
+                // moves player and returns their state
+                playerWon = MovePlayer();
                 if (currentPlayer.Damage(1) <= 0)
                     continue;
+                if(playerWon)
+                    break;
 
                 // Prints game info
                 UI.ShowCurrentInformation(
                     currentPlayer.Health, "Player", gameValues.Level);
                 UI.ShowBoard(board);
 
-                // moves player again
-                MovePlayer();
+                // moves player againreturns thier state
+                playerWon = MovePlayer();
                 if (currentPlayer.Damage(1) <= 0)
                     continue;
+                if(playerWon)
+                    break;
 
 
                 // iterates though all enemies on board, moving them or damaging
@@ -154,9 +160,24 @@ namespace Roguelike
                     // TODO POWERUP
                     else
                     {
-                        // moves enemy and shows movement on console
-                        board.MoveEntity(
-                        enemy, enemy.WhereToMove(board));
+                        // gets target move coordinate
+                        Coord dest = enemy.WhereToMove(board);
+
+                        // gets original coordinate
+                        Coord source = enemy.Pos;
+
+                        // checks if the is powerup on dest coordinate, and 
+                        // stores it
+                        if (board.IsPowerUp(dest) > 0)
+                        {
+                            board.StorePowerUp(dest);
+                        }
+
+                        // moves enemy
+                        board.MoveEntity(enemy, dest);
+
+                        // restores power ups if needed
+                        board.RestorePowerUp(source);
 
                         // show where the enemy moved
                         UI.ShowBoardInformation(
@@ -168,31 +189,33 @@ namespace Roguelike
                     Thread.Sleep(1000);  
                 } // end foreach (Enemy enemy in enemyInBoard)
             } // end while (currentPlayer.Health > 0)
-            UI.WriteMessage("Your health reached 0. Game over.");
+
+            if(playerWon)
+                NewLevel();
+            else
+                EndGame();
         }
 
-        private void MovePlayer()
+        private bool MovePlayer()
         {
             // gets the coord where player will move
             Coord dest = currentPlayer.WhereToMove(board);
 
+            //checks if the player reached and exit
+            if(board.IsExit(dest))
+                return true;
+
             // checks if player is moving into power up and heals them
             int heal = 4;
-            Entity ent = board.GetEntityAt(dest);
-            if (ent != null)
-            {
-                if (ent.kind == EntityKind.PowerUpS)
-                    currentPlayer.Heal(heal);
-                if (ent.kind == EntityKind.PowerUpM)
-                    currentPlayer.Heal(heal*2);
-                if (ent.kind == EntityKind.PowerUpL)
-                    currentPlayer.Heal(heal*4);
-            }
+            currentPlayer.Heal(heal * board.IsPowerUp(dest));
 
             // moves player and updates board
             board.MoveEntity(currentPlayer, dest);
 
+            return false;
+
         }
+        
         
         /// <summary>
         /// Resets board to its initial empty state
@@ -321,12 +344,30 @@ namespace Roguelike
         /// <summary>
         /// Handles the the new level creation
         /// </summary>
-        private void NextLevel()
+        private void NewLevel()
         {
             gameValues.Level++;
             EmptyBoard();
             GenerateLevel();
             GameLoop();
+        }
+
+        private void EndGame(){
+            //Prints an exit message
+            //UI.ExitMessage();
+            UI.WriteMessage("Player's health as reach 0 points.");
+
+       
+            if(highscoreTable.IsHighscore(gameValues.Level))
+            {
+                //Prompts player to type their username
+                string username = UI.PromptUsername();
+                //Adds score to highscoreTable
+                highscoreTable.AddScore(username, gameValues.Level);
+                //Save changes
+                SaveManager.Save(highscoreTable);
+            }
+          
         }
 
     }

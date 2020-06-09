@@ -52,7 +52,10 @@ namespace Roguelike
         /// <returns> </returns>
         public bool IsHighscore(int score)
         {
-            if(score > GetScore(highscoreTable.Count).NewScore)
+            if(highscoreTable.Count < 10)
+                return true;
+
+            if(score > GetScore(highscoreTable.Count - 1).NewScore)
                 return true;
             return false;
         }

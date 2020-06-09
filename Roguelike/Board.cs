@@ -110,6 +110,33 @@ namespace Roguelike
         }
 
         /// <summary>
+        /// TODO
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
+        public int IsPowerUp(Coord c){
+            // if tile is null, is not power up
+            if (IsOccupied(c) == false)
+                return 0;
+
+            if(GetEntityAt(c).kind == EntityKind.PowerUpS)
+                return 1;
+            if(GetEntityAt(c).kind == EntityKind.PowerUpM)
+                return 2;
+            if(GetEntityAt(c).kind == EntityKind.PowerUpL)
+                return 4;
+            return 0;
+        }
+
+        public bool IsExit(Coord c)
+        {
+            // if it is null, it is not exit
+            if (IsOccupied(c) == false)
+                return false;
+            return (GetEntityAt(c).kind == EntityKind.Exit);
+        }
+
+        /// <summary>
         /// Method that returns the Neighbour position of the given position in
         /// the parameter <param name="coord">, in the direction of the 
         /// parameter <param name="direction">.

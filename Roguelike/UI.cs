@@ -292,6 +292,22 @@ namespace Roguelike
         }
 
         /// <summary>
+        /// Gets the player username if they got in the highscore board
+        /// </summary>
+        /// <returns> The username given by the user </returns>
+        public static string PromptUsername()
+        {
+           Console.WriteLine("");
+           Console.WriteLine("Ψѧ----------------------------ѧΨ");
+           Console.WriteLine("|    You are in the top 10!    |");
+           Console.WriteLine("|     Enter your username      |");
+           Console.WriteLine("Ψѧ----------------------------ѧΨ\n");
+
+           UI.WriteOnString();
+           return Input; 
+        }
+
+        /// <summary>
         /// Function that renders the highscore table in the console
         /// </summary>
         /// <param name="highscore">"Highscore table"</param>
