@@ -1,5 +1,4 @@
 using System;
-using System.Text;
 
 namespace Roguelike
 {
@@ -11,16 +10,6 @@ namespace Roguelike
     {
         // The single string that manages all inputs on the game
         public static string Input { get; private set; } = "";
-
-        /// <summary>
-        /// Static constructor of the class. Will make the output encode
-        /// support Unicode characters.
-        /// </summary>
-        static UI()
-        {
-            // Allows the console to print other Unicode characters 
-            Console.OutputEncoding = System.Text.Encoding.UTF8;
-        }
 
         /// <summary>
         /// A simple method that shows to the player a graphic depiction of 
@@ -414,6 +403,10 @@ namespace Roguelike
             Console.WriteLine(
                 "| Use WASD or the Arrow Keys to move, or press 'q' to leave " +
                 "in your turn.");
+            Console.WriteLine("Ψѧ----------------------------");
+            Console.WriteLine("| .☻. Player | .¤. Minion | ◄☼► Boss | " +
+                              "||| Obstacle | ♥ Small HP PowerUp | ɾ♥ɿ Mid " +
+                              "HP PowerUp | ѧ♥ѧ Large HP PowerUp | _∩_ Exit");
             Console.WriteLine("Ψѧ----------------------------");
         }
 
