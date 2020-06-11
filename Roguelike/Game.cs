@@ -161,6 +161,8 @@ namespace Roguelike
                         if (enemy.kind == EntityKind.Boss)
                             damage *= 2;
                         currentPlayer.Damage(damage);
+
+                        UI.WriteMessage($"You took {damage} damage!");
                     }
 
                     // if it's not adjacent to player
@@ -192,7 +194,7 @@ namespace Roguelike
 
                     if (currentPlayer.Health < 0) continue;
 
-                    Thread.Sleep(1000);  
+                    Thread.Sleep(2000);  
                 } // end foreach (Enemy enemy in enemyInBoard)
             } // end while (currentPlayer.Health > 0)
 
@@ -263,8 +265,11 @@ namespace Roguelike
         private void GenerateLevel()
         {
             Coord pCoord = new Coord(0, rand.Next(0, gameValues.Height)); 
-            currentPlayer = new Player(
-                pCoord, (gameValues.Width * gameValues.Height) / 4);
+            if (gameValues.Level == 1)
+                currentPlayer = new Player(
+                    pCoord, (gameValues.Width * gameValues.Height) / 4);
+            else 
+                currentPlayer = new Player(pCoord, gameValues.Hp);
 
             // Instantiate the Player
             board.PlaceEntity(
@@ -369,6 +374,8 @@ namespace Roguelike
         private void NewLevel()
         {
             gameValues.Level++;
+            gameValues.Hp = currentPlayer.Health;
+
             EmptyBoard();
             GenerateLevel();
             GameLoop();

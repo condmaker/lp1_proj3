@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 
 namespace Roguelike
 {
@@ -71,10 +72,12 @@ namespace Roguelike
                 Console.WriteLine("Ψѧ----------------------------");
                 Console.WriteLine(
                     "| You reached the end of this section and decided to "+
-                    "continue exploring... You are now in the level " +
+                    "continue exploring... You are now in level -" +
                     $"{level}. ");
                 Console.WriteLine("Ψѧ----------------------------");
             }
+
+            Thread.Sleep(2500);
         }
 
         /// <summary>
