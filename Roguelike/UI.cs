@@ -406,7 +406,10 @@ namespace Roguelike
             for (int i = 0; i < board.Width; i++)
                 Console.Write("‾‾‾‾‾");
             Console.WriteLine("‾‾");
-            
+        }
+
+        public static void ShowBoardInstructions()
+        {
             // Basic instructions
             Console.WriteLine("Ψѧ----------------------------");
             Console.WriteLine(

@@ -118,33 +118,38 @@ namespace Roguelike
                 UI.ShowCurrentInformation(
                     currentPlayer.Health, "Player", gameValues.Level);
                 UI.ShowBoard(board);
+                UI.ShowBoardInstructions();
 
                 // moves player and returns their state
                 playerWon = MovePlayer();
+
                 if (currentPlayer.Damage(1) <= 0)
                     continue;
-                if(playerWon)
+                if (playerWon)
                     break;
 
                 // Prints game info
                 UI.ShowCurrentInformation(
                     currentPlayer.Health, "Player", gameValues.Level);
                 UI.ShowBoard(board);
+                UI.ShowBoardInstructions();
 
                 // moves player again and returns their state
                 playerWon = MovePlayer();
+
                 if (currentPlayer.Damage(1) <= 0)
                     continue;
-                if(playerWon)
+                if (playerWon)
                     break;
-
 
                 // iterates though all enemies on board, moving them or damaging
                 // the player nearby
                 List<Enemy> enemies = new List<Enemy>();
+
                 foreach (Entity e in board.CurrentBoard)
                     if(e is Enemy)
                         enemies.Add((Enemy)e);
+
                 foreach (Enemy enemy in enemies)
                 {
                     // prints current information on console
@@ -264,7 +269,7 @@ namespace Roguelike
             Coord pCoord = new Coord(0, rand.Next(0, gameValues.Height)); 
             currentPlayer = new Player(
                 pCoord, (gameValues.Width * gameValues.Height) / 4);
-                
+
             // Instantiate the Player
             board.PlaceEntity(
                 currentPlayer, currentPlayer.Pos);

@@ -64,6 +64,12 @@ namespace Roguelike
             // Asks the player to input a direction.
             Direction direction = UI.InputDirection();
 
+            while (direction == Direction.Undefined)
+            {
+                UI.WriteMessage("Unknown Input. Please try again.");
+                direction = UI.InputDirection();
+            }
+
             if (direction == Direction.None)
             {
                 UI.ShowEndMessage();
@@ -74,12 +80,10 @@ namespace Roguelike
             // board limit.
             Coord dest = board.GetNeighbor(Pos, direction);
             
-            while (board.IsObstructed(dest) || direction == Direction.Undefined
-                    || !board.IsOnBoard(dest))
+            if (board.IsObstructed(dest) || !board.IsOnBoard(dest))
             {
                 UI.WriteMessage("You can't move there. Try another direction.");
-                direction = UI.InputDirection();
-                dest = board.GetNeighbor(Pos, direction);
+                WhereToMove(board);
             }
 
             // Shows where the player moved on screen.
