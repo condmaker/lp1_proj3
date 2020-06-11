@@ -51,11 +51,6 @@ namespace Roguelike
             rand = new Random();
             gameValues.Level = 1;
 
-            // Instantiates current player
-            Coord pCoord = new Coord(0, rand.Next(0, gameValues.Height)); 
-            currentPlayer = new Player(
-                pCoord, (gameValues.Width * gameValues.Height) / 4);
-
             GenerateLevel();
 
         }
@@ -266,6 +261,10 @@ namespace Roguelike
         /// </summary>
         private void GenerateLevel()
         {
+            Coord pCoord = new Coord(0, rand.Next(0, gameValues.Height)); 
+            currentPlayer = new Player(
+                pCoord, (gameValues.Width * gameValues.Height) / 4);
+                
             // Instantiate the Player
             board.PlaceEntity(
                 currentPlayer, currentPlayer.Pos);
