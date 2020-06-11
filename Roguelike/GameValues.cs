@@ -81,9 +81,8 @@ namespace Roguelike
             //the program ends with an error message
             if(args.Length != 4 && args.Length != 2)
             {
-                //TODO: Exeption
-                //Temp for testing
-                return new GameValues(10, 10);
+                UI.WriteMessage("Not enough arguments.");
+                Environment.Exit(0);
             }
 
             //Checks if the user is trying to load the game
@@ -97,19 +96,36 @@ namespace Roguelike
             // Argument parsing
             for(int i = 0; i < 4; i++)
             {
-                 if(i == 3)
-                    //Exeption of some sort -> Args were passed in the wrong way
-                    continue;
+                if(i == 3)
+                {
+                    UI.WriteMessage("Not enough arguments.");
+                    Environment.Exit(0);
+                }
 
                 //Documentation used to Find Replace Method
-                string currentArg = args[i].Replace("-","");
+                string currentArg = "";
+                try 
+                {
+                    currentArg = args[i].Replace("-","");
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    UI.WriteMessage("Invalid Arguments. Please input -c and "  +
+                        "-r for number of columns and rows, each followed by " +
+                        "their respective number, or -l to load a previous "   +
+                        "game with the name of the file aftwerwards.");
+
+                    Environment.Exit(0);
+                }
+                
                 string nextArg =  args[i+1];
 
                 if(currentArg == "r")
                 {
                     if(!int.TryParse(nextArg, out height))
                     {
-                        //Exeption
+                        UI.WriteMessage("Invalid row height number.");
+                        Environment.Exit(0);
                     }
 
                     i++;
@@ -118,7 +134,8 @@ namespace Roguelike
                 {
                     if(!int.TryParse(nextArg, out width))
                     {
-                        //Exeption
+                        UI.WriteMessage("Invalid column width number.");
+                        Environment.Exit(0);
                     }
                     i++;
                 }

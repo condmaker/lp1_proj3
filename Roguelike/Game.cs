@@ -90,7 +90,7 @@ namespace Roguelike
             }
 
             UI.ShowEndMessage();
-            //SaveManager.Save(highscoreTable);
+            SaveManager.Save(highscoreTable);
     
         }
 
