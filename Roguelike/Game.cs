@@ -59,7 +59,8 @@ namespace Roguelike
         }
 
         /// <summary>
-        /// 
+        /// Shows the main menu, awaits for the user's input, and calls the 
+        /// proper method to continue the game.
         /// </summary>
         public void Initiate()
         {           
