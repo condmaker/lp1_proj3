@@ -103,11 +103,12 @@ namespace Roguelike
 
 
         /// <summary>
-        /// Loads the game data from a file 
+        /// Loads the game data from a file <param name="fileName">.
         /// </summary>
         /// <param name="fileName"> Name of the file where the data is saved on
         /// given by the user</param>
-        /// <returns></returns>
+        /// <returns>Values stored on save file <param name="fileName">.
+        /// </returns>
          public static int[] Load(string fileName)
          {
            

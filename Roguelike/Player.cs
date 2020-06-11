@@ -12,7 +12,7 @@ namespace Roguelike
         /// points.
         /// </summary>
         /// <value>The player's health points.</value>
-        public int Health {get; set;}
+        public int Health {get; private set;}
         
         /// <summary>
         /// Constructor

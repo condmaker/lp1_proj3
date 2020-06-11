@@ -146,7 +146,11 @@ namespace Roguelike
 
                 // iterates though all enemies on board, moving them or damaging
                 // the player nearby
-                foreach (Enemy enemy in enemyInBoard)
+                List<Enemy> enemies = new List<Enemy>();
+                foreach (Entity e in board.CurrentBoard)
+                    if(e is Enemy)
+                        enemies.Add((Enemy)e);
+                foreach (Enemy enemy in enemies)
                 {
                     // prints current information on console
                     UI.ShowCurrentInformation(
@@ -164,7 +168,6 @@ namespace Roguelike
                     }
 
                     // if it's not adjacent to player
-                    // TODO POWERUP
                     else
                     {
                         // gets target move coordinate

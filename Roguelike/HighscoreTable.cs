@@ -37,10 +37,10 @@ namespace Roguelike
         }
  
         /// <summary>
-        /// Get Score based on its position in the table
+        /// Get Score based on its position <param name="id"> in the table
         /// </summary>
         /// <param name="id"> Score id </param>
-        /// <returns> </returns>
+        /// <returns>High score on the position <param name="id">.</returns>
         public Score GetScore(int id)
         {
             if(id > highscoreTable.Count - 1) return null;
@@ -49,10 +49,12 @@ namespace Roguelike
 
 
         /// <summary>
-        /// Checks if the new score belongs inide the table
+        /// Checks if the new score belongs in the table
         /// </summary>
         /// <param name="score"> New score </param>
-        /// <returns> </returns>
+        /// <returns><c>true</c> if new score belongs in the table,
+        /// <c>false</c> otherwise.
+        /// </returns>
         public bool IsHighscore(int score)
         {
             if(highscoreTable.Count < 10)

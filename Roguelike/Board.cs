@@ -56,6 +56,14 @@ namespace Roguelike
             return CurrentBoard[pos.x, pos.y];
         } 
 
+        /// <summary>
+        /// Method that indicates if a given Coord <param name="c"> is inside 
+        /// the limits of the board.
+        /// </summary>
+        /// <param name="c">A Position</param>
+        /// <returns><c>true</c> if the Coord <param name="c"> is within the 
+        /// limits of the board, <c>false</c> otherwise
+        /// </returns>
         public bool IsOnBoard(Coord c)
         {
             if (c.x < 0)
@@ -75,7 +83,7 @@ namespace Roguelike
         /// </summary>
         /// <param name="c">Position on the 'board'.</param>
         /// <returns><c>true</c> if an entity in the given position exists in
-        /// <param name="c">, <c>false</c> otherwise
+        /// <param name="c">, <c>false</c> otherwise.
         /// </returns>
         public bool IsOccupied(Coord c)
         {
@@ -87,10 +95,13 @@ namespace Roguelike
 
 
         /// <summary>
-        /// TODO
+        /// Method that indicates if a given position <param name="c"> is 
+        /// obstructed by an Enemy or Obstacle.
         /// </summary>
-        /// <param name="c"></param>
-        /// <returns></returns>
+        /// <param name="c">Position on the board.</param>
+        /// <returns><c>true</c> if the position is obstructed by an Enemy or 
+        /// Obstacle, <c>false</c> otherwise.
+        /// </returns>
         public bool IsObstructed(Coord c){
             c = Normalize(c);
 
@@ -109,10 +120,15 @@ namespace Roguelike
         }
 
         /// <summary>
-        /// TODO
+        /// Method that indicates if a given position <param name="c"> is 
+        /// occupied by a Power Up, and what is its size.
         /// </summary>
-        /// <param name="c"></param>
-        /// <returns></returns>
+        /// <param name="c">Position on the board.</param>
+        /// <returns><c>0</c> if it is not occupied by a Power Up,
+        /// <c>1</c> if it is occupied by a small Power up,
+        /// <c>2</c> if it is occupied by a medium Power up,
+        /// <c>4</c> if it is occupied by a large Power up.
+        /// </returns>
         public int IsPowerUp(Coord c){
             // if tile is null, is not power up
             if (IsOccupied(c) == false)
@@ -127,6 +143,14 @@ namespace Roguelike
             return 0;
         }
 
+        /// <summary>
+        /// Method that indicates if a given position <param name="c"> is
+        /// occupied by the level's exit.
+        /// </summary>
+        /// <param name="c">Position on the board.</param>
+        /// <returns><c>true</c> if the position is occupied by the Exit, 
+        /// <c>false</c> otherwise.
+        /// </returns>
         public bool IsExit(Coord c)
         {
             // if it is null, it is not exit
@@ -242,12 +266,14 @@ namespace Roguelike
         /// <param name="c">The position of the entity to be restored.</param>
         public void RestorePowerUp(Coord c)
         {
-            foreach (Entity e in hiddenPowerUps)
+            for (int i = hiddenPowerUps.Count - 1; i>=0; i--)
+            //foreach (Entity e in hiddenPowerUps)
             {
+                Entity e = hiddenPowerUps[i];
                 if (e.Pos == c)
                 {
                     CurrentBoard[c.x, c.y] = e;
-                    hiddenPowerUps.Remove(e);
+                    hiddenPowerUps.RemoveAt(i);
                     continue;
                 }
             }

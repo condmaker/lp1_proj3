@@ -93,18 +93,16 @@ namespace Roguelike
         /// Writes message showing the last player movement.
         /// </summary>
         /// <param name="dir">Direction of movement.</param>
-        /// <param name="entity"></param>
-        public static void ShowBoardInformation(Direction dir, 
-        EntityKind entity)
+        public static void ShowBoardInformation(Direction dir)
         {   
             Console.WriteLine($"You moved {dir.ToString()}.");
         }
 
         /// <summary>
-        /// 
+        /// Writes message showing the last enemy's movement.
         /// </summary>
-        /// <param name="coord"></param>
-        /// <param name="entity"></param>
+        /// <param name="coord">Enemy's position after movement.</param>
+        /// <param name="entity">Kind of enemy.</param>
         public static void ShowBoardInformation(Coord coord, EntityKind entity)
         {
             Console.WriteLine(
@@ -112,6 +110,15 @@ namespace Roguelike
                     $"{coord.ToString()}.");
         }
 
+        /// <summary>
+        /// Shows current game information.
+        /// </summary>
+        /// <remarks>
+        /// Shows player health, current turn and current floor.
+        /// </remarks>
+        /// <param name="playerHealth">Player health.</param>
+        /// <param name="currentTurn">Current turn.</param>
+        /// <param name="currentFloor">Current floor.</param>
         public static void ShowCurrentInformation(int playerHealth, 
         String currentTurn, int currentFloor)
         {
@@ -125,7 +132,7 @@ namespace Roguelike
         }
 
         /// <summary>
-        /// 
+        /// Writes message for leaving the game.
         /// </summary>
         public static void ShowEndMessage()
         {
@@ -138,7 +145,7 @@ namespace Roguelike
         }
 
         /// <summary>
-        /// 
+        /// Writes the game tutorial.
         /// </summary>
         public static void ShowTutorial()
         {
@@ -290,9 +297,11 @@ namespace Roguelike
         }
 
         /// <summary>
-        /// 
+        /// Writes message and awaits input to continue tutorial.
         /// </summary>
-        /// <returns></returns>
+        /// <returns><c>true</c> if the player input the command to continue
+        /// tutorial, <c>false</c> otherwise.
+        /// </returns>
         private static bool ContinueTutorial()
         {
             Console.WriteLine("Ψѧ-------------------------------ѧΨ");
@@ -406,6 +415,14 @@ namespace Roguelike
             Console.WriteLine("Ψѧ----------------------------");
         }
 
+    /// <summary>
+    /// Asks the player and awaits input to move again or not.
+    /// </summary>
+    /// <remarks> Outdated.
+    /// </remarks>
+    /// <returns><c>true</c> if the player wants to move again,
+    /// <c>false</c> otherwise.
+    /// </returns>
         public static bool MoveAgain()
         {
             bool willMove = false;
@@ -446,6 +463,10 @@ namespace Roguelike
             }
         }
 
+        /// <summary>
+        /// Asks and awaits user input for direction of movement.
+        /// </summary>
+        /// <returns>Direction of movement.</returns>
         public static Direction InputDirection()
         {
             Console.Write(">");

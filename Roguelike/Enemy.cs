@@ -34,9 +34,14 @@ namespace Roguelike
 
             foreach (Direction d in Directions)
             {
-                Entity neighbor = board.GetEntityAt(board.GetNeighbor(Pos, d));
-                if (neighbor is Player)
-                    return true;
+                Coord dest = board.GetNeighbor(Pos, d);
+                if(board.IsOnBoard(dest))
+                {
+                    Entity neighbor = board.GetEntityAt(dest);
+                    if (neighbor is Player)
+                        return true;
+                }
+                
             }
             return false;
         }
@@ -99,14 +104,6 @@ namespace Roguelike
                         shorterPaths.Add(d);
                 }
             }
-            // DELETE
-            System.Console.WriteLine("\nshorterPaths: ");
-            foreach (Direction d in shorterPaths)
-                System.Console.Write(d);
-            System.Console.WriteLine("\nlegalMoves: ");
-            foreach (Direction d in legalMoves)
-                System.Console.Write(d);
-
 
             // Returns possible destiny in which the distance is shorter, if it
             // exists
