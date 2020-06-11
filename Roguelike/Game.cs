@@ -49,7 +49,6 @@ namespace Roguelike
             board = new Board(gameValues.Width, gameValues.Height);
 
             rand = new Random();
-            gameValues.Level = 1;
 
             GenerateLevel();
 
