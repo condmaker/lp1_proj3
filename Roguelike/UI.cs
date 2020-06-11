@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 
 namespace Roguelike
 {
@@ -71,10 +72,12 @@ namespace Roguelike
                 Console.WriteLine("Ψѧ----------------------------");
                 Console.WriteLine(
                     "| You reached the end of this section and decided to "+
-                    "continue exploring... You are now in the level " +
+                    "continue exploring... You are now in level -" +
                     $"{level}. ");
                 Console.WriteLine("Ψѧ----------------------------");
             }
+
+            Thread.Sleep(2500);
         }
 
         /// <summary>
@@ -437,38 +440,6 @@ namespace Roguelike
                               "HP PowerUp | ѧ♥ѧ Large HP PowerUp | _∩_ Exit");
             Console.WriteLine("Ψѧ----------------------------");
         }
-
-    /// <summary>
-    /// Asks the player and awaits input to move again or not.
-    /// </summary>
-    /// <remarks> Outdated.
-    /// </remarks>
-    /// <returns><c>true</c> if the player wants to move again,
-    /// <c>false</c> otherwise.
-    /// </returns>
-        public static bool MoveAgain()
-        {
-            bool willMove = false;
-
-            Console.WriteLine("Do you wish to move again? (y/n)");
-            WriteOnString(true);
-
-            do
-            {
-                if (Input == "y")
-                    willMove = true;
-                else if (Input == "n")
-                    willMove = false;
-                else 
-                {
-                    Console.WriteLine("Unknown Input. Please answer with y/n.");
-                    WriteOnString(true);
-                }
-            }
-            while (Input != "y" && Input != "n");
-
-            return willMove;
-        } 
 
         /// <summary>
         /// Changes the instance Input.
