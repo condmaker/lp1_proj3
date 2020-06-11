@@ -41,15 +41,16 @@ namespace Roguelike
         }
 
         /// <summary>
-        /// 
+        /// Writes a given message <param name="str"> on the console.
         /// </summary>
+        /// <param name="str">Message to write.</param>
         public static void WriteMessage(String str)
         {
             Console.WriteLine(str);
         }
         
         /// <summary>
-        /// 
+        /// Shows game credits on Console.
         /// </summary>
         public static void ShowCredits()
         {
@@ -88,11 +89,22 @@ namespace Roguelike
             }
         }
 
+        /// <summary>
+        /// Writes message showing the last player movement.
+        /// </summary>
+        /// <param name="dir">Direction of movement.</param>
+        /// <param name="entity"></param>
         public static void ShowBoardInformation(Direction dir, 
         EntityKind entity)
         {   
             Console.WriteLine($"You moved {dir.ToString()}.");
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="coord"></param>
+        /// <param name="entity"></param>
         public static void ShowBoardInformation(Coord coord, EntityKind entity)
         {
             Console.WriteLine(

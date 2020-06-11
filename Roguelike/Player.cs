@@ -83,7 +83,7 @@ namespace Roguelike
             }
 
             // Shows where the player moved on screen.
-            UI.ShowBoardInformation(direction, kind);
+            UI.ShowBoardInformation(direction);
 
             // returns coordinate
             return dest;
