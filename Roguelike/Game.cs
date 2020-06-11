@@ -64,7 +64,7 @@ namespace Roguelike
             while (UI.Input != "q")
             {
                 UI.MainMenu();
-                UI.WriteOnString();
+                UI.WriteOnString(true);
 
                 switch(UI.Input)
                 {
@@ -85,6 +85,7 @@ namespace Roguelike
                         break;
                         
                     default:
+                        UI.WriteMessage("Unknown Input.");
                         break;
                 }
             }

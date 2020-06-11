@@ -14,20 +14,20 @@ namespace Roguelike
         /// the game board. 
         /// </summary>
         /// <value> Number of tiles in the y axis. </value>
-        public int Height{ get; }
+        public int Height { get; }
 
         /// <summary>
         /// Auto-implemented property that represents the horizontal 
         /// dimention of the game board.
         /// </summary>
         /// <value> Number of tiles in the x axis. </value>
-        public int Width{ get; }
+        public int Width { get; }
 
-        public int Hp{get; set;}
+        public int Hp { get; set; }
 
         public int BoardSize => Width * Height; 
 
-        public int Level{get; set;}
+        public int Level { get; set; }
 
         public int MinionNumb => 
         (int)MathF.Max(2,
@@ -167,7 +167,7 @@ namespace Roguelike
         {
             Height = height;
             Width = width;
-            level = Level;
+            Level = level;
             Hp = hp;
         }
 

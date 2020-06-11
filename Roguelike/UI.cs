@@ -447,13 +447,20 @@ namespace Roguelike
         /// </summary>
         public static void WriteOnString(bool keyBuffer = false)
         {
+            ConsoleKeyInfo InputTest;
+
             Console.Write(">");
 
             if (!keyBuffer)
                 Input = Console.ReadLine().ToLower();
             else 
             {
-                Input = Console.ReadKey().KeyChar.ToString().ToLower();
+                InputTest = Console.ReadKey();
+
+                if (InputTest.Key == ConsoleKey.Escape)
+                    Environment.Exit(0);
+
+                Input = InputTest.KeyChar.ToString().ToLower();
                 Console.WriteLine();
             }
         }
@@ -464,9 +471,15 @@ namespace Roguelike
         /// <returns>Direction of movement.</returns>
         public static Direction InputDirection()
         {
+            ConsoleKeyInfo InputTest;
+
             Console.Write(">");
-            // This is buggy! Change.
-            Input = Console.ReadKey().KeyChar.ToString().ToLower();
+            InputTest = Console.ReadKey();
+
+            if (InputTest.Key == ConsoleKey.Escape)
+                Environment.Exit(0);
+
+            Input = InputTest.KeyChar.ToString().ToLower();
             Console.WriteLine();
 
             if (Input == "w")
