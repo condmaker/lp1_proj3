@@ -3,6 +3,9 @@ using System;
 
 namespace Roguelike
 {
+    /// <summary>
+    /// Class responsible for saving the game state.
+    /// </summary>
     public static class SaveManager
     {
 

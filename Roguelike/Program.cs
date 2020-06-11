@@ -3,6 +3,9 @@ using System.ComponentModel;
 
 namespace Roguelike
 {
+    /// <summary>
+    /// Class which contains the main method.
+    /// </summary>
     class Program
     {
 

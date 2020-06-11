@@ -3,6 +3,10 @@ using System.Text;
 
 namespace Roguelike
 {
+    /// <summary>
+    /// Class responsible for the user interface on console, and for the game 
+    /// tutorial.
+    /// </summary>
     public static class UI
     {
         // The single string that manages all inputs on the game

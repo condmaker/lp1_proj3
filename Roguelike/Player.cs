@@ -2,6 +2,9 @@ using System;
 
 namespace Roguelike
 {
+    /// <summary>
+    /// Defines a implementation of the Player Character.
+    /// </summary>
     public class Player: Agent
     {
         /// <summary>

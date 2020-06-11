@@ -3,6 +3,9 @@ using System;
 
 namespace Roguelike
 {
+    /// <summary>
+    /// Class responsible for managing High Scores.
+    /// </summary>
     public class HighscoreTable
     {
         private List<Score> highscoreTable;

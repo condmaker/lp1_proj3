@@ -2,6 +2,9 @@ using  System;
 
 namespace Roguelike
 {
+    /// <summary>
+    /// Defines the properties necessary for core game functions.
+    /// </summary>
     public class GameValues
     {
 

@@ -4,7 +4,9 @@ using System.Threading;
 
 namespace Roguelike
 {
-
+    /// <summary>
+    /// Defines the game's main loop and other core functions.
+    /// </summary>
     public class Game
     {
 
@@ -102,8 +104,12 @@ namespace Roguelike
         }
 
         /// <summary>
-        /// 
+        /// Main Game loop
         /// </summary>
+        /// <remarks>
+        /// Shows information and board, moves player and checks their HP 
+        /// (twice), iterate all enemies to move them or damage player.
+        /// </remarks>
         private void GameLoop()
         {
             
@@ -130,7 +136,7 @@ namespace Roguelike
                     currentPlayer.Health, "Player", gameValues.Level);
                 UI.ShowBoard(board);
 
-                // moves player againreturns thier state
+                // moves player again and returns their state
                 playerWon = MovePlayer();
                 if (currentPlayer.Damage(1) <= 0)
                     continue;
@@ -197,6 +203,16 @@ namespace Roguelike
                 EndGame();
         }
 
+        /// <summary>
+        /// Method responsible for Player movement.
+        /// </summary>
+        /// <remarks>
+        /// Asks for direction from the user, checks if Player reached the exit,
+        /// heals player if he moved into a PowerUp, updates board.
+        /// </remarks>
+        /// <returns><c>true</c> if the player reached the exit,
+        /// <c>false</c> otherwise.
+        /// </returns>
         private bool MovePlayer()
         {
             // gets the coord where player will move
@@ -302,8 +318,10 @@ namespace Roguelike
 
 
         /// <summary>
-        /// 
+        /// Creates an entity of the given kind <param name="kind">, and 
+        /// randomly places it on the board.
         /// </summary>
+        /// <param name="kind">The kind of enemy to create.</param>
         private void CreateEntity(EntityKind kind)
         {
             // Inicial position
