@@ -19,7 +19,7 @@ Game Loop, UI
 
 GameValues, Saving/Loading, Highscores, Board Generation/Renderization, LevelProgression
 
-### O que foi feito por Pedor Bezerra
+### O que foi feito por Pedro Bezerra
 
 Coord, Board Funtionalities , Player and Enemies Funtionalities 
 
@@ -31,7 +31,7 @@ Coord, Board Funtionalities , Player and Enemies Funtionalities
  
 ## Referencias 
 
-Grande parte da lógica do projeto foi beseada pelo exemplo [ZombiesVsHumans](https://github.com/VideojogosLusofona/lp1_2018_p2_solucao)
+Grande parte da lógica do projeto foi beseada no exemplo [ZombiesVsHumans](https://github.com/VideojogosLusofona/lp1_2018_p2_solucao)
 dado pelo Professor Nuno Fachada.
 
 
