@@ -50,7 +50,6 @@ namespace Roguelike
         /// <param name="pos">Position in the current game 'board'.</param>
         /// <returns>Entity in the position indicated in the paramenter
         /// <param name="pos">.</returns>
-        // TODO : IEntity?
         public Entity GetEntityAt(Coord pos)
         {       
             pos = Normalize(pos);
