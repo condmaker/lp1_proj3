@@ -197,7 +197,10 @@ namespace Roguelike
             } // end while (currentPlayer.Health > 0)
 
             if(playerWon)
+            {
+                SaveProgress();
                 NewLevel();
+            }
             else
                 EndGame();
         }
@@ -362,6 +365,16 @@ namespace Roguelike
             board.PlaceEntity(newEntity, pos);
         }
   
+        
+        private void SaveProgress()
+        {
+           string filname  = UI.PromptSaveFile();
+
+            if(filname != "n"){
+                SaveManager.Save(gameValues, filname);
+            }
+        }
+
 
         /// <summary>
         /// Handles the the new level creation
@@ -374,6 +387,9 @@ namespace Roguelike
             GameLoop();
         }
 
+        /// <summary>
+        /// Handles what happens when the player loses
+        /// </summary>
         private void EndGame(){
             //Prints an exit message
             //UI.ExitMessage();

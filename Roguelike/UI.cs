@@ -320,6 +320,34 @@ namespace Roguelike
            return Input; 
         }
 
+
+        /// <summary>
+        /// Gets a filename to save the data to
+        /// </summary>
+        /// <returns> The filename given by the user </returns>
+        public static string PromptSaveFile()
+        {
+           Console.WriteLine("");
+           Console.WriteLine("Ψѧ-----------------------------------ѧΨ");
+           Console.WriteLine("|    Do you want to save the game?    |");
+           Console.WriteLine("|    (y/n)                            |");
+           Console.WriteLine("Ψѧ-----------------------------------ѧΨ\n");
+
+           UI.WriteOnString();
+
+           if(Input == "y")
+           {
+                Console.WriteLine("");
+                Console.WriteLine("Ψѧ-----------------------ѧΨ");
+                Console.WriteLine("|    Enter a filename.    |");
+                Console.WriteLine("Ψѧ-----------------------ѧΨ\n");
+                UI.WriteOnString();
+           }
+
+           return Input; 
+        }
+
+
         /// <summary>
         /// Function that renders the highscore table in the console
         /// </summary>
