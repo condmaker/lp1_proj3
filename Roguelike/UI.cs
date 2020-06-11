@@ -32,7 +32,6 @@ namespace Roguelike
             Console.WriteLine("|           -Roguelike-           |");
             Console.WriteLine("Ψѧ--------------+Ѡ+--------------ѧΨ");
             Console.WriteLine("| n - New Game                    |");
-            Console.WriteLine("| m - Print this again            |");
             Console.WriteLine("| h - High Scores                 |");
             Console.WriteLine("| i - Instructions                |");
             Console.WriteLine("| c - Credits                     |");

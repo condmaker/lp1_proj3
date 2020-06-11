@@ -72,10 +72,6 @@ namespace Roguelike
                         NewLevel();
                         break;
 
-                    case "m":
-                        UI.MainMenu();
-                        break;
-
                     case "h":
                         UI.ShowHighscoreTable(highscoreTable);
                         break;
