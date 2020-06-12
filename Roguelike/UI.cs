@@ -332,15 +332,16 @@ namespace Roguelike
         {
            Console.WriteLine("");
            Console.WriteLine("Ψѧ-----------------------------------ѧΨ");
-           Console.WriteLine("|    Do you want to save the game?    |");
-           Console.WriteLine("|    (y/n)                            |");
+           Console.WriteLine("| You've reached the end of this level. |");
+           Console.WriteLine("|     Do you wish to save the game?     |");
+           Console.WriteLine("|        (Press 'y' to confirm)         |");
            Console.WriteLine("Ψѧ-----------------------------------ѧΨ\n");
 
-           UI.WriteOnString();
+           UI.WriteOnString(true);
 
            if(Input == "y")
            {
-                Console.WriteLine("");
+                Console.WriteLine();
                 Console.WriteLine("Ψѧ-----------------------ѧΨ");
                 Console.WriteLine("|    Enter a filename.    |");
                 Console.WriteLine("Ψѧ-----------------------ѧΨ\n");

@@ -374,10 +374,10 @@ namespace Roguelike
         
         private void SaveProgress()
         {
-           string filname  = UI.PromptSaveFile();
+           string filename  = UI.PromptSaveFile();
 
-            if(filname != "n"){
-                SaveManager.Save(gameValues, filname);
+            if(filename == "y"){
+                SaveManager.Save(gameValues, filename);
             }
         }
 

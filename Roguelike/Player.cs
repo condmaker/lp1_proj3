@@ -83,7 +83,7 @@ namespace Roguelike
             if (board.IsObstructed(dest) || !board.IsOnBoard(dest))
             {
                 UI.WriteMessage("You can't move there. Try another direction.");
-                WhereToMove(board);
+                return WhereToMove(board);
             }
 
             // Shows where the player moved on screen.
