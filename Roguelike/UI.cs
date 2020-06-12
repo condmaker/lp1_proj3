@@ -354,6 +354,10 @@ namespace Roguelike
                 Console.WriteLine("Ψѧ-----------------------ѧΨ\n");
                 UI.WriteOnString();
            }
+           else
+           {
+               Input = null;
+           }
 
            return Input; 
         }

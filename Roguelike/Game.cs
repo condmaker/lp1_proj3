@@ -66,7 +66,16 @@ namespace Roguelike
         /// proper method to continue the game.
         /// </summary>
         public void Initiate()
-        {           
+        {          
+
+            // If the progress was loaded initiate automatically the game  
+            // without going to the MainMenu
+            if(gameValues.Level != 0)
+            {
+                NewLevel();
+            }
+
+
             // The Main Menu loop. Will always loop while the input is different
             // than 'q'. Observes player input and enters in the respective 
             // command's method.
@@ -403,9 +412,10 @@ namespace Roguelike
         /// </summary>
         private void SaveProgress()
         {
-           string filename = UI.PromptSaveFile();
-
-            if(filename == "y"){
+            string filename  = UI.PromptSaveFile();
+            
+            if(filename != null)
+            {
                 SaveManager.Save(gameValues, filename);
             }
         }
@@ -444,6 +454,10 @@ namespace Roguelike
                 //Save changes
                 SaveManager.Save(highscoreTable);
             }
+
+            //Reset values
+            gameValues.Level = 0;
+            gameValues.Hp = (gameValues.Height * gameValues.Width) / 4;
           
         }
 
