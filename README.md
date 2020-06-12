@@ -77,6 +77,10 @@ mencionados acima.
 
 Daniel fez a maioria dos comentários e *XML* nas suas próprias classes.
 
+### *UML* e *Fluxogramas*
+
+O diagrama *UML* e os fluxogramas utilizados foram feitos por Daniel Fernandes
+
 ### O que foi feito por Pedro Bezerra
 
 #### Enum `Direction`
