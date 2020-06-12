@@ -199,7 +199,11 @@ namespace Roguelike
             } // end while (currentPlayer.Health > 0)
 
             if(playerWon)
+            {
+                gameValues.Hp = currentPlayer.Health;
+                SaveProgress();
                 NewLevel();
+            }
             else
                 EndGame();
         }
@@ -367,6 +371,16 @@ namespace Roguelike
             board.PlaceEntity(newEntity, pos);
         }
   
+        
+        private void SaveProgress()
+        {
+           string filname  = UI.PromptSaveFile();
+
+            if(filname != "n"){
+                SaveManager.Save(gameValues, filname);
+            }
+        }
+
 
         /// <summary>
         /// Handles the the new level creation
@@ -374,7 +388,7 @@ namespace Roguelike
         private void NewLevel()
         {
             gameValues.Level++;
-            gameValues.Hp = currentPlayer.Health;
+            
 
             EmptyBoard();
             GenerateLevel();
