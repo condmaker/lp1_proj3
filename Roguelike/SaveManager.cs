@@ -46,8 +46,14 @@ namespace Roguelike
 
             string scoreData = "";
 
+            StreamWriter sw = new StreamWriter("scores.txt");
+            sw.Close();
+
             // Open file in readeable mode 
             StreamReader sr = new StreamReader("scores.txt");
+
+
+
 
             // Cycle through every line inside the file
             while( (scoreData = sr.ReadLine()) != null)
