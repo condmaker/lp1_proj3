@@ -286,7 +286,7 @@ Grande parte da lógica do projeto foi baseada no exemplo
 dado pelo Professor Nuno Fachada, e alguns métodos, como o `ProcGenFunction`,
 são totalmente de sua autoria.
 
-[flux]:    Diagrams\Flowchart.png
-[flux_en]: Diagrams\FlowchartEnemy.png
+[flux]:    Diagrams/Flowchart.png 
+[flux_en]: Diagrams/FlowchartEnemy.png
 
-[UML]:     Diagrams\UML.png
+[UML]:     Diagrams\UML.png 
