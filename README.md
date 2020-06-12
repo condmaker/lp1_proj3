@@ -290,11 +290,11 @@ dado pelo Professor Nuno Fachada, e alguns métodos, como o `ProcGenFunction`,
 são totalmente de sua autoria. 
 
 Em `coord` também foi utilizada extensivamente a Documentação oficial do C# pela
-*Microsoft*, [aqui](link1). Também foi utilizado uma resposta no fórum de 
+*Microsoft*, [aqui][link1]. Também foi utilizado uma resposta no fórum de 
 dúvidas *StackOverflow* para remover items utilizado em `RestorePowerUp()` da
-classe `Board`, (aqui)[link2]. A última referência foi para a realização do 
+classe `Board`, [aqui][link2]. A última referência foi para a realização do 
 método `ConvertArgs()` na classe `GameValues`, também apanhado da documentação
-oficial do C#, [aqui](link3).
+oficial do C#, [aqui][link3].
 
 
 [link1]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading
