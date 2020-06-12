@@ -12,18 +12,23 @@ namespace Roguelike
         /// </summary>
         /// <value>Name of the score's owner.</value>
         public string Name{get;}
+
         /// <summary>
         /// Property that represents the player's score.
         /// </summary>
         /// <value>The player's score.</value>
         public int NewScore{get;}
 
+        /// <summary>
+        /// Class constructor. Will record the player's name and score.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="newscore"></param>
         public Score(string name, int newscore)
         {
             Name = name;
             NewScore = newscore;
         }
-
 
         /// <summary>
         /// Compares two Score objects.

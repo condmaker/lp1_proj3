@@ -8,28 +8,34 @@ namespace Roguelike
     /// </summary>
     public class HighscoreTable
     {
+        /// <summary>
+        /// A list laoded everytime when the game is launched (or created), 
+        /// that will contain the Top 10 scores on the current computer.
+        /// </summary>
         private List<Score> highscoreTable;
         
-
+        /// <summary>
+        /// Constructor of the class. Instantiates the Highscore Table List.
+        /// </summary>
         public HighscoreTable()
         {
             highscoreTable = new List<Score>{};
         }
 
         /// <summary>
-        /// Add new Score to the table
+        /// Add a new Score to the table.
         /// </summary>
-        /// <param name="name"> Name of the player to be added</param>
-        /// <param name="score"> Score of the player to be added</param>
+        /// <param name="name">Name of the player to be added</param>
+        /// <param name="score">Score of the player to be added</param>
         public void AddScore(string name, int score)
         {
-            //Add new score and sort the table 
+            // Add new score and sort the table.
             Score newScore = new Score(name, score);
 
             highscoreTable.Add( newScore );
             highscoreTable.Sort();
 
-            //If the table as more that 10 scores delete the last one
+            // If the table as more that 10 scores delete the last one.
             if(highscoreTable.Count > 10)
             {
                 highscoreTable.Remove( GetScore(10) );
@@ -39,7 +45,7 @@ namespace Roguelike
         /// <summary>
         /// Get Score based on its position <param name="id"> in the table
         /// </summary>
-        /// <param name="id"> Score id </param>
+        /// <param name="id">The Score's ID</param>
         /// <returns>High score on the position <param name="id">.</returns>
         public Score GetScore(int id)
         {
@@ -47,11 +53,10 @@ namespace Roguelike
             return highscoreTable[id];
         }
 
-
         /// <summary>
         /// Checks if the new score belongs in the table
         /// </summary>
-        /// <param name="score"> New score </param>
+        /// <param name="score"> The new score to be checked </param>
         /// <returns><c>true</c> if new score belongs in the table,
         /// <c>false</c> otherwise.
         /// </returns>
@@ -64,7 +69,5 @@ namespace Roguelike
                 return true;
             return false;
         }
-
-
     }
 }

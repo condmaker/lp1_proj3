@@ -281,11 +281,12 @@ namespace Roguelike
             Console.WriteLine("| the player reached on that      |");
             Console.WriteLine("| session.                        |");
             Console.WriteLine("| The game ends when you die or   |");
-            Console.WriteLine("| when you press the 'Escape'     |");
-            Console.WriteLine("| key. After ending, the game     |");
+            Console.WriteLine("| when you press the 'Escape' or  |");
+            Console.WriteLine("| 'q' key. After ending, the game |");
             Console.WriteLine("| will ask you to input your name |");
             Console.WriteLine("| to be recorded alongside your   |");
-            Console.WriteLine("| score.                          |");
+            Console.WriteLine("| score, if you are on the        |");
+            Console.WriteLine("| Top 10 scores, that is.         |");
             Console.WriteLine("Ψѧ-------------------------------ѧΨ");
             Console.WriteLine("| You have reached the end of the |");
             Console.WriteLine("|  tutorial and returned to the   |");
@@ -306,7 +307,7 @@ namespace Roguelike
             Console.WriteLine("| or, anything else to go back... |");
             Console.WriteLine("Ψѧ-------------------------------ѧΨ");
 
-            WriteOnString();
+            WriteOnString(true);
 
             if (Input == "c") return true;
             return false;
@@ -366,14 +367,14 @@ namespace Roguelike
         {
             Console.WriteLine("Ψѧ-----|");
 
-            //Checks every possible spot of the table.
+            // Checks every possible spot of the table.
             for(int i  = 0; i < 10; i++)
             {
 
-                //Gets the score correspondent to the spot.
+                // Gets the score correspondent to the spot.
                 Score score = highscore.GetScore(i);
 
-                //If theres a score in the expecifict spot, print it.
+                // If theres a score in the expecifict spot, print it.
                 if(score != null) 
                 {
                     Console.WriteLine ($"| Name: {score.Name} " +
@@ -392,7 +393,7 @@ namespace Roguelike
         }
 
         /// <summary>
-        /// Function that renders the game board in the console
+        /// Method that renders the game board in the console
         /// </summary>
         /// <param name="board">"Current game board"</param>
         public static void ShowBoard(Board board, bool empty = false)
@@ -402,36 +403,36 @@ namespace Roguelike
                 Console.Write("—————");
             Console.WriteLine("——");
 
-            //Cycle through every line 
+            // Cycle through every line 
             for(int y = 0; y < board.Height; y++)
             {
                 Console.Write("|");
-                //Cycle through every column in the current line 
+                // Cycle through every column in the current line 
                 for(int x = 0; x < board.Width; x++)
                 {
-                    //Get current coordinate
+                    // Get current coordinate
                     Coord coord = new Coord(x,y);
 
                         
-                    //Checks if there is some entity occupying the position
-                    //and if the board was setuped to be printed in an empty
-                    //state
+                    // Checks if there is some entity occupying the position
+                    // and if the board was setuped to be printed in an empty
+                    // state
                     if(board.IsOccupied(coord) && !empty)
                     {
-                        //Prints its image
+                        // Prints the Entity 'image'.
                         Console.Write
                         (board.GetEntityAt(coord).ToString());
                     }
                     else
                     {
-                        //Prints empty tile image
+                        // Prints empty tile 'image'
                         Console.Write(" ——— ");
                     }
                 }
 
                 Console.Write("|");
 
-                //Space between lines 
+                // Space between lines 
                 Console.WriteLine("\n");
             }
 
@@ -440,6 +441,9 @@ namespace Roguelike
             Console.WriteLine("‾‾");
         }
 
+        /// <summary>
+        /// Board's instructions for the player to base off of.
+        /// </summary>
         public static void ShowBoardInstructions()
         {
             // Basic instructions
@@ -455,8 +459,11 @@ namespace Roguelike
         }
 
         /// <summary>
-        /// Changes the instance Input.
+        /// Changes the instance input.
         /// </summary>
+        /// <param name="keyBuffer">If <c>true</c> enters the method on key 
+        /// press mode, which will record only the immediate player keypress.
+        /// Otherwise it records his entire input after he presses enter.</param>
         public static void WriteOnString(bool keyBuffer = false)
         {
             ConsoleKeyInfo InputTest;

@@ -4,16 +4,8 @@ using System.Text;
 
 namespace Roguelike
 {
-    /// <summary>
-    /// Class which contains the main method.
-    /// </summary>
     class Program
     {
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="args"></param>
         static void Main(string[] args)
         {
             // Makes it so that the program supports unicode characters.

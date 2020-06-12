@@ -4,7 +4,7 @@ using System;
 namespace Roguelike
 {
     /// <summary>
-    /// Class responsible for saving the game state.
+    /// Class responsible for saving the game state into a file.
     /// </summary>
     public static class SaveManager
     {
@@ -15,23 +15,23 @@ namespace Roguelike
         /// <param name="highscore">Highscore table to be saved</param>
         public static void Save(HighscoreTable highscore)
         {
-            //Open file in writeable mode
+            // Open file in writeable mode
             StreamWriter sw = new StreamWriter("scores.txt");
 
-            //Checks every possible spot of the table.
+            // Checks every possible spot of the table.
             for(int i  = 0; i < 10; i++)
             {
 
-                //Gets the score correspondent to the spot.
+                // Gets the score correspondent to the spot.
                 Score score = highscore.GetScore(i);
 
-                //If theres a score in the expecifict spot, print it.
+                // If theres a score in the specific spot, print it.
                 if(score != null)
                      sw.WriteLine (score.Name + " " + score.NewScore);
                            
             }
 
-            //Close file
+            // Close file
             sw.Close();
         }
 
@@ -41,36 +41,37 @@ namespace Roguelike
         /// <returns> Properly filled Highscore Table </returns>
         public static HighscoreTable Load()
         {
-            //Instatiate a new highscore table reference
+            // Instatiate a new highscore table reference
             HighscoreTable highscore = new HighscoreTable();
 
             string scoreData = "";
 
-            //Open file in readeable mode 
+            // Open file in readeable mode 
             StreamReader sr = new StreamReader("scores.txt");
 
-            //Cycle through every line inside the file
+            // Cycle through every line inside the file
             while( (scoreData = sr.ReadLine()) != null)
             {
-                //Split the data in two string:
-                //name and score
+                // Split the data in two strings: Name and Score.
                 string[] splitData = scoreData.Split();
                 int score;
                     
-                //Parse the score data into an int
+                // Parse the score data into an int
                 if(!int.TryParse(splitData[1], out score))
                 {
-                    //Execption
+                    UI.WriteMessage("Error.");
+                    Environment.Exit(0);
                 }
                 
-                //Add score to new HighscoreTable
+                // Adds score to new HighscoreTable
                 highscore.AddScore(splitData[0], score);      
 
             }   
 
-            //Close file
+            // Close the file.
             sr.Close();     
                    
+            // Returns the Highscore table.
             return highscore;
         }
 
@@ -86,18 +87,18 @@ namespace Roguelike
         /// where the data is saved</param>
         public static void Save(GameValues gameValues, string fileName)
         {
-            //Open file in writeable mode
+            // Open file in writeable mode
             StreamWriter sw = new StreamWriter(fileName);
 
 
-            //Save the game data in the file
+            // Save the game data in the file
             sw.WriteLine(gameValues.Width);
             sw.WriteLine(gameValues.Height);
             sw.WriteLine(gameValues.Level);
             sw.WriteLine(gameValues.Hp);
 
             
-            //Close file
+            // Close file
             sw.Close();
         }
 
@@ -114,23 +115,25 @@ namespace Roguelike
            
             int[] values = new int[4];
               
-            //Open file in readeable mode 
+            // Open file in readeable mode 
             StreamReader sr = new StreamReader(fileName);
 
-            //Cycle trough every line and retrieve the game data
+            // Cycle trough every line and retrieve the game data
             for(int i = 0; i < 4; i++)
             {
                 
                 if(!int.TryParse(sr.ReadLine(), out values[i]))
                 {
-                    //Exception
+                    UI.WriteMessage("Error.");
+                    Environment.Exit(0);
                 }
                
             }
 
-            //Close file
+            // Close file
             sr.Close();
 
+            // Returns the game data.
             return values;
         }
     }

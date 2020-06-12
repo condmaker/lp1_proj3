@@ -99,6 +99,7 @@ namespace Roguelike
                 }
             }
 
+            // Shows a 'Goodbye' message and saves the Highscore.
             UI.ShowEndMessage();
             SaveManager.Save(highscoreTable);
     
@@ -114,56 +115,67 @@ namespace Roguelike
         private void GameLoop()
         {
             
+            // Shows a starting message for the level/floor.
             UI.ShowStartingMessage(gameValues.Level);
 
+            // A boolean that describes if the player won or not.
             bool playerWon = false;
+
+            // The game loop in and of itself. Will only be broken if the 
+            // player dies, leaves the game, or if he finishes the level.
             while (currentPlayer.Health > 0)
             {
 
-                // Prints game information
+                // Prints game information for the player's turn
                 UI.ShowCurrentInformation(
                     currentPlayer.Health, "Player", gameValues.Level);
                 UI.ShowBoard(board);
                 UI.ShowBoardInstructions();
 
-                // moves player and returns their state
+                // Moves player and returns their state, observing if he won
+                // or not.
                 playerWon = MovePlayer();
 
+                // Checks if player is dead or if he won.
                 if (currentPlayer.Damage(1) <= 0)
                     continue;
                 if (playerWon)
                     break;
 
-                // Prints game info
+                // Prints game info once again.
                 UI.ShowCurrentInformation(
                     currentPlayer.Health, "Player", gameValues.Level);
                 UI.ShowBoard(board);
                 UI.ShowBoardInstructions();
 
-                // moves player again and returns their state
+                // Moves player again and returns their state
                 playerWon = MovePlayer();
 
+                // Checks if player is dead or if he won, once again.
                 if (currentPlayer.Damage(1) <= 0)
                     continue;
                 if (playerWon)
                     break;
 
-                // iterates though all enemies on board, moving them or damaging
-                // the player nearby
+                // Creates a list of enemies that will be present on the board.
                 List<Enemy> enemies = new List<Enemy>();
 
+                // Iterates through all enemies on board and adds their 
+                // references to the list.
                 foreach (Entity e in board.CurrentBoard)
                     if(e is Enemy)
                         enemies.Add((Enemy)e);
 
+                // Will do actions for every enemy on board.
                 foreach (Enemy enemy in enemies)
                 {
-                    // prints current information on console
+                    // Prints current enemy information.
                     UI.ShowCurrentInformation(
                         currentPlayer.Health, "Enemy", gameValues.Level);
                     UI.ShowBoard(board);
 
-                    // checks if is adjacent to player
+                    // Observes if enemy is adjacent to player, and if so, 
+                    // damages him
                     if (enemy.AdjacentToPlayer(board))
                     {
                         int damage = 5;
@@ -175,7 +187,7 @@ namespace Roguelike
                         UI.WriteMessage($"You took {damage} damage!");
                     }
 
-                    // if it's not adjacent to player
+                    // If he is not adjacent to player, he moves towards him
                     else
                     {
                         // gets target move coordinate
@@ -202,12 +214,16 @@ namespace Roguelike
                         enemy.Pos, enemy.kind);
                     }
 
-                    if (currentPlayer.Health < 0) continue;
+                    if (currentPlayer.Health <= 0) continue;
 
+                    // Pauses for 2 seconds so the player can process what 
+                    // happened.
                     Thread.Sleep(2000);  
-                } // end foreach (Enemy enemy in enemyInBoard)
-            } // end while (currentPlayer.Health > 0)
+                } 
+            } 
 
+            // After leaving the loop, it is observed if the player won or not,
+            // and the game updates values and enters methods accordingly.
             if(playerWon)
             {
                 gameValues.Hp = currentPlayer.Health;
@@ -230,18 +246,18 @@ namespace Roguelike
         /// </returns>
         private bool MovePlayer()
         {
-            // gets the coord where player will move
+            // Gets the coord where player will move.
             Coord dest = currentPlayer.WhereToMove(board);
 
-            //checks if the player reached and exit
+            // Checks if the player reached and exit.
             if(board.IsExit(dest))
                 return true;
 
-            // checks if player is moving into power up and heals them
+            // Checks if player is moving into power up and heals them.
             int heal = 4;
             currentPlayer.Heal(heal * board.IsPowerUp(dest));
 
-            // moves player and updates board
+            // Moves player and updates board.
             board.MoveEntity(currentPlayer, dest);
 
             return false;
@@ -254,18 +270,19 @@ namespace Roguelike
         /// </summary>
         private void EmptyBoard()
         {
-            //Cycle through every line 
+            // Cycle through every line 
             for(int y = 0; y < gameValues.Height; y++)
             {
-                //Cycle through every column in the current line 
+                // Cycle through every column in the current line 
                 for(int x = 0; x < gameValues.Width; x++)
                 {
-                    //Get current coordinate
-                    Coord coord = new Coord(x,y);                    
-                    //Checks if there is some entity occupying the position
+                    // Get current coordinate
+                    Coord coord = new Coord(x,y);    
+
+                    // Checks if there is some entity occupying the position
                     if(board.IsOccupied(coord))
                     {
-                        //Deletes entity
+                        // Deletes entity
                         board.PlaceEntity(null,coord);
                     }
  
@@ -278,35 +295,40 @@ namespace Roguelike
         /// </summary>
         private void GenerateLevel()
         {
+            // Creates a new random coordinate for the player, with the column
+            // always being 0 (the first one).
             Coord pCoord = new Coord(0, rand.Next(0, gameValues.Height)); 
+
+            // Observes what level it is so that the player instantiation 
+            // needs a base HP value or a carried one.
             if (gameValues.Level == 1)
                 currentPlayer = new Player(
                     pCoord, (gameValues.Width * gameValues.Height) / 4);
             else 
                 currentPlayer = new Player(pCoord, gameValues.Hp);
 
-            // Instantiate the Player
+            // Place the instantiated player on the current board.
             board.PlaceEntity(
                 currentPlayer, currentPlayer.Pos);
             
-            // Instantiate Exit
+            // Instantiate the Exit.
             Coord sCoord = new Coord (
                 gameValues.Width - 1, rand.Next(0, gameValues.Height));
             board.PlaceEntity(new Entity(sCoord, EntityKind.Exit), sCoord);
 
-            //Instatiate minions
+            // Instatiate minions.
             for(int i = 0; i < gameValues.MinionNumb; i++)
             {
                 CreateEntity(EntityKind.Minion);
             }
 
-            //Instatiate Bosses
+            // Instatiate Bosses.
             for(int i = 0; i < gameValues.BossNumb; i++)
             {
                 CreateEntity(EntityKind.Boss);
             }
 
-            //Instatiate Obstacle
+            // Instatiate Obstacle.
             gameValues.ObstclNumb 
                 = rand.Next( (int)MathF.Min(gameValues.Height,gameValues.Width) - 1);
             for(int i = 0; i < gameValues.ObstclNumb; i++)
@@ -314,25 +336,25 @@ namespace Roguelike
                 CreateEntity(EntityKind.Obstacle);
             }
 
-            //Instatiate PowerUp small
+            // Instatiate small PowerUp.
             for(int i = 0; i < gameValues.PowUPSmallNumb; i++)
             {
                 CreateEntity(EntityKind.PowerUpS);
             }
 
-            //Instatiate PowerUp medium
+            //Instatiate mid PowerUp.
             for(int i = 0; i < gameValues.PowUPSMediumNumb; i++)
             {
                 CreateEntity(EntityKind.PowerUpM);
             }
 
-            //Instatiate PowerUp large
+            //Instatiate large PowerUp.
             for(int i = 0; i < gameValues.PowUPLargeNumb; i++)
             {
                 CreateEntity(EntityKind.PowerUpL);
             }
 
-            // Gets a list with all enemy in the board
+            // Gets a list with all enemies in the board.
             foreach (Entity entity in board.CurrentBoard)
                 if (entity is Enemy)
                     enemyInBoard.Add((Enemy) entity);  
@@ -352,8 +374,8 @@ namespace Roguelike
             Entity newEntity = null;
             
 
-            //Find a coordinate unocupied to instatiate the entity]
-            //Made by the teacher
+            // Find a coordinate unocupied to instatiate the entity.
+            // **Made by Nuno Fachada
             do{
                 pos = new Coord(
                     rand.Next(gameValues.Width),
@@ -363,7 +385,7 @@ namespace Roguelike
 
 
             // Creates Entity of the desired kind and assign it to the newEntity
-            // reference
+            // reference.
             switch(kind)
             {
                 case EntityKind.Minion:
@@ -377,11 +399,13 @@ namespace Roguelike
                     break;
             }
 
-            // Place new Entity int the generated position
+            // Place new Entity int the generated position.
             board.PlaceEntity(newEntity, pos);
         }
   
-        
+        /// <summary>
+        /// Saves the game progress if the player wishes so.
+        /// </summary>
         private void SaveProgress()
         {
            string filename  = UI.PromptSaveFile();
@@ -393,13 +417,15 @@ namespace Roguelike
 
 
         /// <summary>
-        /// Handles the the new level creation
+        /// Handles the the new level creation.
         /// </summary>
         private void NewLevel()
         {
+            // Iters the level count on GameValues
             gameValues.Level++;
             
-
+            // Empties the board, generates a new level on it, and starts the
+            // game once again.
             EmptyBoard();
             GenerateLevel();
             GameLoop();
@@ -408,7 +434,7 @@ namespace Roguelike
         /// <summary>
         /// Uses the UI to display the player's death and observes if the 
         /// player is in the top 10 scores, prompting him to input his name 
-        /// if necessary
+        /// if necessary.
         /// </summary>
         private void EndGame(){
 

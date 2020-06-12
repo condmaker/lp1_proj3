@@ -15,7 +15,7 @@ namespace Roguelike
         public int Health {get; private set;}
         
         /// <summary>
-        /// Constructor
+        /// Constructor of the class.
         /// </summary>
         /// <param name="pos">The position in which the entity is located on 
         /// the level.</param>
@@ -89,7 +89,7 @@ namespace Roguelike
             // Shows where the player moved on screen.
             UI.ShowBoardInformation(direction);
 
-            // returns coordinate
+            // Returns the coordinate
             return dest;
         }
     }
