@@ -403,7 +403,7 @@ namespace Roguelike
         /// </summary>
         private void SaveProgress()
         {
-           string filename  = UI.PromptSaveFile();
+           string filename = UI.PromptSaveFile();
 
             if(filename == "y"){
                 SaveManager.Save(gameValues, filename);
