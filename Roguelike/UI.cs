@@ -453,13 +453,13 @@ namespace Roguelike
             Input = InputTest.KeyChar.ToString().ToLower();
             Console.WriteLine();
 
-            if (Input == "w")
+            if (Input == "w" || InputTest.Key == ConsoleKey.UpArrow)
                 return Direction.Up;
-            else if (Input == "a")
+            else if (Input == "a" || InputTest.Key == ConsoleKey.LeftArrow)
                 return Direction.Left;
-            else if (Input == "s")
+            else if (Input == "s" || InputTest.Key == ConsoleKey.DownArrow)
                 return Direction.Down;
-            else if (Input == "d")
+            else if (Input == "d" || InputTest.Key == ConsoleKey.RightArrow)
                 return Direction.Right;
             else if (Input == "q")
                 return Direction.None;

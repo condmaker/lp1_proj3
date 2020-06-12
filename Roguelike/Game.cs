@@ -381,11 +381,14 @@ namespace Roguelike
             GameLoop();
         }
 
+        /// <summary>
+        /// Uses the UI to display the player's death and observes if the 
+        /// player is in the top 10 scores, prompting him to input his name 
+        /// if necessary
+        /// </summary>
         private void EndGame(){
-            //Prints an exit message
-            //UI.ExitMessage();
-            UI.WriteMessage("Player's health as reach 0 points.");
 
+            UI.WriteMessage("You died.");
        
             if(highscoreTable.IsHighscore(gameValues.Level))
             {
