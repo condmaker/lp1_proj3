@@ -51,7 +51,7 @@ namespace Roguelike
            (BoardSize * 
                 MathF.Min(
                     BoardSize / 2, 
-                    (float)ProcGenFunctions.Logistic(Level, 0.2f, 17, 0.28f))));
+                    (float)ProcGenFunctions.Logistic(Level, 0.2f, 17, 0.08f))));
         
         /// <summary>
         /// Lambda method that will calculate the number of bosses for current 
@@ -63,7 +63,7 @@ namespace Roguelike
            (BoardSize * 
                 MathF.Min(
                 BoardSize / 4, 
-                (float)ProcGenFunctions.Logistic(Level, 0.05f, 17, 0.28f))));
+                (float)ProcGenFunctions.Logistic(Level, 0.05f, 17, 0.08f))));
             
         /// <summary>
         /// Number of obstacles in the current level.

@@ -114,7 +114,7 @@ namespace Roguelike
         /// </remarks>
         private void GameLoop()
         {
-            
+
             // Shows a starting message for the level/floor.
             UI.ShowStartingMessage(gameValues.Level);
 
