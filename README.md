@@ -297,9 +297,9 @@ método `ConvertArgs()` na classe `GameValues`, também apanhado da documentaç�
 oficial do C#, [aqui](link3).
 
 
-[link1](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading)
-[link2](https://stackoverflow.com/questions/1582285/how-to-remove-elements-from-a-generic-list-while-iterating-over-it)
-[link3](https://docs.microsoft.com/en-us/dotnet/api/system.string.replace?view=netcore-3.1)
+[link1]: https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading
+[link2]: https://stackoverflow.com/questions/1582285/how-to-remove-elements-from-a-generic-list-while-iterating-over-it
+[link3]: https://docs.microsoft.com/en-us/dotnet/api/system.string.replace?view=netcore-3.1
 
 [flux]:    Diagrams/Flowchart.png 
 [flux_en]: Diagrams/FlowchartEnemy.png
