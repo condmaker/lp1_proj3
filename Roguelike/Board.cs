@@ -12,7 +12,7 @@ namespace Roguelike
         /// bi-dimensional array that represents the game's 'board' (made by 
         /// 'tiles' of Entities).
         /// </summary>
-        public Entity[,] CurrentBoard { get; private set;}
+        public Entity[,] CurrentBoard { get; private set; }
 
         /// <summary>
         /// Private instance variable that contains reference to the Entities

@@ -352,12 +352,7 @@ namespace Roguelike
             for(int i = 0; i < gameValues.PowUPLargeNumb; i++)
             {
                 CreateEntity(EntityKind.PowerUpL);
-            }
-
-            // Gets a list with all enemies in the board.
-            foreach (Entity entity in board.CurrentBoard)
-                if (entity is Enemy)
-                    enemyInBoard.Add((Enemy) entity);  
+            } 
         }
 
 
