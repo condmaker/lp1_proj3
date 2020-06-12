@@ -181,6 +181,9 @@ classes do programa.
 
 ![UML]
 
+**Este diagrama é apenas uma versão simplificada, demonstrando as dependências
+mais importantes**
+
 #### Classe `Entity`
 
 A classe base para todo objeto no tabuleiro de jogo. Contem uma posição `Pos`
@@ -284,9 +287,20 @@ importantes de progressão dum jogador, modo de jogo).
 Grande parte da lógica do projeto foi baseada no exemplo 
 [ZombiesVsHumans](https://github.com/VideojogosLusofona/lp1_2018_p2_solucao)
 dado pelo Professor Nuno Fachada, e alguns métodos, como o `ProcGenFunction`,
-são totalmente de sua autoria.
+são totalmente de sua autoria. 
+
+Em `coord` também foi utilizada extensivamente a Documentação oficial do C# pela
+*Microsoft*, [aqui](link1). Também foi utilizado uma resposta no fórum de 
+dúvidas *StackOverflow* para remover items utilizado em `RestorePowerUp()` da
+classe `Board`, [aqui](link2). A última referência foi para a realização do 
+método `ConvertArgs()` na classe `GameValues`, também apanhado da documentação
+oficial do C#, [aqui](link3).
+
+
+[link1](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/operators/operator-overloading)
+[link2](https://stackoverflow.com/questions/1582285/how-to-remove-elements-from-a-generic-list-while-iterating-over-it)
+[link3](https://docs.microsoft.com/en-us/dotnet/api/system.string.replace?view=netcore-3.1)
 
 [flux]:    Diagrams/Flowchart.png 
 [flux_en]: Diagrams/FlowchartEnemy.png
-
-[UML]:     Diagrams\UML.png 
+[UML]:     Diagrams/UML.png 
