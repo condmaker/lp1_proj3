@@ -152,6 +152,8 @@ variável de método `playerWon`.
 O processo é então repetido mais uma vez, visto que o jogador pode mover-se duas
 vezes por turno. 
 
+![flux_en]
+
 É então o turno dos inimigos, e todos os inimigos daquele tabuleiro são iterados
 a partir de uma lista já criada, e utilizam a sua *AI* (na classe `Enemy`, no
 método `WhereToMove()`, onde toda a AI está estruturada) para moverem-se para
@@ -174,7 +176,10 @@ Main Menu.
 ### Descrição de ficheiros
 
 Esta secção irá brevemente descrever o que é que cada classe/enumerado no 
-programa faz.
+programa faz. Está aqui um diagrama *UML* representando a estrutura das 
+classes do programa.
+
+![UML]
 
 #### Classe `Entity`
 
@@ -281,5 +286,7 @@ Grande parte da lógica do projeto foi baseada no exemplo
 dado pelo Professor Nuno Fachada, e alguns métodos, como o `ProcGenFunction`,
 são totalmente de sua autoria.
 
-[flux]: Diagrams\Flowchart.png
-[UML]:  Diagrams\UML.png
+[flux]:    Diagrams\Flowchart.png
+[flux_en]: Diagrams\FlowchartEnemy.png
+
+[UML]:     Diagrams\UML.png
