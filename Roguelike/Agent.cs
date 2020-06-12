@@ -6,7 +6,7 @@ namespace Roguelike
     public abstract class Agent: Entity
     {
         /// <summary>
-        /// Constructor
+        /// Constructor of the class.
         /// </summary>
         /// <param name="pos">The position in which the entity is located on 
         /// the level.</param>

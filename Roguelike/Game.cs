@@ -11,20 +11,23 @@ namespace Roguelike
     {
 
         /// <summary>
-        /// Game values
+        /// Game values.
         /// </summary>
         private GameValues gameValues;
 
         /// <summary>
-        /// Random number generator
+        /// Random number generator for the entire game.
         /// </summary>
         public static Random rand;
 
         /// <summary>
-        /// Game board reference
+        /// Game board reference.
         /// </summary> 
         private Board board;
         
+        /// <summary>
+        /// List of all enemies on the current board.
+        /// </summary>
         private List<Enemy> enemyInBoard = new List<Enemy>();
 
         /// <summary>
@@ -32,26 +35,30 @@ namespace Roguelike
         /// </summary>
         private Player currentPlayer;
 
+        /// <summary>
+        /// The computer's high score table.
+        /// </summary>
         private HighscoreTable highscoreTable;
          
         /// <summary>
-        /// 
+        /// The class constructor. Loads a GameValues instance and the 
+        /// computer's high score table, creates a board and random number 
+        /// generator instance, and generates the first level.
         /// </summary>
-        /// <param name="gameValues"></param>
+        /// <param name="gameValues">The files that will manage every important
+        /// thing to begin the level. Can be 'loaded' from a saved game or 
+        /// a new one.</param>
         public Game(GameValues gameValues)
         {
+            // Loads the highscore table and current game values.
             this.gameValues = gameValues;
-
             highscoreTable = SaveManager.Load();
             
-
-            //Ceate board instance
+            // Create board and rand instance
             board = new Board(gameValues.Width, gameValues.Height);
-
             rand = new Random();
 
             GenerateLevel();
-
         }
 
         /// <summary>
@@ -60,6 +67,9 @@ namespace Roguelike
         /// </summary>
         public void Initiate()
         {           
+            // The Main Menu loop. Will always loop while the input is different
+            // than 'q'. Observes player input and enters in the respective 
+            // command's method.
             while (UI.Input != "q")
             {
                 UI.MainMenu();

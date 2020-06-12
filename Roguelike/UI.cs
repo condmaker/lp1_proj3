@@ -52,7 +52,13 @@ namespace Roguelike
             Console.WriteLine("|          Marco Domingos         |");
             Console.WriteLine("|                                 |");
             Console.WriteLine("|          -Made in 2020-         |");
-            Console.WriteLine("Ψѧ--------------+Ѡ+--------------ѧΨ");
+            Console.WriteLine("Ψѧ--------------+Ѡ+--------------ѧΨ\n");
+
+            Console.WriteLine("Ψѧ-------------------------------------ѧΨ");
+            Console.WriteLine("| Press 'ENTER', or any key, to return. |");
+            Console.WriteLine("Ψѧ-------------------------------------ѧΨ");
+
+            WriteOnString(true);
         }
 
         /// <summary>
@@ -376,7 +382,13 @@ namespace Roguelike
 
             }
 
-            Console.WriteLine("Ψѧ-----|");
+            Console.WriteLine("Ψѧ-----|\n");
+
+            Console.WriteLine("Ψѧ-------------------------------------ѧΨ");
+            Console.WriteLine("| Press 'ENTER', or any key, to return. |");
+            Console.WriteLine("Ψѧ-------------------------------------ѧΨ");
+
+            WriteOnString(true);
         }
 
         /// <summary>

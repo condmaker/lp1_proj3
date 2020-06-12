@@ -25,6 +25,9 @@ namespace Roguelike
         /// Moves leftwards.
         /// </summary>
         Left,
+        /// <summary>
+        /// Undefined movement.
+        /// </summary>
         Undefined
     }
 }

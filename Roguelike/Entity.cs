@@ -21,10 +21,10 @@ namespace Roguelike
         public readonly EntityKind kind;
 
         /// <summary>
-        /// Constructor.
+        /// Constructor of this class.
         /// </summary>
-        /// <param name="pos">A position.</param>
-        /// <param name="kind">An EntityKind</param>
+        /// <param name="pos">The entity's position.</param>
+        /// <param name="kind">The kind of entity of this instance.</param>
         public Entity(Coord pos, EntityKind kind)
         {
             this.kind = kind;

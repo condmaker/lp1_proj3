@@ -16,7 +16,6 @@ namespace Roguelike
         public Enemy (Coord pos, EntityKind kind)
             : base(pos, kind) {}
 
-
         /// <summary>
         /// Method that checks if the enemy is adjacent to the player.
         /// </summary>
@@ -80,25 +79,25 @@ namespace Roguelike
             PossibleDirections.Add(Direction.Down);
             PossibleDirections.Add(Direction.Left);
 
-            // creates list of shorter paths, and all possible moves
+            // Creates list of shorter paths, and all possible moves
             List<Direction> legalMoves = new List<Direction>();
             List<Direction> shorterPaths = new List<Direction>();
 
 
-            // for every direction, verifies if the move is legal
+            // For every direction, verifies if the move is legal
             foreach (Direction d in PossibleDirections)
             {
-                // gets the destination
+                // Gets the destination
                 Coord dest = board.GetNeighbor(Pos, d);
 
-                // verifies if it is on board and not obstructed
+                // Verifies if it is on board and not obstructed
                 if (board.IsOnBoard(dest) && !board.IsObstructed(dest) &&
                     !board.IsExit(dest))
                 {
-                    // adds it to the legalMoves list
+                    // Adds it to the legalMoves list
                     legalMoves.Add(d);
 
-                    // verifies if it shortens the path to player
+                    // Verifies if it shortens the path to player
                     int newDistanceToTarget = dest.DistanceTo(target.Pos);
                     if (newDistanceToTarget < distanceToTarget)
                         shorterPaths.Add(d);
@@ -124,7 +123,7 @@ namespace Roguelike
             }
                 
 
-            // if there is no possible direction to move, stays at same position
+            // If there is no possible direction to move, stays at same position
             return Pos;
         }
     }

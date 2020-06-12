@@ -130,7 +130,8 @@ namespace Roguelike
         /// <c>4</c> if it is occupied by a large Power up.
         /// </returns>
         public int IsPowerUp(Coord c){
-            // if tile is null, is not power up
+
+            // If tile is null, is not a power up
             if (IsOccupied(c) == false)
                 return 0;
 
@@ -140,6 +141,7 @@ namespace Roguelike
                 return 2;
             if(GetEntityAt(c).kind == EntityKind.PowerUpL)
                 return 4;
+
             return 0;
         }
 
@@ -153,7 +155,7 @@ namespace Roguelike
         /// </returns>
         public bool IsExit(Coord c)
         {
-            // if it is null, it is not exit
+            // If it is null, it is not a exit
             if (IsOccupied(c) == false)
                 return false;
             return (GetEntityAt(c).kind == EntityKind.Exit);
